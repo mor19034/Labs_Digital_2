@@ -54,10 +54,10 @@ void __interrupt() interrupiones(void){
 //-------------------------------PORTB
     if (RBIF == 1){
         if(RB0 == 1){
-            PORTD++;
+            PORTD++;   //se aumental el contador de puerto D si se toca el botón
         }
         if(RB1 == 1){
-            PORTD--;
+            PORTD--; //se decrementa el contador de puerto D si se toca el botón
         }
     INTCONbits.RBIF = 0; 
     }
@@ -71,16 +71,16 @@ void __interrupt() interrupiones(void){
         TMR0 = 255;  
         
         if (flags == 1) {           //Por medio de banderas verificamos que 
-           PORTAbits.RA1 = 0;       //display es el que toca encender
-           PORTAbits.RA2 = 1;       //al terminar el if cambiamos de bandera
-           display(down_nibbles);
-           flags = 0; 
+           PORTAbits.RA1 = 0;       //display es el que toca encender y se
+           PORTAbits.RA2 = 1;       //alterna con estas mismas
+           display(down_nibbles); //se manda al display el valor resultante de
+           flags = 0;  //convertir el valor del ADC y luego separarlo por bits
         }
         
         else {
            PORTAbits.RA2 = 0;
            PORTAbits.RA1 = 1;
-           display(upper_nibbles);
+           display(upper_nibbles); //se mandan los bits más significativos 
            flags = 1;  
         }          
     }    
@@ -92,15 +92,15 @@ void main(void){
     ADCON0bits.GO = 1; //se inicia la conversion del ADC
     
     while(1){
-           if (ADCON0bits.GO == 0){        //Cuando termine la conversion 
-            __delay_us(200);            //
-            ADCON0bits.GO = 1;         
+           if (ADCON0bits.GO == 0){     //Se revisa si la conversión se termina  
+            __delay_us(200);            //se deja dealy 
+            ADCON0bits.GO = 1;          //y se empiez la conversión de nuevo
         }                               
         
-        nibbles(ADC);
-        
-        if (ADC > PORTD) {
-            PORTAbits.RA3 = 1;
+        nibbles(ADC);   //se llama a la libreria donde se separan los bits 
+                        //y se ingresa el resultado de la conversión ADC
+        if (ADC > PORTD) { //aquí revisamos si se enciende la alarma debido
+            PORTAbits.RA3 = 1; //a que hubo un desvorde 
         }
         
         else {
@@ -149,7 +149,7 @@ void setup (void){
     
     //------configuracion ADC
     ADCON1bits.ADFM  = 0;    //Justificado a la izquierda
-    conf_ADC(2);
+    conf_ADC(2);             //Fosc/32 para tads de 4us y voltajes VSS y VDD
     ADCON0bits.CHS   = 0;    //Chanel 0
     __delay_us(200);
     ADCON0bits.ADON  = 1;    //Encendemos el ADC
