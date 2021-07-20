@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.31 build 20201012212115 
-                                                                                               Mon Jul 19 18:21:15 2021
+                                                                                               Tue Jul 20 00:36:36 2021
 
 Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1 
      1                           	processor	16F887
@@ -327,16 +327,16 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    313  0007                     _PORTC	set	7
    314  0006                     _PORTB	set	6
    315  0005                     _PORTA	set	5
-   316  0007                     _PORTCbits	set	7
-   317  0001                     _TMR0	set	1
-   318  0005                     _PORTAbits	set	5
-   319  000B                     _INTCONbits	set	11
-   320  0008                     _PORTD	set	8
-   321  0006                     _PORTBbits	set	6
-   322  001E                     _ADRESH	set	30
-   323  001F                     _ADCON0bits	set	31
-   324  000C                     _PIR1bits	set	12
-   325  005A                     _T0IF	set	90
+   316  0001                     _TMR0	set	1
+   317  0005                     _PORTAbits	set	5
+   318  000B                     _INTCONbits	set	11
+   319  0008                     _PORTD	set	8
+   320  001E                     _ADRESH	set	30
+   321  001F                     _ADCON0bits	set	31
+   322  000C                     _PIR1bits	set	12
+   323  005A                     _T0IF	set	90
+   324  0031                     _RB1	set	49
+   325  0030                     _RB0	set	48
    326  0058                     _RBIF	set	88
    327  0081                     _OPTION_REGbits	set	129
    328  008F                     _OSCCONbits	set	143
@@ -382,7 +382,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    368                           
    369                           	psect	bssCOMMON
    370  0076                     __pbssCOMMON:
-   371  0076                     _ADC_valor:
+   371  0076                     _ADC:
    372  0076                     	ds	1
    373  0077                     _upper_nibbles:
    374  0077                     	ds	1
@@ -515,7 +515,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    501 ;;
    502 ;; *************** function _main *****************
    503 ;; Defined at:
-   504 ;;		line 88 in file "Lab01.c"
+   504 ;;		line 90 in file "Lab01.c"
    505 ;; Parameters:    Size  Location     Type
    506 ;;		None
    507 ;; Auto vars:     Size  Location     Type
@@ -551,17 +551,17 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    537                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+pclath+cstack]
    538                           
    539                           
-   540                           ;Lab01.c: 89:     TRISC = 0b00000000;
+   540                           ;Lab01.c: 91:     PORTC = 0b00000000;
    541  0180  120A  118A  212C  120A  118A  	fcall	_setup
    542  0185                     l1392:
    543                           
-   544                           ;Lab01.c: 90:     TRISD = 0b00000000;
+   544                           ;Lab01.c: 92:     PORTD = 0b00000000;
    545  0185  1283               	bcf	3,5	;RP0=0, select bank0
    546  0186  1303               	bcf	3,6	;RP1=0, select bank0
    547  0187  149F               	bsf	31,1	;volatile
    548  0188                     l1394:
    549                           
-   550                           ;Lab01.c: 93:     PORTB = 0b00000000;
+   550                           ;Lab01.c: 95:     INTCONbits.GIE = 1;
    551  0188  189F               	btfsc	31,1	;volatile
    552  0189  298B               	goto	u151
    553  018A  298C               	goto	u150
@@ -570,7 +570,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    556  018C                     u150:
    557  018C                     l1396:
    558                           
-   559                           ;Lab01.c: 94:     PORTC = 0b00000000;
+   559                           ;Lab01.c: 96:     INTCONbits.PEIE = 1;
    560  018C  300C               	movlw	12
    561  018D  1283               	bcf	3,5	;RP0=0, select bank0
    562  018E  1303               	bcf	3,6	;RP1=0, select bank0
@@ -581,19 +581,19 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    567  0192  0000               	nop
    568  0193                     l1398:
    569                           
-   570                           ;Lab01.c: 95:     PORTD = 0b00000000;
+   570                           ;Lab01.c: 97:     INTCONbits.T0IE = 1;
    571  0193  1283               	bcf	3,5	;RP0=0, select bank0
    572  0194  1303               	bcf	3,6	;RP1=0, select bank0
    573  0195  149F               	bsf	31,1	;volatile
    574  0196                     l1400:
    575                           
-   576                           ;Lab01.c: 98:     INTCONbits.GIE = 1;
-   577  0196  0876               	movf	_ADC_valor,w
+   576                           ;Lab01.c: 100: 
+   577  0196  0876               	movf	_ADC,w
    578  0197  120A  118A  21D1  120A  118A  	fcall	_nibbles
    579  019C                     l1402:
    580                           
-   581                           ;Lab01.c: 100:     INTCONbits.T0IE = 1;
-   582  019C  0876               	movf	_ADC_valor,w
+   581                           ;Lab01.c: 102:     INTCONbits.RBIF = 0;
+   582  019C  0876               	movf	_ADC,w
    583  019D  1283               	bcf	3,5	;RP0=0, select bank0
    584  019E  1303               	bcf	3,6	;RP1=0, select bank0
    585  019F  0208               	subwf	8,w	;volatile
@@ -605,17 +605,17 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    591  01A4                     u160:
    592  01A4                     l1404:
    593                           
-   594                           ;Lab01.c: 101:     INTCONbits.RBIE = 1;
-   595  01A4  1407               	bsf	7,0	;volatile
+   594                           ;Lab01.c: 103:     PIR1bits.ADIF = 0;
+   595  01A4  1585               	bsf	5,3	;volatile
    596                           
-   597                           ;Lab01.c: 102:     PIE1bits.ADIE = 1;
+   597                           ;Lab01.c: 104: 
    598  01A5  2988               	goto	l1394
    599  01A6                     l92:	
-   600                           ;Lab01.c: 104:     INTCONbits.T0IF = 0;
+   600                           ;Lab01.c: 106:     conf_osc(7);
    601                           
    602                           
-   603                           ;Lab01.c: 105:     INTCONbits.RBIF = 0;
-   604  01A6  1007               	bcf	7,0	;volatile
+   603                           ;Lab01.c: 107: 
+   604  01A6  1185               	bcf	5,3	;volatile
    605  01A7  2988               	goto	l1394
    606  01A8  120A  118A  280E   	ljmp	start
    607  01AB                     __end_of_main:
@@ -669,1081 +669,1077 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    655  012F  0088               	movwf	8	;volatile
    656  0130                     l1326:
    657                           
-   658                           ;Lab01.c: 116:     IOCBbits.IOCB0 = 1;
+   658                           ;Lab01.c: 116: 
    659  0130  0189               	clrf	9	;volatile
    660  0131                     l1328:
    661                           
-   662                           ;Lab01.c: 118: 
-   663  0131  3003               	movlw	3
+   662                           ;Lab01.c: 118:     conf_ADC(2);
+   663  0131  3001               	movlw	1
    664  0132  1683               	bsf	3,5	;RP0=1, select bank1
    665  0133  1303               	bcf	3,6	;RP1=0, select bank1
    666  0134  0085               	movwf	5	;volatile
    667  0135                     l1330:
    668                           
-   669                           ;Lab01.c: 119: 
+   669                           ;Lab01.c: 119:     ADCON0bits.CHS = 0;
    670  0135  3003               	movlw	3
    671  0136  0086               	movwf	6	;volatile
    672  0137                     l1332:
    673                           
-   674                           ;Lab01.c: 120:     ADCON1bits.ADFM = 0;
+   674                           ;Lab01.c: 120:     _delay((unsigned long)((200)*(800000/4000000.0)));
    675  0137  0187               	clrf	7	;volatile
    676  0138                     l1334:
    677                           
-   678                           ;Lab01.c: 121:     conf_ADC(2);
+   678                           ;Lab01.c: 121:     ADCON0bits.ADON = 1;
    679  0138  0188               	clrf	8	;volatile
    680  0139                     l1336:
    681                           
-   682                           ;Lab01.c: 123:     _delay((unsigned long)((200)*(800000/4000000.0)));
+   682                           ;Lab01.c: 123: 
    683  0139  1283               	bcf	3,5	;RP0=0, select bank0
    684  013A  1303               	bcf	3,6	;RP1=0, select bank0
    685  013B  0185               	clrf	5	;volatile
    686  013C                     l1338:
    687                           
-   688                           ;Lab01.c: 124:     ADCON0bits.ADON = 1;
+   688                           ;Lab01.c: 124: 
    689  013C  0186               	clrf	6	;volatile
    690  013D                     l1340:
    691                           
-   692                           ;Lab01.c: 125:     _delay((unsigned long)((200)*(800000/4000000.0)));
+   692                           ;Lab01.c: 125: 
    693  013D  0187               	clrf	7	;volatile
    694  013E                     l1342:
    695                           
-   696                           ;Lab01.c: 126: 
+   696                           ;Lab01.c: 126:     flags = 0b00000000;
    697  013E  0188               	clrf	8	;volatile
    698  013F                     l1344:
    699                           
-   700                           ;Lab01.c: 129:     PORTD = 0b00000000;
+   700                           ;Lab01.c: 129: }
    701  013F  178B               	bsf	11,7	;volatile
    702  0140                     l1346:
-   703                           
-   704                           ;Lab01.c: 130: 
-   705  0140  170B               	bsf	11,6	;volatile
-   706  0141                     l1348:
-   707                           
-   708                           ;Lab01.c: 131: }
-   709  0141  168B               	bsf	11,5	;volatile
-   710  0142                     l1350:
-   711  0142  158B               	bsf	11,3	;volatile
-   712  0143                     l1352:
-   713  0143  1683               	bsf	3,5	;RP0=1, select bank1
-   714  0144  1303               	bcf	3,6	;RP1=0, select bank1
-   715  0145  170C               	bsf	12,6	;volatile
-   716  0146                     l1354:
-   717  0146  110B               	bcf	11,2	;volatile
-   718  0147                     l1356:
-   719  0147  100B               	bcf	11,0	;volatile
-   720  0148                     l1358:
-   721  0148  1283               	bcf	3,5	;RP0=0, select bank0
-   722  0149  1303               	bcf	3,6	;RP1=0, select bank0
-   723  014A  130C               	bcf	12,6	;volatile
-   724  014B                     l1360:
-   725  014B  3007               	movlw	7
-   726  014C  120A  118A  207F  120A  118A  	fcall	_conf_osc
-   727  0151                     l1362:
-   728  0151  3007               	movlw	7
-   729  0152  120A  118A  2027  120A  118A  	fcall	_conf_tmr0
-   730  0157                     l1364:
-   731  0157  30FF               	movlw	255
-   732  0158  1283               	bcf	3,5	;RP0=0, select bank0
-   733  0159  1303               	bcf	3,6	;RP1=0, select bank0
-   734  015A  0081               	movwf	1	;volatile
-   735  015B                     l1366:
-   736  015B  1683               	bsf	3,5	;RP0=1, select bank1
-   737  015C  1303               	bcf	3,6	;RP1=0, select bank1
-   738  015D  1416               	bsf	22,0	;volatile
-   739  015E                     l1368:
-   740  015E  1496               	bsf	22,1	;volatile
-   741  015F                     l1370:
-   742  015F  139F               	bcf	31,7	;volatile
-   743  0160                     l1372:
-   744  0160  3002               	movlw	2
-   745  0161  120A  118A  21AB  120A  118A  	fcall	_conf_ADC
-   746  0166                     l1374:
-   747  0166  30C3               	movlw	-61
-   748  0167  1283               	bcf	3,5	;RP0=0, select bank0
-   749  0168  1303               	bcf	3,6	;RP1=0, select bank0
-   750  0169  059F               	andwf	31,f	;volatile
-   751  016A                     l1376:
-   752  016A  300C               	movlw	12
-   753  016B  1283               	bcf	3,5	;RP0=0, select bank0
-   754  016C  1303               	bcf	3,6	;RP1=0, select bank0
-   755  016D  00B3               	movwf	??_setup
-   756  016E                     u187:
-   757  016E  0BB3               	decfsz	??_setup,f
-   758  016F  296E               	goto	u187
-   759  0170  0000               	nop
-   760  0171                     l1378:
-   761  0171  1283               	bcf	3,5	;RP0=0, select bank0
-   762  0172  1303               	bcf	3,6	;RP1=0, select bank0
-   763  0173  141F               	bsf	31,0	;volatile
-   764  0174                     l1380:
-   765  0174  300C               	movlw	12
-   766  0175  1283               	bcf	3,5	;RP0=0, select bank0
-   767  0176  1303               	bcf	3,6	;RP1=0, select bank0
-   768  0177  00B3               	movwf	??_setup
-   769  0178                     u197:
-   770  0178  0BB3               	decfsz	??_setup,f
-   771  0179  2978               	goto	u197
-   772  017A  0000               	nop
-   773  017B                     l1382:
-   774  017B  01F9               	clrf	_flags
-   775  017C                     l1384:
-   776  017C  1283               	bcf	3,5	;RP0=0, select bank0
-   777  017D  1303               	bcf	3,6	;RP1=0, select bank0
-   778  017E  0188               	clrf	8	;volatile
-   779  017F                     l99:
-   780  017F  0008               	return
-   781  0180                     __end_of_setup:
-   782                           
-   783                           	psect	text2
-   784  0027                     __ptext2:	
-   785 ;; *************** function _conf_tmr0 *****************
-   786 ;; Defined at:
-   787 ;;		line 55 in file "configuraciones_pic.c"
-   788 ;; Parameters:    Size  Location     Type
-   789 ;;  prescaler       1    wreg     unsigned char 
-   790 ;; Auto vars:     Size  Location     Type
-   791 ;;  prescaler       1    2[BANK0 ] unsigned char 
-   792 ;; Return value:  Size  Location     Type
-   793 ;;                  1    wreg      void 
-   794 ;; Registers used:
-   795 ;;		wreg, fsr0l, fsr0h, status,2, status,0
-   796 ;; Tracked objects:
-   797 ;;		On entry : 0/0
-   798 ;;		On exit  : 0/0
-   799 ;;		Unchanged: 0/0
-   800 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-   801 ;;      Params:         0       0       0       0       0
-   802 ;;      Locals:         0       1       0       0       0
-   803 ;;      Temps:          0       2       0       0       0
-   804 ;;      Totals:         0       3       0       0       0
-   805 ;;Total ram usage:        3 bytes
-   806 ;; Hardware stack levels used:    1
-   807 ;; Hardware stack levels required when called:    2
-   808 ;; This function calls:
-   809 ;;		Nothing
-   810 ;; This function is called by:
-   811 ;;		_setup
-   812 ;; This function uses a non-reentrant model
-   813 ;;
+   703  0140  170B               	bsf	11,6	;volatile
+   704  0141                     l1348:
+   705  0141  168B               	bsf	11,5	;volatile
+   706  0142                     l1350:
+   707  0142  158B               	bsf	11,3	;volatile
+   708  0143                     l1352:
+   709  0143  1683               	bsf	3,5	;RP0=1, select bank1
+   710  0144  1303               	bcf	3,6	;RP1=0, select bank1
+   711  0145  170C               	bsf	12,6	;volatile
+   712  0146                     l1354:
+   713  0146  110B               	bcf	11,2	;volatile
+   714  0147                     l1356:
+   715  0147  100B               	bcf	11,0	;volatile
+   716  0148                     l1358:
+   717  0148  1283               	bcf	3,5	;RP0=0, select bank0
+   718  0149  1303               	bcf	3,6	;RP1=0, select bank0
+   719  014A  130C               	bcf	12,6	;volatile
+   720  014B                     l1360:
+   721  014B  3007               	movlw	7
+   722  014C  120A  118A  207F  120A  118A  	fcall	_conf_osc
+   723  0151                     l1362:
+   724  0151  3007               	movlw	7
+   725  0152  120A  118A  2027  120A  118A  	fcall	_conf_tmr0
+   726  0157                     l1364:
+   727  0157  30FF               	movlw	255
+   728  0158  1283               	bcf	3,5	;RP0=0, select bank0
+   729  0159  1303               	bcf	3,6	;RP1=0, select bank0
+   730  015A  0081               	movwf	1	;volatile
+   731  015B                     l1366:
+   732  015B  1683               	bsf	3,5	;RP0=1, select bank1
+   733  015C  1303               	bcf	3,6	;RP1=0, select bank1
+   734  015D  1416               	bsf	22,0	;volatile
+   735  015E                     l1368:
+   736  015E  1496               	bsf	22,1	;volatile
+   737  015F                     l1370:
+   738  015F  139F               	bcf	31,7	;volatile
+   739  0160                     l1372:
+   740  0160  3002               	movlw	2
+   741  0161  120A  118A  21AB  120A  118A  	fcall	_conf_ADC
+   742  0166                     l1374:
+   743  0166  30C3               	movlw	-61
+   744  0167  1283               	bcf	3,5	;RP0=0, select bank0
+   745  0168  1303               	bcf	3,6	;RP1=0, select bank0
+   746  0169  059F               	andwf	31,f	;volatile
+   747  016A                     l1376:
+   748  016A  300C               	movlw	12
+   749  016B  1283               	bcf	3,5	;RP0=0, select bank0
+   750  016C  1303               	bcf	3,6	;RP1=0, select bank0
+   751  016D  00B3               	movwf	??_setup
+   752  016E                     u187:
+   753  016E  0BB3               	decfsz	??_setup,f
+   754  016F  296E               	goto	u187
+   755  0170  0000               	nop
+   756  0171                     l1378:
+   757  0171  1283               	bcf	3,5	;RP0=0, select bank0
+   758  0172  1303               	bcf	3,6	;RP1=0, select bank0
+   759  0173  141F               	bsf	31,0	;volatile
+   760  0174                     l1380:
+   761  0174  300C               	movlw	12
+   762  0175  1283               	bcf	3,5	;RP0=0, select bank0
+   763  0176  1303               	bcf	3,6	;RP1=0, select bank0
+   764  0177  00B3               	movwf	??_setup
+   765  0178                     u197:
+   766  0178  0BB3               	decfsz	??_setup,f
+   767  0179  2978               	goto	u197
+   768  017A  0000               	nop
+   769  017B                     l1382:
+   770  017B  01F9               	clrf	_flags
+   771  017C                     l1384:
+   772  017C  1283               	bcf	3,5	;RP0=0, select bank0
+   773  017D  1303               	bcf	3,6	;RP1=0, select bank0
+   774  017E  0188               	clrf	8	;volatile
+   775  017F                     l99:
+   776  017F  0008               	return
+   777  0180                     __end_of_setup:
+   778                           
+   779                           	psect	text2
+   780  0027                     __ptext2:	
+   781 ;; *************** function _conf_tmr0 *****************
+   782 ;; Defined at:
+   783 ;;		line 55 in file "configuraciones_pic.c"
+   784 ;; Parameters:    Size  Location     Type
+   785 ;;  prescaler       1    wreg     unsigned char 
+   786 ;; Auto vars:     Size  Location     Type
+   787 ;;  prescaler       1    2[BANK0 ] unsigned char 
+   788 ;; Return value:  Size  Location     Type
+   789 ;;                  1    wreg      void 
+   790 ;; Registers used:
+   791 ;;		wreg, fsr0l, fsr0h, status,2, status,0
+   792 ;; Tracked objects:
+   793 ;;		On entry : 0/0
+   794 ;;		On exit  : 0/0
+   795 ;;		Unchanged: 0/0
+   796 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   797 ;;      Params:         0       0       0       0       0
+   798 ;;      Locals:         0       1       0       0       0
+   799 ;;      Temps:          0       2       0       0       0
+   800 ;;      Totals:         0       3       0       0       0
+   801 ;;Total ram usage:        3 bytes
+   802 ;; Hardware stack levels used:    1
+   803 ;; Hardware stack levels required when called:    2
+   804 ;; This function calls:
+   805 ;;		Nothing
+   806 ;; This function is called by:
+   807 ;;		_setup
+   808 ;; This function uses a non-reentrant model
+   809 ;;
+   810                           
+   811                           
+   812                           ;psect for function _conf_tmr0
+   813  0027                     _conf_tmr0:
    814                           
-   815                           
-   816                           ;psect for function _conf_tmr0
-   817  0027                     _conf_tmr0:
-   818                           
-   819                           ;incstack = 0
-   820                           ; Regs used in _conf_tmr0: [wreg-fsr0h+status,2+status,0]
-   821                           ;conf_tmr0@prescaler stored from wreg
-   822  0027  1283               	bcf	3,5	;RP0=0, select bank0
-   823  0028  1303               	bcf	3,6	;RP1=0, select bank0
-   824  0029  00B2               	movwf	conf_tmr0@prescaler
-   825  002A                     l1278:
+   815                           ;incstack = 0
+   816                           ; Regs used in _conf_tmr0: [wreg-fsr0h+status,2+status,0]
+   817                           ;conf_tmr0@prescaler stored from wreg
+   818  0027  1283               	bcf	3,5	;RP0=0, select bank0
+   819  0028  1303               	bcf	3,6	;RP1=0, select bank0
+   820  0029  00B2               	movwf	conf_tmr0@prescaler
+   821  002A                     l1278:
+   822                           
+   823                           ;configuraciones_pic.c: 56:     switch(prescaler){
+   824  002A  285D               	goto	l1298
+   825  002B                     l1280:
    826                           
-   827                           ;configuraciones_pic.c: 56:     switch(prescaler){
-   828  002A  285D               	goto	l1298
-   829  002B                     l1280:
-   830                           
-   831                           ;configuraciones_pic.c: 58:             OPTION_REGbits.PS = 000;
-   832  002B  30F8               	movlw	-8
-   833  002C  1683               	bsf	3,5	;RP0=1, select bank1
-   834  002D  1303               	bcf	3,6	;RP1=0, select bank1
-   835  002E  0581               	andwf	1,f	;volatile
+   827                           ;configuraciones_pic.c: 58:             OPTION_REGbits.PS = 000;
+   828  002B  30F8               	movlw	-8
+   829  002C  1683               	bsf	3,5	;RP0=1, select bank1
+   830  002D  1303               	bcf	3,6	;RP1=0, select bank1
+   831  002E  0581               	andwf	1,f	;volatile
+   832                           
+   833                           ;configuraciones_pic.c: 59:             break;
+   834  002F  287C               	goto	l135
+   835  0030                     l1282:
    836                           
-   837                           ;configuraciones_pic.c: 59:             break;
-   838  002F  287C               	goto	l135
-   839  0030                     l1282:
-   840                           
-   841                           ;configuraciones_pic.c: 61:             OPTION_REGbits.PS = 001;
-   842  0030  1683               	bsf	3,5	;RP0=1, select bank1
-   843  0031  1303               	bcf	3,6	;RP1=0, select bank1
-   844  0032  0801               	movf	1,w	;volatile
-   845  0033  39F8               	andlw	-8
-   846  0034  3801               	iorlw	1
-   847  0035  0081               	movwf	1	;volatile
+   837                           ;configuraciones_pic.c: 61:             OPTION_REGbits.PS = 001;
+   838  0030  1683               	bsf	3,5	;RP0=1, select bank1
+   839  0031  1303               	bcf	3,6	;RP1=0, select bank1
+   840  0032  0801               	movf	1,w	;volatile
+   841  0033  39F8               	andlw	-8
+   842  0034  3801               	iorlw	1
+   843  0035  0081               	movwf	1	;volatile
+   844                           
+   845                           ;configuraciones_pic.c: 62:             break;
+   846  0036  287C               	goto	l135
+   847  0037                     l1284:
    848                           
-   849                           ;configuraciones_pic.c: 62:             break;
-   850  0036  287C               	goto	l135
-   851  0037                     l1284:
-   852                           
-   853                           ;configuraciones_pic.c: 64:             OPTION_REGbits.PS = 010;
-   854  0037  30F8               	movlw	-8
-   855  0038  1683               	bsf	3,5	;RP0=1, select bank1
-   856  0039  1303               	bcf	3,6	;RP1=0, select bank1
-   857  003A  0581               	andwf	1,f	;volatile
+   849                           ;configuraciones_pic.c: 64:             OPTION_REGbits.PS = 010;
+   850  0037  30F8               	movlw	-8
+   851  0038  1683               	bsf	3,5	;RP0=1, select bank1
+   852  0039  1303               	bcf	3,6	;RP1=0, select bank1
+   853  003A  0581               	andwf	1,f	;volatile
+   854                           
+   855                           ;configuraciones_pic.c: 65:             break;
+   856  003B  287C               	goto	l135
+   857  003C                     l1286:
    858                           
-   859                           ;configuraciones_pic.c: 65:             break;
-   860  003B  287C               	goto	l135
-   861  003C                     l1286:
-   862                           
-   863                           ;configuraciones_pic.c: 67:             OPTION_REGbits.PS = 011;
-   864  003C  1683               	bsf	3,5	;RP0=1, select bank1
-   865  003D  1303               	bcf	3,6	;RP1=0, select bank1
-   866  003E  0801               	movf	1,w	;volatile
-   867  003F  39F8               	andlw	-8
-   868  0040  3801               	iorlw	1
-   869  0041  0081               	movwf	1	;volatile
+   859                           ;configuraciones_pic.c: 67:             OPTION_REGbits.PS = 011;
+   860  003C  1683               	bsf	3,5	;RP0=1, select bank1
+   861  003D  1303               	bcf	3,6	;RP1=0, select bank1
+   862  003E  0801               	movf	1,w	;volatile
+   863  003F  39F8               	andlw	-8
+   864  0040  3801               	iorlw	1
+   865  0041  0081               	movwf	1	;volatile
+   866                           
+   867                           ;configuraciones_pic.c: 68:             break;
+   868  0042  287C               	goto	l135
+   869  0043                     l1288:
    870                           
-   871                           ;configuraciones_pic.c: 68:             break;
-   872  0042  287C               	goto	l135
-   873  0043                     l1288:
-   874                           
-   875                           ;configuraciones_pic.c: 70:             OPTION_REGbits.PS = 100;
-   876  0043  1683               	bsf	3,5	;RP0=1, select bank1
-   877  0044  1303               	bcf	3,6	;RP1=0, select bank1
-   878  0045  0801               	movf	1,w	;volatile
-   879  0046  39F8               	andlw	-8
-   880  0047  3804               	iorlw	4
-   881  0048  0081               	movwf	1	;volatile
+   871                           ;configuraciones_pic.c: 70:             OPTION_REGbits.PS = 100;
+   872  0043  1683               	bsf	3,5	;RP0=1, select bank1
+   873  0044  1303               	bcf	3,6	;RP1=0, select bank1
+   874  0045  0801               	movf	1,w	;volatile
+   875  0046  39F8               	andlw	-8
+   876  0047  3804               	iorlw	4
+   877  0048  0081               	movwf	1	;volatile
+   878                           
+   879                           ;configuraciones_pic.c: 71:             break;
+   880  0049  287C               	goto	l135
+   881  004A                     l1290:
    882                           
-   883                           ;configuraciones_pic.c: 71:             break;
-   884  0049  287C               	goto	l135
-   885  004A                     l1290:
-   886                           
-   887                           ;configuraciones_pic.c: 73:             OPTION_REGbits.PS = 101;
-   888  004A  1683               	bsf	3,5	;RP0=1, select bank1
-   889  004B  1303               	bcf	3,6	;RP1=0, select bank1
-   890  004C  0801               	movf	1,w	;volatile
-   891  004D  39F8               	andlw	-8
-   892  004E  3805               	iorlw	5
-   893  004F  0081               	movwf	1	;volatile
+   883                           ;configuraciones_pic.c: 73:             OPTION_REGbits.PS = 101;
+   884  004A  1683               	bsf	3,5	;RP0=1, select bank1
+   885  004B  1303               	bcf	3,6	;RP1=0, select bank1
+   886  004C  0801               	movf	1,w	;volatile
+   887  004D  39F8               	andlw	-8
+   888  004E  3805               	iorlw	5
+   889  004F  0081               	movwf	1	;volatile
+   890                           
+   891                           ;configuraciones_pic.c: 74:             break;
+   892  0050  287C               	goto	l135
+   893  0051                     l1292:
    894                           
-   895                           ;configuraciones_pic.c: 74:             break;
-   896  0050  287C               	goto	l135
-   897  0051                     l1292:
-   898                           
-   899                           ;configuraciones_pic.c: 76:             OPTION_REGbits.PS = 111;
-   900  0051  3007               	movlw	7
-   901  0052  1683               	bsf	3,5	;RP0=1, select bank1
-   902  0053  1303               	bcf	3,6	;RP1=0, select bank1
-   903  0054  0481               	iorwf	1,f	;volatile
+   895                           ;configuraciones_pic.c: 76:             OPTION_REGbits.PS = 111;
+   896  0051  3007               	movlw	7
+   897  0052  1683               	bsf	3,5	;RP0=1, select bank1
+   898  0053  1303               	bcf	3,6	;RP1=0, select bank1
+   899  0054  0481               	iorwf	1,f	;volatile
+   900                           
+   901                           ;configuraciones_pic.c: 77:             break;
+   902  0055  287C               	goto	l135
+   903  0056                     l1294:
    904                           
-   905                           ;configuraciones_pic.c: 77:             break;
-   906  0055  287C               	goto	l135
-   907  0056                     l1294:
-   908                           
-   909                           ;configuraciones_pic.c: 79:             OPTION_REGbits.PS = 110;
-   910  0056  1683               	bsf	3,5	;RP0=1, select bank1
-   911  0057  1303               	bcf	3,6	;RP1=0, select bank1
-   912  0058  0801               	movf	1,w	;volatile
-   913  0059  39F8               	andlw	-8
-   914  005A  3806               	iorlw	6
-   915  005B  0081               	movwf	1	;volatile
-   916                           
-   917                           ;configuraciones_pic.c: 80:             break;
-   918  005C  287C               	goto	l135
-   919  005D                     l1298:
-   920  005D  0832               	movf	conf_tmr0@prescaler,w
-   921  005E  00B0               	movwf	??_conf_tmr0
-   922  005F  01B1               	clrf	??_conf_tmr0+1
-   923                           
-   924                           ; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-sw
+   905                           ;configuraciones_pic.c: 79:             OPTION_REGbits.PS = 110;
+   906  0056  1683               	bsf	3,5	;RP0=1, select bank1
+   907  0057  1303               	bcf	3,6	;RP1=0, select bank1
+   908  0058  0801               	movf	1,w	;volatile
+   909  0059  39F8               	andlw	-8
+   910  005A  3806               	iorlw	6
+   911  005B  0081               	movwf	1	;volatile
+   912                           
+   913                           ;configuraciones_pic.c: 80:             break;
+   914  005C  287C               	goto	l135
+   915  005D                     l1298:
+   916  005D  0832               	movf	conf_tmr0@prescaler,w
+   917  005E  00B0               	movwf	??_conf_tmr0
+   918  005F  01B1               	clrf	??_conf_tmr0+1
+   919                           
+   920                           ; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-sw
       +                          itches
-   925                           ; Switch size 1, requested type "simple"
-   926                           ; Number of cases is 1, Range of values is 0 to 0
-   927                           ; switch strategies available:
-   928                           ; Name         Instructions Cycles
-   929                           ; simple_byte            4     3 (average)
-   930                           ; direct_byte           11     8 (fixed)
-   931                           ; jumptable            260     6 (fixed)
-   932                           ;	Chosen strategy is simple_byte
-   933  0060  0831               	movf	??_conf_tmr0+1,w
-   934  0061  3A00               	xorlw	0	; case 0
-   935  0062  1903               	skipnz
-   936  0063  2865               	goto	l1496
-   937  0064  2856               	goto	l1294
-   938  0065                     l1496:
-   939                           
-   940                           ; Switch size 1, requested type "simple"
-   941                           ; Number of cases is 7, Range of values is 0 to 7
-   942                           ; switch strategies available:
-   943                           ; Name         Instructions Cycles
-   944                           ; simple_byte           22    12 (average)
-   945                           ; direct_byte           32     8 (fixed)
-   946                           ; jumptable            260     6 (fixed)
-   947                           ;	Chosen strategy is simple_byte
-   948  0065  0830               	movf	??_conf_tmr0,w
-   949  0066  3A00               	xorlw	0	; case 0
-   950  0067  1903               	skipnz
-   951  0068  282B               	goto	l1280
-   952  0069  3A01               	xorlw	1	; case 1
-   953  006A  1903               	skipnz
-   954  006B  2830               	goto	l1282
-   955  006C  3A03               	xorlw	3	; case 2
-   956  006D  1903               	skipnz
-   957  006E  2837               	goto	l1284
-   958  006F  3A01               	xorlw	1	; case 3
-   959  0070  1903               	skipnz
-   960  0071  283C               	goto	l1286
-   961  0072  3A07               	xorlw	7	; case 4
-   962  0073  1903               	skipnz
-   963  0074  2843               	goto	l1288
-   964  0075  3A01               	xorlw	1	; case 5
-   965  0076  1903               	skipnz
-   966  0077  284A               	goto	l1290
-   967  0078  3A02               	xorlw	2	; case 7
-   968  0079  1903               	skipnz
-   969  007A  2851               	goto	l1292
-   970  007B  2856               	goto	l1294
-   971  007C                     l135:
-   972                           
-   973                           ;configuraciones_pic.c: 82:     OPTION_REGbits.T0CS = 0;
-   974  007C  1281               	bcf	1,5	;volatile
-   975                           
-   976                           ;configuraciones_pic.c: 83:     OPTION_REGbits.PSA = 0;
-   977  007D  1181               	bcf	1,3	;volatile
-   978  007E                     l143:
-   979  007E  0008               	return
-   980  007F                     __end_of_conf_tmr0:
-   981                           
-   982                           	psect	text3
-   983  007F                     __ptext3:	
-   984 ;; *************** function _conf_osc *****************
-   985 ;; Defined at:
-   986 ;;		line 25 in file "configuraciones_pic.c"
-   987 ;; Parameters:    Size  Location     Type
-   988 ;;  frec            1    wreg     unsigned char 
-   989 ;; Auto vars:     Size  Location     Type
-   990 ;;  frec            1    2[BANK0 ] unsigned char 
-   991 ;; Return value:  Size  Location     Type
-   992 ;;                  1    wreg      void 
-   993 ;; Registers used:
-   994 ;;		wreg, fsr0l, fsr0h, status,2, status,0
-   995 ;; Tracked objects:
-   996 ;;		On entry : 0/0
-   997 ;;		On exit  : 0/0
-   998 ;;		Unchanged: 0/0
-   999 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-  1000 ;;      Params:         0       0       0       0       0
-  1001 ;;      Locals:         0       1       0       0       0
-  1002 ;;      Temps:          0       2       0       0       0
-  1003 ;;      Totals:         0       3       0       0       0
-  1004 ;;Total ram usage:        3 bytes
-  1005 ;; Hardware stack levels used:    1
-  1006 ;; Hardware stack levels required when called:    2
-  1007 ;; This function calls:
-  1008 ;;		Nothing
-  1009 ;; This function is called by:
-  1010 ;;		_setup
-  1011 ;; This function uses a non-reentrant model
-  1012 ;;
+   921                           ; Switch size 1, requested type "simple"
+   922                           ; Number of cases is 1, Range of values is 0 to 0
+   923                           ; switch strategies available:
+   924                           ; Name         Instructions Cycles
+   925                           ; simple_byte            4     3 (average)
+   926                           ; direct_byte           11     8 (fixed)
+   927                           ; jumptable            260     6 (fixed)
+   928                           ;	Chosen strategy is simple_byte
+   929  0060  0831               	movf	??_conf_tmr0+1,w
+   930  0061  3A00               	xorlw	0	; case 0
+   931  0062  1903               	skipnz
+   932  0063  2865               	goto	l1496
+   933  0064  2856               	goto	l1294
+   934  0065                     l1496:
+   935                           
+   936                           ; Switch size 1, requested type "simple"
+   937                           ; Number of cases is 7, Range of values is 0 to 7
+   938                           ; switch strategies available:
+   939                           ; Name         Instructions Cycles
+   940                           ; simple_byte           22    12 (average)
+   941                           ; direct_byte           32     8 (fixed)
+   942                           ; jumptable            260     6 (fixed)
+   943                           ;	Chosen strategy is simple_byte
+   944  0065  0830               	movf	??_conf_tmr0,w
+   945  0066  3A00               	xorlw	0	; case 0
+   946  0067  1903               	skipnz
+   947  0068  282B               	goto	l1280
+   948  0069  3A01               	xorlw	1	; case 1
+   949  006A  1903               	skipnz
+   950  006B  2830               	goto	l1282
+   951  006C  3A03               	xorlw	3	; case 2
+   952  006D  1903               	skipnz
+   953  006E  2837               	goto	l1284
+   954  006F  3A01               	xorlw	1	; case 3
+   955  0070  1903               	skipnz
+   956  0071  283C               	goto	l1286
+   957  0072  3A07               	xorlw	7	; case 4
+   958  0073  1903               	skipnz
+   959  0074  2843               	goto	l1288
+   960  0075  3A01               	xorlw	1	; case 5
+   961  0076  1903               	skipnz
+   962  0077  284A               	goto	l1290
+   963  0078  3A02               	xorlw	2	; case 7
+   964  0079  1903               	skipnz
+   965  007A  2851               	goto	l1292
+   966  007B  2856               	goto	l1294
+   967  007C                     l135:
+   968                           
+   969                           ;configuraciones_pic.c: 82:     OPTION_REGbits.T0CS = 0;
+   970  007C  1281               	bcf	1,5	;volatile
+   971                           
+   972                           ;configuraciones_pic.c: 83:     OPTION_REGbits.PSA = 0;
+   973  007D  1181               	bcf	1,3	;volatile
+   974  007E                     l143:
+   975  007E  0008               	return
+   976  007F                     __end_of_conf_tmr0:
+   977                           
+   978                           	psect	text3
+   979  007F                     __ptext3:	
+   980 ;; *************** function _conf_osc *****************
+   981 ;; Defined at:
+   982 ;;		line 25 in file "configuraciones_pic.c"
+   983 ;; Parameters:    Size  Location     Type
+   984 ;;  frec            1    wreg     unsigned char 
+   985 ;; Auto vars:     Size  Location     Type
+   986 ;;  frec            1    2[BANK0 ] unsigned char 
+   987 ;; Return value:  Size  Location     Type
+   988 ;;                  1    wreg      void 
+   989 ;; Registers used:
+   990 ;;		wreg, fsr0l, fsr0h, status,2, status,0
+   991 ;; Tracked objects:
+   992 ;;		On entry : 0/0
+   993 ;;		On exit  : 0/0
+   994 ;;		Unchanged: 0/0
+   995 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   996 ;;      Params:         0       0       0       0       0
+   997 ;;      Locals:         0       1       0       0       0
+   998 ;;      Temps:          0       2       0       0       0
+   999 ;;      Totals:         0       3       0       0       0
+  1000 ;;Total ram usage:        3 bytes
+  1001 ;; Hardware stack levels used:    1
+  1002 ;; Hardware stack levels required when called:    2
+  1003 ;; This function calls:
+  1004 ;;		Nothing
+  1005 ;; This function is called by:
+  1006 ;;		_setup
+  1007 ;; This function uses a non-reentrant model
+  1008 ;;
+  1009                           
+  1010                           
+  1011                           ;psect for function _conf_osc
+  1012  007F                     _conf_osc:
   1013                           
-  1014                           
-  1015                           ;psect for function _conf_osc
-  1016  007F                     _conf_osc:
-  1017                           
-  1018                           ;incstack = 0
-  1019                           ; Regs used in _conf_osc: [wreg-fsr0h+status,2+status,0]
-  1020                           ;conf_osc@frec stored from wreg
-  1021  007F  1283               	bcf	3,5	;RP0=0, select bank0
-  1022  0080  1303               	bcf	3,6	;RP1=0, select bank0
-  1023  0081  00B2               	movwf	conf_osc@frec
-  1024  0082                     l1250:
+  1014                           ;incstack = 0
+  1015                           ; Regs used in _conf_osc: [wreg-fsr0h+status,2+status,0]
+  1016                           ;conf_osc@frec stored from wreg
+  1017  007F  1283               	bcf	3,5	;RP0=0, select bank0
+  1018  0080  1303               	bcf	3,6	;RP1=0, select bank0
+  1019  0081  00B2               	movwf	conf_osc@frec
+  1020  0082                     l1250:
+  1021                           
+  1022                           ;configuraciones_pic.c: 26:     switch(frec){
+  1023  0082  28B5               	goto	l1270
+  1024  0083                     l1252:
   1025                           
-  1026                           ;configuraciones_pic.c: 26:     switch(frec){
-  1027  0082  28B5               	goto	l1270
-  1028  0083                     l1252:
-  1029                           
-  1030                           ;configuraciones_pic.c: 28:             OSCCONbits.IRCF = 000;
-  1031  0083  308F               	movlw	-113
-  1032  0084  1683               	bsf	3,5	;RP0=1, select bank1
-  1033  0085  1303               	bcf	3,6	;RP1=0, select bank1
-  1034  0086  058F               	andwf	15,f	;volatile
+  1026                           ;configuraciones_pic.c: 28:             OSCCONbits.IRCF = 000;
+  1027  0083  308F               	movlw	-113
+  1028  0084  1683               	bsf	3,5	;RP0=1, select bank1
+  1029  0085  1303               	bcf	3,6	;RP1=0, select bank1
+  1030  0086  058F               	andwf	15,f	;volatile
+  1031                           
+  1032                           ;configuraciones_pic.c: 29:             break;
+  1033  0087  28D4               	goto	l122
+  1034  0088                     l1254:
   1035                           
-  1036                           ;configuraciones_pic.c: 29:             break;
-  1037  0087  28D4               	goto	l122
-  1038  0088                     l1254:
-  1039                           
-  1040                           ;configuraciones_pic.c: 31:             OSCCONbits.IRCF = 001;
-  1041  0088  1683               	bsf	3,5	;RP0=1, select bank1
-  1042  0089  1303               	bcf	3,6	;RP1=0, select bank1
-  1043  008A  080F               	movf	15,w	;volatile
-  1044  008B  398F               	andlw	-113
-  1045  008C  3810               	iorlw	16
-  1046  008D  008F               	movwf	15	;volatile
+  1036                           ;configuraciones_pic.c: 31:             OSCCONbits.IRCF = 001;
+  1037  0088  1683               	bsf	3,5	;RP0=1, select bank1
+  1038  0089  1303               	bcf	3,6	;RP1=0, select bank1
+  1039  008A  080F               	movf	15,w	;volatile
+  1040  008B  398F               	andlw	-113
+  1041  008C  3810               	iorlw	16
+  1042  008D  008F               	movwf	15	;volatile
+  1043                           
+  1044                           ;configuraciones_pic.c: 32:             break;
+  1045  008E  28D4               	goto	l122
+  1046  008F                     l1256:
   1047                           
-  1048                           ;configuraciones_pic.c: 32:             break;
-  1049  008E  28D4               	goto	l122
-  1050  008F                     l1256:
-  1051                           
-  1052                           ;configuraciones_pic.c: 34:             OSCCONbits.IRCF = 010;
-  1053  008F  308F               	movlw	-113
-  1054  0090  1683               	bsf	3,5	;RP0=1, select bank1
-  1055  0091  1303               	bcf	3,6	;RP1=0, select bank1
-  1056  0092  058F               	andwf	15,f	;volatile
+  1048                           ;configuraciones_pic.c: 34:             OSCCONbits.IRCF = 010;
+  1049  008F  308F               	movlw	-113
+  1050  0090  1683               	bsf	3,5	;RP0=1, select bank1
+  1051  0091  1303               	bcf	3,6	;RP1=0, select bank1
+  1052  0092  058F               	andwf	15,f	;volatile
+  1053                           
+  1054                           ;configuraciones_pic.c: 35:             break;
+  1055  0093  28D4               	goto	l122
+  1056  0094                     l1258:
   1057                           
-  1058                           ;configuraciones_pic.c: 35:             break;
-  1059  0093  28D4               	goto	l122
-  1060  0094                     l1258:
-  1061                           
-  1062                           ;configuraciones_pic.c: 37:             OSCCONbits.IRCF = 011;
-  1063  0094  1683               	bsf	3,5	;RP0=1, select bank1
-  1064  0095  1303               	bcf	3,6	;RP1=0, select bank1
-  1065  0096  080F               	movf	15,w	;volatile
-  1066  0097  398F               	andlw	-113
-  1067  0098  3810               	iorlw	16
-  1068  0099  008F               	movwf	15	;volatile
+  1058                           ;configuraciones_pic.c: 37:             OSCCONbits.IRCF = 011;
+  1059  0094  1683               	bsf	3,5	;RP0=1, select bank1
+  1060  0095  1303               	bcf	3,6	;RP1=0, select bank1
+  1061  0096  080F               	movf	15,w	;volatile
+  1062  0097  398F               	andlw	-113
+  1063  0098  3810               	iorlw	16
+  1064  0099  008F               	movwf	15	;volatile
+  1065                           
+  1066                           ;configuraciones_pic.c: 38:             break;
+  1067  009A  28D4               	goto	l122
+  1068  009B                     l1260:
   1069                           
-  1070                           ;configuraciones_pic.c: 38:             break;
-  1071  009A  28D4               	goto	l122
-  1072  009B                     l1260:
-  1073                           
-  1074                           ;configuraciones_pic.c: 40:             OSCCONbits.IRCF = 100;
-  1075  009B  1683               	bsf	3,5	;RP0=1, select bank1
-  1076  009C  1303               	bcf	3,6	;RP1=0, select bank1
-  1077  009D  080F               	movf	15,w	;volatile
-  1078  009E  398F               	andlw	-113
-  1079  009F  3840               	iorlw	64
-  1080  00A0  008F               	movwf	15	;volatile
+  1070                           ;configuraciones_pic.c: 40:             OSCCONbits.IRCF = 100;
+  1071  009B  1683               	bsf	3,5	;RP0=1, select bank1
+  1072  009C  1303               	bcf	3,6	;RP1=0, select bank1
+  1073  009D  080F               	movf	15,w	;volatile
+  1074  009E  398F               	andlw	-113
+  1075  009F  3840               	iorlw	64
+  1076  00A0  008F               	movwf	15	;volatile
+  1077                           
+  1078                           ;configuraciones_pic.c: 41:             break;
+  1079  00A1  28D4               	goto	l122
+  1080  00A2                     l1262:
   1081                           
-  1082                           ;configuraciones_pic.c: 41:             break;
-  1083  00A1  28D4               	goto	l122
-  1084  00A2                     l1262:
-  1085                           
-  1086                           ;configuraciones_pic.c: 43:             OSCCONbits.IRCF = 101;
-  1087  00A2  1683               	bsf	3,5	;RP0=1, select bank1
-  1088  00A3  1303               	bcf	3,6	;RP1=0, select bank1
-  1089  00A4  080F               	movf	15,w	;volatile
-  1090  00A5  398F               	andlw	-113
-  1091  00A6  3850               	iorlw	80
-  1092  00A7  008F               	movwf	15	;volatile
+  1082                           ;configuraciones_pic.c: 43:             OSCCONbits.IRCF = 101;
+  1083  00A2  1683               	bsf	3,5	;RP0=1, select bank1
+  1084  00A3  1303               	bcf	3,6	;RP1=0, select bank1
+  1085  00A4  080F               	movf	15,w	;volatile
+  1086  00A5  398F               	andlw	-113
+  1087  00A6  3850               	iorlw	80
+  1088  00A7  008F               	movwf	15	;volatile
+  1089                           
+  1090                           ;configuraciones_pic.c: 44:             break;
+  1091  00A8  28D4               	goto	l122
+  1092  00A9                     l1264:
   1093                           
-  1094                           ;configuraciones_pic.c: 44:             break;
-  1095  00A8  28D4               	goto	l122
-  1096  00A9                     l1264:
-  1097                           
-  1098                           ;configuraciones_pic.c: 46:             OSCCONbits.IRCF = 111;
-  1099  00A9  3070               	movlw	112
-  1100  00AA  1683               	bsf	3,5	;RP0=1, select bank1
-  1101  00AB  1303               	bcf	3,6	;RP1=0, select bank1
-  1102  00AC  048F               	iorwf	15,f	;volatile
+  1094                           ;configuraciones_pic.c: 46:             OSCCONbits.IRCF = 111;
+  1095  00A9  3070               	movlw	112
+  1096  00AA  1683               	bsf	3,5	;RP0=1, select bank1
+  1097  00AB  1303               	bcf	3,6	;RP1=0, select bank1
+  1098  00AC  048F               	iorwf	15,f	;volatile
+  1099                           
+  1100                           ;configuraciones_pic.c: 47:             break;
+  1101  00AD  28D4               	goto	l122
+  1102  00AE                     l1266:
   1103                           
-  1104                           ;configuraciones_pic.c: 47:             break;
-  1105  00AD  28D4               	goto	l122
-  1106  00AE                     l1266:
-  1107                           
-  1108                           ;configuraciones_pic.c: 49:             OSCCONbits.IRCF = 110;
-  1109  00AE  1683               	bsf	3,5	;RP0=1, select bank1
-  1110  00AF  1303               	bcf	3,6	;RP1=0, select bank1
-  1111  00B0  080F               	movf	15,w	;volatile
-  1112  00B1  398F               	andlw	-113
-  1113  00B2  3860               	iorlw	96
-  1114  00B3  008F               	movwf	15	;volatile
-  1115                           
-  1116                           ;configuraciones_pic.c: 50:             break;
-  1117  00B4  28D4               	goto	l122
-  1118  00B5                     l1270:
-  1119  00B5  0832               	movf	conf_osc@frec,w
-  1120  00B6  00B0               	movwf	??_conf_osc
-  1121  00B7  01B1               	clrf	??_conf_osc+1
-  1122                           
-  1123                           ; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-sw
+  1104                           ;configuraciones_pic.c: 49:             OSCCONbits.IRCF = 110;
+  1105  00AE  1683               	bsf	3,5	;RP0=1, select bank1
+  1106  00AF  1303               	bcf	3,6	;RP1=0, select bank1
+  1107  00B0  080F               	movf	15,w	;volatile
+  1108  00B1  398F               	andlw	-113
+  1109  00B2  3860               	iorlw	96
+  1110  00B3  008F               	movwf	15	;volatile
+  1111                           
+  1112                           ;configuraciones_pic.c: 50:             break;
+  1113  00B4  28D4               	goto	l122
+  1114  00B5                     l1270:
+  1115  00B5  0832               	movf	conf_osc@frec,w
+  1116  00B6  00B0               	movwf	??_conf_osc
+  1117  00B7  01B1               	clrf	??_conf_osc+1
+  1118                           
+  1119                           ; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-sw
       +                          itches
-  1124                           ; Switch size 1, requested type "simple"
-  1125                           ; Number of cases is 1, Range of values is 0 to 0
-  1126                           ; switch strategies available:
-  1127                           ; Name         Instructions Cycles
-  1128                           ; simple_byte            4     3 (average)
-  1129                           ; direct_byte           11     8 (fixed)
-  1130                           ; jumptable            260     6 (fixed)
-  1131                           ;	Chosen strategy is simple_byte
-  1132  00B8  0831               	movf	??_conf_osc+1,w
-  1133  00B9  3A00               	xorlw	0	; case 0
-  1134  00BA  1903               	skipnz
-  1135  00BB  28BD               	goto	l1498
-  1136  00BC  28AE               	goto	l1266
-  1137  00BD                     l1498:
-  1138                           
-  1139                           ; Switch size 1, requested type "simple"
-  1140                           ; Number of cases is 7, Range of values is 0 to 7
-  1141                           ; switch strategies available:
-  1142                           ; Name         Instructions Cycles
-  1143                           ; simple_byte           22    12 (average)
-  1144                           ; direct_byte           32     8 (fixed)
-  1145                           ; jumptable            260     6 (fixed)
-  1146                           ;	Chosen strategy is simple_byte
-  1147  00BD  0830               	movf	??_conf_osc,w
-  1148  00BE  3A00               	xorlw	0	; case 0
-  1149  00BF  1903               	skipnz
-  1150  00C0  2883               	goto	l1252
-  1151  00C1  3A01               	xorlw	1	; case 1
-  1152  00C2  1903               	skipnz
-  1153  00C3  2888               	goto	l1254
-  1154  00C4  3A03               	xorlw	3	; case 2
-  1155  00C5  1903               	skipnz
-  1156  00C6  288F               	goto	l1256
-  1157  00C7  3A01               	xorlw	1	; case 3
-  1158  00C8  1903               	skipnz
-  1159  00C9  2894               	goto	l1258
-  1160  00CA  3A07               	xorlw	7	; case 4
-  1161  00CB  1903               	skipnz
-  1162  00CC  289B               	goto	l1260
-  1163  00CD  3A01               	xorlw	1	; case 5
-  1164  00CE  1903               	skipnz
-  1165  00CF  28A2               	goto	l1262
-  1166  00D0  3A02               	xorlw	2	; case 7
-  1167  00D1  1903               	skipnz
-  1168  00D2  28A9               	goto	l1264
-  1169  00D3  28AE               	goto	l1266
-  1170  00D4                     l122:
-  1171                           
-  1172                           ;configuraciones_pic.c: 52:     OSCCONbits.SCS = 1;
-  1173  00D4  140F               	bsf	15,0	;volatile
-  1174  00D5                     l130:
-  1175  00D5  0008               	return
-  1176  00D6                     __end_of_conf_osc:
-  1177                           
-  1178                           	psect	text4
-  1179  01AB                     __ptext4:	
-  1180 ;; *************** function _conf_ADC *****************
-  1181 ;; Defined at:
-  1182 ;;		line 86 in file "configuraciones_pic.c"
-  1183 ;; Parameters:    Size  Location     Type
-  1184 ;;  adcFrec         1    wreg     unsigned char 
-  1185 ;; Auto vars:     Size  Location     Type
-  1186 ;;  adcFrec         1    2[BANK0 ] unsigned char 
-  1187 ;; Return value:  Size  Location     Type
-  1188 ;;                  1    wreg      void 
-  1189 ;; Registers used:
-  1190 ;;		wreg, fsr0l, fsr0h, status,2, status,0
-  1191 ;; Tracked objects:
-  1192 ;;		On entry : 0/0
-  1193 ;;		On exit  : 0/0
-  1194 ;;		Unchanged: 0/0
-  1195 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-  1196 ;;      Params:         0       0       0       0       0
-  1197 ;;      Locals:         0       1       0       0       0
-  1198 ;;      Temps:          0       2       0       0       0
-  1199 ;;      Totals:         0       3       0       0       0
-  1200 ;;Total ram usage:        3 bytes
-  1201 ;; Hardware stack levels used:    1
-  1202 ;; Hardware stack levels required when called:    2
-  1203 ;; This function calls:
-  1204 ;;		Nothing
-  1205 ;; This function is called by:
-  1206 ;;		_setup
-  1207 ;; This function uses a non-reentrant model
-  1208 ;;
+  1120                           ; Switch size 1, requested type "simple"
+  1121                           ; Number of cases is 1, Range of values is 0 to 0
+  1122                           ; switch strategies available:
+  1123                           ; Name         Instructions Cycles
+  1124                           ; simple_byte            4     3 (average)
+  1125                           ; direct_byte           11     8 (fixed)
+  1126                           ; jumptable            260     6 (fixed)
+  1127                           ;	Chosen strategy is simple_byte
+  1128  00B8  0831               	movf	??_conf_osc+1,w
+  1129  00B9  3A00               	xorlw	0	; case 0
+  1130  00BA  1903               	skipnz
+  1131  00BB  28BD               	goto	l1498
+  1132  00BC  28AE               	goto	l1266
+  1133  00BD                     l1498:
+  1134                           
+  1135                           ; Switch size 1, requested type "simple"
+  1136                           ; Number of cases is 7, Range of values is 0 to 7
+  1137                           ; switch strategies available:
+  1138                           ; Name         Instructions Cycles
+  1139                           ; simple_byte           22    12 (average)
+  1140                           ; direct_byte           32     8 (fixed)
+  1141                           ; jumptable            260     6 (fixed)
+  1142                           ;	Chosen strategy is simple_byte
+  1143  00BD  0830               	movf	??_conf_osc,w
+  1144  00BE  3A00               	xorlw	0	; case 0
+  1145  00BF  1903               	skipnz
+  1146  00C0  2883               	goto	l1252
+  1147  00C1  3A01               	xorlw	1	; case 1
+  1148  00C2  1903               	skipnz
+  1149  00C3  2888               	goto	l1254
+  1150  00C4  3A03               	xorlw	3	; case 2
+  1151  00C5  1903               	skipnz
+  1152  00C6  288F               	goto	l1256
+  1153  00C7  3A01               	xorlw	1	; case 3
+  1154  00C8  1903               	skipnz
+  1155  00C9  2894               	goto	l1258
+  1156  00CA  3A07               	xorlw	7	; case 4
+  1157  00CB  1903               	skipnz
+  1158  00CC  289B               	goto	l1260
+  1159  00CD  3A01               	xorlw	1	; case 5
+  1160  00CE  1903               	skipnz
+  1161  00CF  28A2               	goto	l1262
+  1162  00D0  3A02               	xorlw	2	; case 7
+  1163  00D1  1903               	skipnz
+  1164  00D2  28A9               	goto	l1264
+  1165  00D3  28AE               	goto	l1266
+  1166  00D4                     l122:
+  1167                           
+  1168                           ;configuraciones_pic.c: 52:     OSCCONbits.SCS = 1;
+  1169  00D4  140F               	bsf	15,0	;volatile
+  1170  00D5                     l130:
+  1171  00D5  0008               	return
+  1172  00D6                     __end_of_conf_osc:
+  1173                           
+  1174                           	psect	text4
+  1175  01AB                     __ptext4:	
+  1176 ;; *************** function _conf_ADC *****************
+  1177 ;; Defined at:
+  1178 ;;		line 86 in file "configuraciones_pic.c"
+  1179 ;; Parameters:    Size  Location     Type
+  1180 ;;  adcFrec         1    wreg     unsigned char 
+  1181 ;; Auto vars:     Size  Location     Type
+  1182 ;;  adcFrec         1    2[BANK0 ] unsigned char 
+  1183 ;; Return value:  Size  Location     Type
+  1184 ;;                  1    wreg      void 
+  1185 ;; Registers used:
+  1186 ;;		wreg, fsr0l, fsr0h, status,2, status,0
+  1187 ;; Tracked objects:
+  1188 ;;		On entry : 0/0
+  1189 ;;		On exit  : 0/0
+  1190 ;;		Unchanged: 0/0
+  1191 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1192 ;;      Params:         0       0       0       0       0
+  1193 ;;      Locals:         0       1       0       0       0
+  1194 ;;      Temps:          0       2       0       0       0
+  1195 ;;      Totals:         0       3       0       0       0
+  1196 ;;Total ram usage:        3 bytes
+  1197 ;; Hardware stack levels used:    1
+  1198 ;; Hardware stack levels required when called:    2
+  1199 ;; This function calls:
+  1200 ;;		Nothing
+  1201 ;; This function is called by:
+  1202 ;;		_setup
+  1203 ;; This function uses a non-reentrant model
+  1204 ;;
+  1205                           
+  1206                           
+  1207                           ;psect for function _conf_ADC
+  1208  01AB                     _conf_ADC:
   1209                           
-  1210                           
-  1211                           ;psect for function _conf_ADC
-  1212  01AB                     _conf_ADC:
-  1213                           
-  1214                           ;incstack = 0
-  1215                           ; Regs used in _conf_ADC: [wreg-fsr0h+status,2+status,0]
-  1216                           ;conf_ADC@adcFrec stored from wreg
-  1217  01AB  1283               	bcf	3,5	;RP0=0, select bank0
-  1218  01AC  1303               	bcf	3,6	;RP1=0, select bank0
-  1219  01AD  00B2               	movwf	conf_ADC@adcFrec
-  1220  01AE                     l1306:
+  1210                           ;incstack = 0
+  1211                           ; Regs used in _conf_ADC: [wreg-fsr0h+status,2+status,0]
+  1212                           ;conf_ADC@adcFrec stored from wreg
+  1213  01AB  1283               	bcf	3,5	;RP0=0, select bank0
+  1214  01AC  1303               	bcf	3,6	;RP1=0, select bank0
+  1215  01AD  00B2               	movwf	conf_ADC@adcFrec
+  1216  01AE                     l1306:
+  1217                           
+  1218                           ;configuraciones_pic.c: 87:     switch(adcFrec){
+  1219  01AE  29BC               	goto	l1316
+  1220  01AF                     l1308:
   1221                           
-  1222                           ;configuraciones_pic.c: 87:     switch(adcFrec){
-  1223  01AE  29BC               	goto	l1316
-  1224  01AF                     l1308:
+  1222                           ;configuraciones_pic.c: 89:             ADCON0bits.ADCS = 00;
+  1223  01AF  303F               	movlw	-193
+  1224  01B0  059F               	andwf	31,f	;volatile
   1225                           
-  1226                           ;configuraciones_pic.c: 89:             ADCON0bits.ADCS = 00;
-  1227  01AF  303F               	movlw	-193
-  1228  01B0  059F               	andwf	31,f	;volatile
+  1226                           ;configuraciones_pic.c: 90:             break;
+  1227  01B1  29CC               	goto	l148
+  1228  01B2                     l1310:
   1229                           
-  1230                           ;configuraciones_pic.c: 90:             break;
-  1231  01B1  29CC               	goto	l148
-  1232  01B2                     l1310:
-  1233                           
-  1234                           ;configuraciones_pic.c: 92:             ADCON0bits.ADCS = 01;
-  1235  01B2  081F               	movf	31,w	;volatile
-  1236  01B3  393F               	andlw	-193
-  1237  01B4  3840               	iorlw	64
-  1238  01B5  009F               	movwf	31	;volatile
+  1230                           ;configuraciones_pic.c: 92:             ADCON0bits.ADCS = 01;
+  1231  01B2  081F               	movf	31,w	;volatile
+  1232  01B3  393F               	andlw	-193
+  1233  01B4  3840               	iorlw	64
+  1234  01B5  009F               	movwf	31	;volatile
+  1235                           
+  1236                           ;configuraciones_pic.c: 93:             break;
+  1237  01B6  29CC               	goto	l148
+  1238  01B7                     l1312:
   1239                           
-  1240                           ;configuraciones_pic.c: 93:             break;
-  1241  01B6  29CC               	goto	l148
-  1242  01B7                     l1312:
-  1243                           
-  1244                           ;configuraciones_pic.c: 95:             ADCON0bits.ADCS = 10;
-  1245  01B7  081F               	movf	31,w	;volatile
-  1246  01B8  393F               	andlw	-193
-  1247  01B9  3880               	iorlw	128
-  1248  01BA  009F               	movwf	31	;volatile
-  1249                           
-  1250                           ;configuraciones_pic.c: 96:             break;
-  1251  01BB  29CC               	goto	l148
-  1252  01BC                     l1316:
-  1253  01BC  0832               	movf	conf_ADC@adcFrec,w
-  1254  01BD  00B0               	movwf	??_conf_ADC
-  1255  01BE  01B1               	clrf	??_conf_ADC+1
-  1256                           
-  1257                           ; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-sw
+  1240                           ;configuraciones_pic.c: 95:             ADCON0bits.ADCS = 10;
+  1241  01B7  081F               	movf	31,w	;volatile
+  1242  01B8  393F               	andlw	-193
+  1243  01B9  3880               	iorlw	128
+  1244  01BA  009F               	movwf	31	;volatile
+  1245                           
+  1246                           ;configuraciones_pic.c: 96:             break;
+  1247  01BB  29CC               	goto	l148
+  1248  01BC                     l1316:
+  1249  01BC  0832               	movf	conf_ADC@adcFrec,w
+  1250  01BD  00B0               	movwf	??_conf_ADC
+  1251  01BE  01B1               	clrf	??_conf_ADC+1
+  1252                           
+  1253                           ; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-sw
       +                          itches
-  1258                           ; Switch size 1, requested type "simple"
-  1259                           ; Number of cases is 1, Range of values is 0 to 0
-  1260                           ; switch strategies available:
-  1261                           ; Name         Instructions Cycles
-  1262                           ; simple_byte            4     3 (average)
-  1263                           ; direct_byte           11     8 (fixed)
-  1264                           ; jumptable            260     6 (fixed)
-  1265                           ;	Chosen strategy is simple_byte
-  1266  01BF  0831               	movf	??_conf_ADC+1,w
-  1267  01C0  3A00               	xorlw	0	; case 0
-  1268  01C1  1903               	skipnz
-  1269  01C2  29C4               	goto	l1500
-  1270  01C3  29B7               	goto	l1312
-  1271  01C4                     l1500:
-  1272                           
-  1273                           ; Switch size 1, requested type "simple"
-  1274                           ; Number of cases is 2, Range of values is 0 to 1
-  1275                           ; switch strategies available:
-  1276                           ; Name         Instructions Cycles
-  1277                           ; simple_byte            7     4 (average)
-  1278                           ; direct_byte           14     8 (fixed)
-  1279                           ; jumptable            260     6 (fixed)
-  1280                           ;	Chosen strategy is simple_byte
-  1281  01C4  0830               	movf	??_conf_ADC,w
-  1282  01C5  3A00               	xorlw	0	; case 0
-  1283  01C6  1903               	skipnz
-  1284  01C7  29AF               	goto	l1308
-  1285  01C8  3A01               	xorlw	1	; case 1
-  1286  01C9  1903               	skipnz
-  1287  01CA  29B2               	goto	l1310
-  1288  01CB  29B7               	goto	l1312
-  1289  01CC                     l148:
-  1290                           
-  1291                           ;configuraciones_pic.c: 99:     ADCON1bits.VCFG0 = 0;
-  1292  01CC  1683               	bsf	3,5	;RP0=1, select bank1
-  1293  01CD  1303               	bcf	3,6	;RP1=0, select bank1
-  1294  01CE  121F               	bcf	31,4	;volatile
-  1295                           
-  1296                           ;configuraciones_pic.c: 100:     ADCON1bits.VCFG1 = 0;
-  1297  01CF  129F               	bcf	31,5	;volatile
-  1298  01D0                     l151:
-  1299  01D0  0008               	return
-  1300  01D1                     __end_of_conf_ADC:
-  1301                           
-  1302                           	psect	text5
-  1303  01D1                     __ptext5:	
-  1304 ;; *************** function _nibbles *****************
-  1305 ;; Defined at:
-  1306 ;;		line 111 in file "configuraciones_pic.c"
-  1307 ;; Parameters:    Size  Location     Type
-  1308 ;;  dato            1    wreg     unsigned char 
-  1309 ;; Auto vars:     Size  Location     Type
-  1310 ;;  dato            1    2[BANK0 ] unsigned char 
-  1311 ;; Return value:  Size  Location     Type
-  1312 ;;                  1    wreg      void 
-  1313 ;; Registers used:
-  1314 ;;		wreg, status,2, status,0
-  1315 ;; Tracked objects:
-  1316 ;;		On entry : 0/0
-  1317 ;;		On exit  : 0/0
-  1318 ;;		Unchanged: 0/0
-  1319 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-  1320 ;;      Params:         0       0       0       0       0
-  1321 ;;      Locals:         0       1       0       0       0
-  1322 ;;      Temps:          0       2       0       0       0
-  1323 ;;      Totals:         0       3       0       0       0
-  1324 ;;Total ram usage:        3 bytes
-  1325 ;; Hardware stack levels used:    1
-  1326 ;; Hardware stack levels required when called:    2
-  1327 ;; This function calls:
-  1328 ;;		Nothing
-  1329 ;; This function is called by:
-  1330 ;;		_main
-  1331 ;; This function uses a non-reentrant model
-  1332 ;;
+  1254                           ; Switch size 1, requested type "simple"
+  1255                           ; Number of cases is 1, Range of values is 0 to 0
+  1256                           ; switch strategies available:
+  1257                           ; Name         Instructions Cycles
+  1258                           ; simple_byte            4     3 (average)
+  1259                           ; direct_byte           11     8 (fixed)
+  1260                           ; jumptable            260     6 (fixed)
+  1261                           ;	Chosen strategy is simple_byte
+  1262  01BF  0831               	movf	??_conf_ADC+1,w
+  1263  01C0  3A00               	xorlw	0	; case 0
+  1264  01C1  1903               	skipnz
+  1265  01C2  29C4               	goto	l1500
+  1266  01C3  29B7               	goto	l1312
+  1267  01C4                     l1500:
+  1268                           
+  1269                           ; Switch size 1, requested type "simple"
+  1270                           ; Number of cases is 2, Range of values is 0 to 1
+  1271                           ; switch strategies available:
+  1272                           ; Name         Instructions Cycles
+  1273                           ; simple_byte            7     4 (average)
+  1274                           ; direct_byte           14     8 (fixed)
+  1275                           ; jumptable            260     6 (fixed)
+  1276                           ;	Chosen strategy is simple_byte
+  1277  01C4  0830               	movf	??_conf_ADC,w
+  1278  01C5  3A00               	xorlw	0	; case 0
+  1279  01C6  1903               	skipnz
+  1280  01C7  29AF               	goto	l1308
+  1281  01C8  3A01               	xorlw	1	; case 1
+  1282  01C9  1903               	skipnz
+  1283  01CA  29B2               	goto	l1310
+  1284  01CB  29B7               	goto	l1312
+  1285  01CC                     l148:
+  1286                           
+  1287                           ;configuraciones_pic.c: 99:     ADCON1bits.VCFG0 = 0;
+  1288  01CC  1683               	bsf	3,5	;RP0=1, select bank1
+  1289  01CD  1303               	bcf	3,6	;RP1=0, select bank1
+  1290  01CE  121F               	bcf	31,4	;volatile
+  1291                           
+  1292                           ;configuraciones_pic.c: 100:     ADCON1bits.VCFG1 = 0;
+  1293  01CF  129F               	bcf	31,5	;volatile
+  1294  01D0                     l151:
+  1295  01D0  0008               	return
+  1296  01D1                     __end_of_conf_ADC:
+  1297                           
+  1298                           	psect	text5
+  1299  01D1                     __ptext5:	
+  1300 ;; *************** function _nibbles *****************
+  1301 ;; Defined at:
+  1302 ;;		line 111 in file "configuraciones_pic.c"
+  1303 ;; Parameters:    Size  Location     Type
+  1304 ;;  dato            1    wreg     unsigned char 
+  1305 ;; Auto vars:     Size  Location     Type
+  1306 ;;  dato            1    2[BANK0 ] unsigned char 
+  1307 ;; Return value:  Size  Location     Type
+  1308 ;;                  1    wreg      void 
+  1309 ;; Registers used:
+  1310 ;;		wreg, status,2, status,0
+  1311 ;; Tracked objects:
+  1312 ;;		On entry : 0/0
+  1313 ;;		On exit  : 0/0
+  1314 ;;		Unchanged: 0/0
+  1315 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1316 ;;      Params:         0       0       0       0       0
+  1317 ;;      Locals:         0       1       0       0       0
+  1318 ;;      Temps:          0       2       0       0       0
+  1319 ;;      Totals:         0       3       0       0       0
+  1320 ;;Total ram usage:        3 bytes
+  1321 ;; Hardware stack levels used:    1
+  1322 ;; Hardware stack levels required when called:    2
+  1323 ;; This function calls:
+  1324 ;;		Nothing
+  1325 ;; This function is called by:
+  1326 ;;		_main
+  1327 ;; This function uses a non-reentrant model
+  1328 ;;
+  1329                           
+  1330                           
+  1331                           ;psect for function _nibbles
+  1332  01D1                     _nibbles:
   1333                           
-  1334                           
-  1335                           ;psect for function _nibbles
-  1336  01D1                     _nibbles:
-  1337                           
-  1338                           ;incstack = 0
-  1339                           ; Regs used in _nibbles: [wreg+status,2+status,0]
-  1340                           ;nibbles@dato stored from wreg
-  1341  01D1  1283               	bcf	3,5	;RP0=0, select bank0
-  1342  01D2  1303               	bcf	3,6	;RP1=0, select bank0
-  1343  01D3  00B2               	movwf	nibbles@dato
-  1344  01D4                     l1386:
-  1345                           
-  1346                           ;configuraciones_pic.c: 112:     down_nibbles = dato&0x0F;
-  1347  01D4  0832               	movf	nibbles@dato,w
-  1348  01D5  390F               	andlw	15
-  1349  01D6  00B0               	movwf	??_nibbles
-  1350  01D7  0830               	movf	??_nibbles,w
-  1351  01D8  00F8               	movwf	_down_nibbles
-  1352  01D9                     l1388:
-  1353                           
-  1354                           ;configuraciones_pic.c: 113:     upper_nibbles = (dato>>4)&0x0F;
-  1355  01D9  0832               	movf	nibbles@dato,w
-  1356  01DA  00B0               	movwf	??_nibbles
-  1357  01DB  3004               	movlw	4
-  1358  01DC                     u145:
-  1359  01DC  1003               	clrc
-  1360  01DD  0CB0               	rrf	??_nibbles,f
-  1361  01DE  3EFF               	addlw	-1
-  1362  01DF  1D03               	skipz
-  1363  01E0  29DC               	goto	u145
-  1364  01E1  0830               	movf	??_nibbles,w
-  1365  01E2  390F               	andlw	15
-  1366  01E3  00B1               	movwf	??_nibbles+1
-  1367  01E4  0831               	movf	??_nibbles+1,w
-  1368  01E5  00F7               	movwf	_upper_nibbles
-  1369  01E6                     l160:
-  1370  01E6  0008               	return
-  1371  01E7                     __end_of_nibbles:
-  1372                           
-  1373                           	psect	text6
-  1374  00D6                     __ptext6:	
-  1375 ;; *************** function _interrupiones *****************
-  1376 ;; Defined at:
-  1377 ;;		line 44 in file "Lab01.c"
-  1378 ;; Parameters:    Size  Location     Type
-  1379 ;;		None
-  1380 ;; Auto vars:     Size  Location     Type
-  1381 ;;		None
-  1382 ;; Return value:  Size  Location     Type
-  1383 ;;                  1    wreg      void 
-  1384 ;; Registers used:
-  1385 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
-  1386 ;; Tracked objects:
-  1387 ;;		On entry : 0/0
-  1388 ;;		On exit  : 0/0
-  1389 ;;		Unchanged: 0/0
-  1390 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-  1391 ;;      Params:         0       0       0       0       0
-  1392 ;;      Locals:         0       0       0       0       0
-  1393 ;;      Temps:          4       0       0       0       0
-  1394 ;;      Totals:         4       0       0       0       0
-  1395 ;;Total ram usage:        4 bytes
-  1396 ;; Hardware stack levels used:    1
-  1397 ;; Hardware stack levels required when called:    1
-  1398 ;; This function calls:
-  1399 ;;		_ADC_convert
-  1400 ;;		_display
-  1401 ;; This function is called by:
-  1402 ;;		Interrupt level 1
-  1403 ;; This function uses a non-reentrant model
-  1404 ;;
-  1405                           
+  1334                           ;incstack = 0
+  1335                           ; Regs used in _nibbles: [wreg+status,2+status,0]
+  1336                           ;nibbles@dato stored from wreg
+  1337  01D1  1283               	bcf	3,5	;RP0=0, select bank0
+  1338  01D2  1303               	bcf	3,6	;RP1=0, select bank0
+  1339  01D3  00B2               	movwf	nibbles@dato
+  1340  01D4                     l1386:
+  1341                           
+  1342                           ;configuraciones_pic.c: 112:     down_nibbles = dato&0x0F;
+  1343  01D4  0832               	movf	nibbles@dato,w
+  1344  01D5  390F               	andlw	15
+  1345  01D6  00B0               	movwf	??_nibbles
+  1346  01D7  0830               	movf	??_nibbles,w
+  1347  01D8  00F8               	movwf	_down_nibbles
+  1348  01D9                     l1388:
+  1349                           
+  1350                           ;configuraciones_pic.c: 113:     upper_nibbles = (dato>>4)&0x0F;
+  1351  01D9  0832               	movf	nibbles@dato,w
+  1352  01DA  00B0               	movwf	??_nibbles
+  1353  01DB  3004               	movlw	4
+  1354  01DC                     u145:
+  1355  01DC  1003               	clrc
+  1356  01DD  0CB0               	rrf	??_nibbles,f
+  1357  01DE  3EFF               	addlw	-1
+  1358  01DF  1D03               	skipz
+  1359  01E0  29DC               	goto	u145
+  1360  01E1  0830               	movf	??_nibbles,w
+  1361  01E2  390F               	andlw	15
+  1362  01E3  00B1               	movwf	??_nibbles+1
+  1363  01E4  0831               	movf	??_nibbles+1,w
+  1364  01E5  00F7               	movwf	_upper_nibbles
+  1365  01E6                     l160:
+  1366  01E6  0008               	return
+  1367  01E7                     __end_of_nibbles:
+  1368                           
+  1369                           	psect	text6
+  1370  00D6                     __ptext6:	
+  1371 ;; *************** function _interrupiones *****************
+  1372 ;; Defined at:
+  1373 ;;		line 46 in file "Lab01.c"
+  1374 ;; Parameters:    Size  Location     Type
+  1375 ;;		None
+  1376 ;; Auto vars:     Size  Location     Type
+  1377 ;;		None
+  1378 ;; Return value:  Size  Location     Type
+  1379 ;;                  1    wreg      void 
+  1380 ;; Registers used:
+  1381 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+  1382 ;; Tracked objects:
+  1383 ;;		On entry : 0/0
+  1384 ;;		On exit  : 0/0
+  1385 ;;		Unchanged: 0/0
+  1386 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1387 ;;      Params:         0       0       0       0       0
+  1388 ;;      Locals:         0       0       0       0       0
+  1389 ;;      Temps:          4       0       0       0       0
+  1390 ;;      Totals:         4       0       0       0       0
+  1391 ;;Total ram usage:        4 bytes
+  1392 ;; Hardware stack levels used:    1
+  1393 ;; Hardware stack levels required when called:    1
+  1394 ;; This function calls:
+  1395 ;;		_ADC_convert
+  1396 ;;		_display
+  1397 ;; This function is called by:
+  1398 ;;		Interrupt level 1
+  1399 ;; This function uses a non-reentrant model
+  1400 ;;
+  1401                           
+  1402                           
+  1403                           ;psect for function _interrupiones
+  1404  00D6                     _interrupiones:
+  1405  00D6                     i1l890:
   1406                           
-  1407                           ;psect for function _interrupiones
-  1408  00D6                     _interrupiones:
-  1409  00D6                     i1l890:
-  1410                           
-  1411                           ;Lab01.c: 46: 
-  1412  00D6  1283               	bcf	3,5	;RP0=0, select bank0
-  1413  00D7  1303               	bcf	3,6	;RP1=0, select bank0
-  1414  00D8  1F0C               	btfss	12,6	;volatile
-  1415  00D9  28DB               	goto	u2_21
-  1416  00DA  28DC               	goto	u2_20
-  1417  00DB                     u2_21:
-  1418  00DB  28EE               	goto	i1l898
-  1419  00DC                     u2_20:
-  1420  00DC                     i1l892:
-  1421                           
-  1422                           ;Lab01.c: 47:         else {
-  1423  00DC  0C1F               	rrf	31,w	;volatile
-  1424  00DD  00F2               	movwf	??_interrupiones
-  1425  00DE  0C72               	rrf	??_interrupiones,w
-  1426  00DF  390F               	andlw	15
-  1427  00E0  3A00               	xorlw	0
-  1428  00E1  1D03               	skipz
-  1429  00E2  28E4               	goto	u3_21
-  1430  00E3  28E5               	goto	u3_20
-  1431  00E4                     u3_21:
-  1432  00E4  28EB               	goto	i1l896
-  1433  00E5                     u3_20:
-  1434  00E5                     i1l894:
-  1435                           
-  1436                           ;Lab01.c: 48:            PORTBbits.RB3 = 0;
-  1437  00E5  081E               	movf	30,w	;volatile
-  1438  00E6  120A  118A  2214  120A  118A  	fcall	_ADC_convert
-  1439  00EB                     i1l896:
-  1440                           
-  1441                           ;Lab01.c: 50:            display(upper_nibbles);
-  1442  00EB  1283               	bcf	3,5	;RP0=0, select bank0
-  1443  00EC  1303               	bcf	3,6	;RP1=0, select bank0
-  1444  00ED  130C               	bcf	12,6	;volatile
-  1445  00EE                     i1l898:
-  1446                           
-  1447                           ;Lab01.c: 53:     }
-  1448  00EE  1C0B               	btfss	11,0	;volatile
-  1449  00EF  28F1               	goto	u4_21
-  1450  00F0  28F2               	goto	u4_20
-  1451  00F1                     u4_21:
-  1452  00F1  2901               	goto	i1l910
-  1453  00F2                     u4_20:
-  1454  00F2                     i1l900:
-  1455                           
-  1456                           ;Lab01.c: 54: }
-  1457  00F2  1C06               	btfss	6,0	;volatile
-  1458  00F3  28F5               	goto	u5_21
-  1459  00F4  28F6               	goto	u5_20
-  1460  00F5                     u5_21:
-  1461  00F5  28FA               	goto	i1l904
-  1462  00F6                     u5_20:
-  1463  00F6                     i1l902:
-  1464                           
-  1465                           ;Lab01.c: 55: 
-  1466  00F6  3001               	movlw	1
-  1467  00F7  00F2               	movwf	??_interrupiones
-  1468  00F8  0872               	movf	??_interrupiones,w
-  1469  00F9  0788               	addwf	8,f	;volatile
-  1470  00FA                     i1l904:
-  1471                           
-  1472                           ;Lab01.c: 57: void main(void){
-  1473  00FA  1C86               	btfss	6,1	;volatile
-  1474  00FB  28FD               	goto	u6_21
-  1475  00FC  28FE               	goto	u6_20
-  1476  00FD                     u6_21:
-  1477  00FD  2900               	goto	i1l908
-  1478  00FE                     u6_20:
-  1479  00FE                     i1l906:
-  1480                           
-  1481                           ;Lab01.c: 58:     setup();
-  1482  00FE  3001               	movlw	1
-  1483  00FF  0288               	subwf	8,f	;volatile
-  1484  0100                     i1l908:
+  1407                           ;Lab01.c: 48:            PORTAbits.RA1 = 1;
+  1408  00D6  1283               	bcf	3,5	;RP0=0, select bank0
+  1409  00D7  1303               	bcf	3,6	;RP1=0, select bank0
+  1410  00D8  1F0C               	btfss	12,6	;volatile
+  1411  00D9  28DB               	goto	u2_21
+  1412  00DA  28DC               	goto	u2_20
+  1413  00DB                     u2_21:
+  1414  00DB  28EE               	goto	i1l898
+  1415  00DC                     u2_20:
+  1416  00DC                     i1l892:
+  1417                           
+  1418                           ;Lab01.c: 49:            display(upper_nibbles);
+  1419  00DC  0C1F               	rrf	31,w	;volatile
+  1420  00DD  00F2               	movwf	??_interrupiones
+  1421  00DE  0C72               	rrf	??_interrupiones,w
+  1422  00DF  390F               	andlw	15
+  1423  00E0  3A00               	xorlw	0
+  1424  00E1  1D03               	skipz
+  1425  00E2  28E4               	goto	u3_21
+  1426  00E3  28E5               	goto	u3_20
+  1427  00E4                     u3_21:
+  1428  00E4  28EB               	goto	i1l896
+  1429  00E5                     u3_20:
+  1430  00E5                     i1l894:
+  1431                           
+  1432                           ;Lab01.c: 50:            flags = 1;
+  1433  00E5  081E               	movf	30,w	;volatile
+  1434  00E6  120A  118A  2214  120A  118A  	fcall	_ADC_convert
+  1435  00EB                     i1l896:
+  1436                           
+  1437                           ;Lab01.c: 52:     }
+  1438  00EB  1283               	bcf	3,5	;RP0=0, select bank0
+  1439  00EC  1303               	bcf	3,6	;RP1=0, select bank0
+  1440  00ED  130C               	bcf	12,6	;volatile
+  1441  00EE                     i1l898:
+  1442                           
+  1443                           ;Lab01.c: 55: 
+  1444  00EE  1C0B               	btfss	11,0	;volatile
+  1445  00EF  28F1               	goto	u4_21
+  1446  00F0  28F2               	goto	u4_20
+  1447  00F1                     u4_21:
+  1448  00F1  2901               	goto	i1l910
+  1449  00F2                     u4_20:
+  1450  00F2                     i1l900:
+  1451                           
+  1452                           ;Lab01.c: 56: void main(void){
+  1453  00F2  1C06               	btfss	6,0	;volatile
+  1454  00F3  28F5               	goto	u5_21
+  1455  00F4  28F6               	goto	u5_20
+  1456  00F5                     u5_21:
+  1457  00F5  28FA               	goto	i1l904
+  1458  00F6                     u5_20:
+  1459  00F6                     i1l902:
+  1460                           
+  1461                           ;Lab01.c: 57:     setup();
+  1462  00F6  3001               	movlw	1
+  1463  00F7  00F2               	movwf	??_interrupiones
+  1464  00F8  0872               	movf	??_interrupiones,w
+  1465  00F9  0788               	addwf	8,f	;volatile
+  1466  00FA                     i1l904:
+  1467                           
+  1468                           ;Lab01.c: 59: 
+  1469  00FA  1C86               	btfss	6,1	;volatile
+  1470  00FB  28FD               	goto	u6_21
+  1471  00FC  28FE               	goto	u6_20
+  1472  00FD                     u6_21:
+  1473  00FD  2900               	goto	i1l908
+  1474  00FE                     u6_20:
+  1475  00FE                     i1l906:
+  1476                           
+  1477                           ;Lab01.c: 60:     while(1){
+  1478  00FE  3001               	movlw	1
+  1479  00FF  0288               	subwf	8,f	;volatile
+  1480  0100                     i1l908:
+  1481                           
+  1482                           ;Lab01.c: 62:             _delay((unsigned long)((200)*(800000/4000000.0)));
+  1483  0100  100B               	bcf	11,0	;volatile
+  1484  0101                     i1l910:
   1485                           
-  1486                           ;Lab01.c: 60: 
-  1487  0100  100B               	bcf	11,0	;volatile
-  1488  0101                     i1l910:
-  1489                           
-  1490                           ;Lab01.c: 63:             _delay((unsigned long)((200)*(800000/4000000.0)));
-  1491  0101  1D0B               	btfss	11,2	;volatile
-  1492  0102  2904               	goto	u7_21
-  1493  0103  2905               	goto	u7_20
-  1494  0104                     u7_21:
-  1495  0104  2923               	goto	i1l85
-  1496  0105                     u7_20:
-  1497  0105                     i1l912:
-  1498                           
-  1499                           ;Lab01.c: 65:         }
-  1500  0105  1085               	bcf	5,1	;volatile
-  1501                           
-  1502                           ;Lab01.c: 66: 
-  1503  0106  1106               	bcf	6,2	;volatile
+  1486                           ;Lab01.c: 65: 
+  1487  0101  1D0B               	btfss	11,2	;volatile
+  1488  0102  2904               	goto	u7_21
+  1489  0103  2905               	goto	u7_20
+  1490  0104                     u7_21:
+  1491  0104  2923               	goto	i1l85
+  1492  0105                     u7_20:
+  1493  0105                     i1l912:
+  1494                           
+  1495                           ;Lab01.c: 67: 
+  1496  0105  1085               	bcf	5,1	;volatile
+  1497                           
+  1498                           ;Lab01.c: 68:         if (ADC > PORTD) {
+  1499  0106  1105               	bcf	5,2	;volatile
+  1500                           
+  1501                           ;Lab01.c: 70:         }
+  1502  0107  110B               	bcf	11,2	;volatile
+  1503  0108                     i1l914:
   1504                           
-  1505                           ;Lab01.c: 68: 
-  1506  0107  110B               	bcf	11,2	;volatile
-  1507  0108                     i1l914:
-  1508                           
-  1509                           ;Lab01.c: 69:         if (ADC_valor > PORTD) {
-  1510  0108  30FF               	movlw	255
-  1511  0109  0081               	movwf	1	;volatile
-  1512  010A                     i1l916:
-  1513                           
-  1514                           ;Lab01.c: 71:         }
-  1515  010A  0379               	decf	_flags,w
-  1516  010B  1D03               	btfss	3,2
-  1517  010C  290E               	goto	u8_21
-  1518  010D  290F               	goto	u8_20
-  1519  010E                     u8_21:
-  1520  010E  2919               	goto	i1l83
-  1521  010F                     u8_20:
-  1522  010F                     i1l918:
-  1523                           
-  1524                           ;Lab01.c: 72: 
-  1525  010F  1106               	bcf	6,2	;volatile
+  1505                           ;Lab01.c: 71: 
+  1506  0108  30FF               	movlw	255
+  1507  0109  0081               	movwf	1	;volatile
+  1508  010A                     i1l916:
+  1509                           
+  1510                           ;Lab01.c: 73:             PORTAbits.RA3 = 0;
+  1511  010A  0379               	decf	_flags,w
+  1512  010B  1D03               	btfss	3,2
+  1513  010C  290E               	goto	u8_21
+  1514  010D  290F               	goto	u8_20
+  1515  010E                     u8_21:
+  1516  010E  2919               	goto	i1l83
+  1517  010F                     u8_20:
+  1518  010F                     i1l918:
+  1519                           
+  1520                           ;Lab01.c: 74:         }
+  1521  010F  1085               	bcf	5,1	;volatile
+  1522                           
+  1523                           ;Lab01.c: 75:     }
+  1524  0110  1505               	bsf	5,2	;volatile
+  1525  0111                     i1l920:
   1526                           
-  1527                           ;Lab01.c: 73:         else {
-  1528  0110  1586               	bsf	6,3	;volatile
-  1529  0111                     i1l920:
-  1530                           
-  1531                           ;Lab01.c: 74:             PORTCbits.RC0 = 0;
-  1532  0111  0878               	movf	_down_nibbles,w
-  1533  0112  120A  118A  220A  120A  118A  	fcall	_display
-  1534  0117                     i1l922:
-  1535                           
-  1536                           ;Lab01.c: 75:         }
-  1537  0117  01F9               	clrf	_flags
-  1538                           
-  1539                           ;Lab01.c: 76: 
-  1540  0118  2923               	goto	i1l85
-  1541  0119                     i1l83:	
-  1542                           ;Lab01.c: 78:     }
+  1527                           ;Lab01.c: 76:     return;
+  1528  0111  0878               	movf	_down_nibbles,w
+  1529  0112  120A  118A  220A  120A  118A  	fcall	_display
+  1530  0117                     i1l922:
+  1531                           
+  1532                           ;Lab01.c: 77: }
+  1533  0117  01F9               	clrf	_flags
+  1534                           
+  1535                           ;Lab01.c: 78: 
+  1536  0118  2923               	goto	i1l85
+  1537  0119                     i1l83:	
+  1538                           ;Lab01.c: 80: void setup (void){
+  1539                           
+  1540                           
+  1541                           ;Lab01.c: 81:     ANSEL = 0b00000001;
+  1542  0119  1105               	bcf	5,2	;volatile
   1543                           
-  1544                           
-  1545                           ;Lab01.c: 79:     return;
-  1546  0119  1186               	bcf	6,3	;volatile
+  1544                           ;Lab01.c: 82:     ANSELH = 0;
+  1545  011A  1485               	bsf	5,1	;volatile
+  1546  011B                     i1l924:
   1547                           
-  1548                           ;Lab01.c: 80: }
-  1549  011A  1506               	bsf	6,2	;volatile
-  1550  011B                     i1l924:
-  1551                           
-  1552                           ;Lab01.c: 81: 
-  1553  011B  0877               	movf	_upper_nibbles,w
-  1554  011C  120A  118A  220A  120A  118A  	fcall	_display
-  1555  0121                     i1l926:
-  1556                           
-  1557                           ;Lab01.c: 82: 
-  1558  0121  01F9               	clrf	_flags
-  1559  0122  0AF9               	incf	_flags,f
-  1560  0123                     i1l85:
-  1561  0123  0875               	movf	??_interrupiones+3,w
-  1562  0124  008A               	movwf	10
-  1563  0125  0874               	movf	??_interrupiones+2,w
-  1564  0126  0084               	movwf	4
-  1565  0127  0E73               	swapf	??_interrupiones+1,w
-  1566  0128  0083               	movwf	3
-  1567  0129  0EFE               	swapf	btemp,f
-  1568  012A  0E7E               	swapf	btemp,w
-  1569  012B  0009               	retfie
-  1570  012C                     __end_of_interrupiones:
-  1571                           
-  1572                           	psect	intentry
-  1573  0004                     __pintentry:	
-  1574                           ;incstack = 0
-  1575                           ; Regs used in _interrupiones: [wreg-fsr0h+status,2+status,0+pclath+cstack]
-  1576                           
-  1577  0004                     interrupt_function:
-  1578  007E                     saved_w	set	btemp
-  1579  0004  00FE               	movwf	btemp
-  1580  0005  0E03               	swapf	3,w
-  1581  0006  00F3               	movwf	??_interrupiones+1
-  1582  0007  0804               	movf	4,w
-  1583  0008  00F4               	movwf	??_interrupiones+2
-  1584  0009  080A               	movf	10,w
-  1585  000A  00F5               	movwf	??_interrupiones+3
-  1586  000B  120A  118A  28D6   	ljmp	_interrupiones
-  1587                           
-  1588                           	psect	text7
-  1589  020A                     __ptext7:	
-  1590 ;; *************** function _display *****************
-  1591 ;; Defined at:
-  1592 ;;		line 103 in file "configuraciones_pic.c"
-  1593 ;; Parameters:    Size  Location     Type
-  1594 ;;  dato            1    wreg     unsigned char 
-  1595 ;; Auto vars:     Size  Location     Type
-  1596 ;;  dato            1    0[COMMON] unsigned char 
-  1597 ;; Return value:  Size  Location     Type
-  1598 ;;                  1    wreg      void 
-  1599 ;; Registers used:
-  1600 ;;		wreg, fsr0l, fsr0h, status,2, status,0
-  1601 ;; Tracked objects:
-  1602 ;;		On entry : 0/0
-  1603 ;;		On exit  : 0/0
-  1604 ;;		Unchanged: 0/0
-  1605 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-  1606 ;;      Params:         0       0       0       0       0
-  1607 ;;      Locals:         1       0       0       0       0
-  1608 ;;      Temps:          0       0       0       0       0
-  1609 ;;      Totals:         1       0       0       0       0
-  1610 ;;Total ram usage:        1 bytes
-  1611 ;; Hardware stack levels used:    1
-  1612 ;; This function calls:
-  1613 ;;		Nothing
-  1614 ;; This function is called by:
-  1615 ;;		_interrupiones
-  1616 ;; This function uses a non-reentrant model
-  1617 ;;
+  1548                           ;Lab01.c: 83: 
+  1549  011B  0877               	movf	_upper_nibbles,w
+  1550  011C  120A  118A  220A  120A  118A  	fcall	_display
+  1551  0121                     i1l926:
+  1552                           
+  1553                           ;Lab01.c: 84:     TRISA = 0b00000001;
+  1554  0121  01F9               	clrf	_flags
+  1555  0122  0AF9               	incf	_flags,f
+  1556  0123                     i1l85:
+  1557  0123  0875               	movf	??_interrupiones+3,w
+  1558  0124  008A               	movwf	10
+  1559  0125  0874               	movf	??_interrupiones+2,w
+  1560  0126  0084               	movwf	4
+  1561  0127  0E73               	swapf	??_interrupiones+1,w
+  1562  0128  0083               	movwf	3
+  1563  0129  0EFE               	swapf	btemp,f
+  1564  012A  0E7E               	swapf	btemp,w
+  1565  012B  0009               	retfie
+  1566  012C                     __end_of_interrupiones:
+  1567                           
+  1568                           	psect	intentry
+  1569  0004                     __pintentry:	
+  1570                           ;incstack = 0
+  1571                           ; Regs used in _interrupiones: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+  1572                           
+  1573  0004                     interrupt_function:
+  1574  007E                     saved_w	set	btemp
+  1575  0004  00FE               	movwf	btemp
+  1576  0005  0E03               	swapf	3,w
+  1577  0006  00F3               	movwf	??_interrupiones+1
+  1578  0007  0804               	movf	4,w
+  1579  0008  00F4               	movwf	??_interrupiones+2
+  1580  0009  080A               	movf	10,w
+  1581  000A  00F5               	movwf	??_interrupiones+3
+  1582  000B  120A  118A  28D6   	ljmp	_interrupiones
+  1583                           
+  1584                           	psect	text7
+  1585  020A                     __ptext7:	
+  1586 ;; *************** function _display *****************
+  1587 ;; Defined at:
+  1588 ;;		line 103 in file "configuraciones_pic.c"
+  1589 ;; Parameters:    Size  Location     Type
+  1590 ;;  dato            1    wreg     unsigned char 
+  1591 ;; Auto vars:     Size  Location     Type
+  1592 ;;  dato            1    0[COMMON] unsigned char 
+  1593 ;; Return value:  Size  Location     Type
+  1594 ;;                  1    wreg      void 
+  1595 ;; Registers used:
+  1596 ;;		wreg, fsr0l, fsr0h, status,2, status,0
+  1597 ;; Tracked objects:
+  1598 ;;		On entry : 0/0
+  1599 ;;		On exit  : 0/0
+  1600 ;;		Unchanged: 0/0
+  1601 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1602 ;;      Params:         0       0       0       0       0
+  1603 ;;      Locals:         1       0       0       0       0
+  1604 ;;      Temps:          0       0       0       0       0
+  1605 ;;      Totals:         1       0       0       0       0
+  1606 ;;Total ram usage:        1 bytes
+  1607 ;; Hardware stack levels used:    1
+  1608 ;; This function calls:
+  1609 ;;		Nothing
+  1610 ;; This function is called by:
+  1611 ;;		_interrupiones
+  1612 ;; This function uses a non-reentrant model
+  1613 ;;
+  1614                           
+  1615                           
+  1616                           ;psect for function _display
+  1617  020A                     _display:
   1618                           
-  1619                           
-  1620                           ;psect for function _display
-  1621  020A                     _display:
-  1622                           
-  1623                           ;incstack = 0
-  1624                           ; Regs used in _display: [wreg-fsr0h+status,2+status,0]
-  1625                           ;display@dato stored from wreg
-  1626  020A  00F0               	movwf	display@dato
-  1627  020B                     i1l822:
-  1628                           
-  1629                           ;configuraciones_pic.c: 104:     PORTC = tabla[dato];
-  1630  020B  0870               	movf	display@dato,w
-  1631  020C  3E20               	addlw	(low (_tabla| 0))& (0+255)
-  1632  020D  0084               	movwf	4
-  1633  020E  1383               	bcf	3,7	;select IRP bank0
-  1634  020F  0800               	movf	0,w
-  1635  0210  1283               	bcf	3,5	;RP0=0, select bank0
-  1636  0211  1303               	bcf	3,6	;RP1=0, select bank0
-  1637  0212  0087               	movwf	7	;volatile
-  1638  0213                     i1l154:
-  1639  0213  0008               	return
-  1640  0214                     __end_of_display:
-  1641                           
-  1642                           	psect	text8
-  1643  0214                     __ptext8:	
-  1644 ;; *************** function _ADC_convert *****************
-  1645 ;; Defined at:
-  1646 ;;		line 107 in file "configuraciones_pic.c"
-  1647 ;; Parameters:    Size  Location     Type
-  1648 ;;  dato            1    wreg     unsigned char 
-  1649 ;; Auto vars:     Size  Location     Type
-  1650 ;;  dato            1    1[COMMON] unsigned char 
-  1651 ;; Return value:  Size  Location     Type
-  1652 ;;                  1    wreg      void 
-  1653 ;; Registers used:
-  1654 ;;		wreg
-  1655 ;; Tracked objects:
-  1656 ;;		On entry : 0/0
-  1657 ;;		On exit  : 0/0
-  1658 ;;		Unchanged: 0/0
-  1659 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
-  1660 ;;      Params:         0       0       0       0       0
-  1661 ;;      Locals:         1       0       0       0       0
-  1662 ;;      Temps:          1       0       0       0       0
-  1663 ;;      Totals:         2       0       0       0       0
-  1664 ;;Total ram usage:        2 bytes
-  1665 ;; Hardware stack levels used:    1
-  1666 ;; This function calls:
-  1667 ;;		Nothing
-  1668 ;; This function is called by:
-  1669 ;;		_interrupiones
-  1670 ;; This function uses a non-reentrant model
-  1671 ;;
+  1619                           ;incstack = 0
+  1620                           ; Regs used in _display: [wreg-fsr0h+status,2+status,0]
+  1621                           ;display@dato stored from wreg
+  1622  020A  00F0               	movwf	display@dato
+  1623  020B                     i1l822:
+  1624                           
+  1625                           ;configuraciones_pic.c: 104:     PORTC = tabla[dato];
+  1626  020B  0870               	movf	display@dato,w
+  1627  020C  3E20               	addlw	(low (_tabla| 0))& (0+255)
+  1628  020D  0084               	movwf	4
+  1629  020E  1383               	bcf	3,7	;select IRP bank0
+  1630  020F  0800               	movf	0,w
+  1631  0210  1283               	bcf	3,5	;RP0=0, select bank0
+  1632  0211  1303               	bcf	3,6	;RP1=0, select bank0
+  1633  0212  0087               	movwf	7	;volatile
+  1634  0213                     i1l154:
+  1635  0213  0008               	return
+  1636  0214                     __end_of_display:
+  1637                           
+  1638                           	psect	text8
+  1639  0214                     __ptext8:	
+  1640 ;; *************** function _ADC_convert *****************
+  1641 ;; Defined at:
+  1642 ;;		line 107 in file "configuraciones_pic.c"
+  1643 ;; Parameters:    Size  Location     Type
+  1644 ;;  dato            1    wreg     unsigned char 
+  1645 ;; Auto vars:     Size  Location     Type
+  1646 ;;  dato            1    1[COMMON] unsigned char 
+  1647 ;; Return value:  Size  Location     Type
+  1648 ;;                  1    wreg      void 
+  1649 ;; Registers used:
+  1650 ;;		wreg
+  1651 ;; Tracked objects:
+  1652 ;;		On entry : 0/0
+  1653 ;;		On exit  : 0/0
+  1654 ;;		Unchanged: 0/0
+  1655 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1656 ;;      Params:         0       0       0       0       0
+  1657 ;;      Locals:         1       0       0       0       0
+  1658 ;;      Temps:          1       0       0       0       0
+  1659 ;;      Totals:         2       0       0       0       0
+  1660 ;;Total ram usage:        2 bytes
+  1661 ;; Hardware stack levels used:    1
+  1662 ;; This function calls:
+  1663 ;;		Nothing
+  1664 ;; This function is called by:
+  1665 ;;		_interrupiones
+  1666 ;; This function uses a non-reentrant model
+  1667 ;;
+  1668                           
+  1669                           
+  1670                           ;psect for function _ADC_convert
+  1671  0214                     _ADC_convert:
   1672                           
-  1673                           
-  1674                           ;psect for function _ADC_convert
-  1675  0214                     _ADC_convert:
-  1676                           
-  1677                           ;incstack = 0
-  1678                           ; Regs used in _ADC_convert: [wreg]
-  1679                           ;ADC_convert@dato stored from wreg
-  1680  0214  00F1               	movwf	ADC_convert@dato
-  1681  0215                     i1l820:
-  1682                           
-  1683                           ;configuraciones_pic.c: 108:     ADC_valor = dato;
-  1684  0215  0871               	movf	ADC_convert@dato,w
-  1685  0216  00F0               	movwf	??_ADC_convert
-  1686  0217  0870               	movf	??_ADC_convert,w
-  1687  0218  00F6               	movwf	_ADC_valor
-  1688  0219                     i1l157:
-  1689  0219  0008               	return
-  1690  021A                     __end_of_ADC_convert:
-  1691  007E                     btemp	set	126	;btemp
-  1692  007E                     wtemp0	set	126
-  1693                           
-  1694                           	psect	config
-  1695                           
-  1696                           ;Config register CONFIG1 @ 0x2007
-  1697                           ;	Oscillator Selection bits
-  1698                           ;	FOSC = INTRC_NOCLKOUT, INTOSCIO oscillator: I/O function on RA6/OSC2/CLKOUT pin, I/O f
+  1673                           ;incstack = 0
+  1674                           ; Regs used in _ADC_convert: [wreg]
+  1675                           ;ADC_convert@dato stored from wreg
+  1676  0214  00F1               	movwf	ADC_convert@dato
+  1677  0215                     i1l820:
+  1678                           
+  1679                           ;configuraciones_pic.c: 108:     ADC = dato;
+  1680  0215  0871               	movf	ADC_convert@dato,w
+  1681  0216  00F0               	movwf	??_ADC_convert
+  1682  0217  0870               	movf	??_ADC_convert,w
+  1683  0218  00F6               	movwf	_ADC
+  1684  0219                     i1l157:
+  1685  0219  0008               	return
+  1686  021A                     __end_of_ADC_convert:
+  1687  007E                     btemp	set	126	;btemp
+  1688  007E                     wtemp0	set	126
+  1689                           
+  1690                           	psect	config
+  1691                           
+  1692                           ;Config register CONFIG1 @ 0x2007
+  1693                           ;	Oscillator Selection bits
+  1694                           ;	FOSC = INTRC_NOCLKOUT, INTOSCIO oscillator: I/O function on RA6/OSC2/CLKOUT pin, I/O f
       +                          unction on RA7/OSC1/CLKIN
-  1699                           ;	Watchdog Timer Enable bit
-  1700                           ;	WDTE = OFF, WDT disabled and can be enabled by SWDTEN bit of the WDTCON register
-  1701                           ;	Power-up Timer Enable bit
-  1702                           ;	PWRTE = ON, PWRT enabled
-  1703                           ;	RE3/MCLR pin function select bit
-  1704                           ;	MCLRE = OFF, RE3/MCLR pin function is digital input, MCLR internally tied to VDD
-  1705                           ;	Code Protection bit
-  1706                           ;	CP = OFF, Program memory code protection is disabled
-  1707                           ;	Data Code Protection bit
-  1708                           ;	CPD = OFF, Data memory code protection is disabled
-  1709                           ;	Brown Out Reset Selection bits
-  1710                           ;	BOREN = OFF, BOR disabled
-  1711                           ;	Internal External Switchover bit
-  1712                           ;	IESO = OFF, Internal/External Switchover mode is disabled
-  1713                           ;	Fail-Safe Clock Monitor Enabled bit
-  1714                           ;	FCMEN = OFF, Fail-Safe Clock Monitor is disabled
-  1715                           ;	Low Voltage Programming Enable bit
-  1716                           ;	LVP = ON, RB3/PGM pin has PGM function, low voltage programming enabled
-  1717                           ;	In-Circuit Debugger Mode bit
-  1718                           ;	DEBUG = 0x1, unprogrammed default
-  1719  2007                     	org	8199
-  1720  2007  30C4               	dw	12484
-  1721                           
-  1722                           ;Config register CONFIG2 @ 0x2008
-  1723                           ;	Brown-out Reset Selection bit
-  1724                           ;	BOR4V = BOR40V, Brown-out Reset set to 4.0V
-  1725                           ;	Flash Program Memory Self Write Enable bits
-  1726                           ;	WRT = OFF, Write protection off
-  1727  2008                     	org	8200
-  1728  2008  3FFF               	dw	16383
+  1695                           ;	Watchdog Timer Enable bit
+  1696                           ;	WDTE = OFF, WDT disabled and can be enabled by SWDTEN bit of the WDTCON register
+  1697                           ;	Power-up Timer Enable bit
+  1698                           ;	PWRTE = ON, PWRT enabled
+  1699                           ;	RE3/MCLR pin function select bit
+  1700                           ;	MCLRE = OFF, RE3/MCLR pin function is digital input, MCLR internally tied to VDD
+  1701                           ;	Code Protection bit
+  1702                           ;	CP = OFF, Program memory code protection is disabled
+  1703                           ;	Data Code Protection bit
+  1704                           ;	CPD = OFF, Data memory code protection is disabled
+  1705                           ;	Brown Out Reset Selection bits
+  1706                           ;	BOREN = OFF, BOR disabled
+  1707                           ;	Internal External Switchover bit
+  1708                           ;	IESO = OFF, Internal/External Switchover mode is disabled
+  1709                           ;	Fail-Safe Clock Monitor Enabled bit
+  1710                           ;	FCMEN = OFF, Fail-Safe Clock Monitor is disabled
+  1711                           ;	Low Voltage Programming Enable bit
+  1712                           ;	LVP = ON, RB3/PGM pin has PGM function, low voltage programming enabled
+  1713                           ;	In-Circuit Debugger Mode bit
+  1714                           ;	DEBUG = 0x1, unprogrammed default
+  1715  2007                     	org	8199
+  1716  2007  30C4               	dw	12484
+  1717                           
+  1718                           ;Config register CONFIG2 @ 0x2008
+  1719                           ;	Brown-out Reset Selection bit
+  1720                           ;	BOR4V = BOR40V, Brown-out Reset set to 4.0V
+  1721                           ;	Flash Program Memory Self Write Enable bits
+  1722                           ;	WRT = OFF, Write protection off
+  1723  2008                     	org	8200
+  1724  2008  3FFF               	dw	16383
 
 Data Sizes:
     Strings     0
@@ -1896,13 +1892,14 @@ EEDATA             100      0       0       0        0.0%
 
 
 Microchip Technology PIC Macro Assembler V2.31 build 20201012212115 
-Symbol Table                                                                                   Mon Jul 19 18:21:15 2021
+Symbol Table                                                                                   Tue Jul 20 00:36:36 2021
 
                       pc 0002          conf_ADC@adcFrec 0032    __end_of_interrupiones 012C  
                      l92 01A6                       l99 017F                       fsr 0004  
                     l130 00D5                      l122 00D4                      l151 01D0  
                     l143 007E                      l135 007C                      l160 01E6  
-                    l148 01CC                      u150 018C                      u151 018B  
+                    l148 01CC                      _ADC 0076                      _RB0 0030  
+                    _RB1 0031                      u150 018C                      u151 018B  
                     u160 01A4                      u145 01DC                      u161 01A3  
                     u177 0190                      u187 016E                      u197 0178  
                     fsr0 0004                      indf 0000             conf_osc@frec 0032  
@@ -1959,14 +1956,13 @@ Symbol Table                                                                    
            __pidataBANK0 01FA            __end_of_setup 0180           _OPTION_REGbits 0081  
      __size_of_conf_tmr0 0058                  ??_setup 0033               __pmaintext 0180  
              __pintentry 0004                ?_conf_ADC 0070                ?_conf_osc 0070  
- __size_of_interrupiones 0056            ??_ADC_convert 0070                _ADC_valor 0076  
-      __end_of_conf_tmr0 007F                  __ptext1 012C                  __ptext2 0027  
-                __ptext3 007F                  __ptext4 01AB                  __ptext5 01D1  
-                __ptext6 00D6                  __ptext7 020A                  __ptext8 0214  
-                _display 020A                  _nibbles 01D1               ??_conf_ADC 0030  
-             ??_conf_osc 0030     end_of_initialization 0023            _interrupiones 00D6  
-    __end_of_ADC_convert 021A                _PORTAbits 0005                _PORTBbits 0006  
-              _PORTCbits 0007           ?_interrupiones 0070      start_initialization 0011  
+ __size_of_interrupiones 0056            ??_ADC_convert 0070        __end_of_conf_tmr0 007F  
+                __ptext1 012C                  __ptext2 0027                  __ptext3 007F  
+                __ptext4 01AB                  __ptext5 01D1                  __ptext6 00D6  
+                __ptext7 020A                  __ptext8 0214                  _display 020A  
+                _nibbles 01D1               ??_conf_ADC 0030               ??_conf_osc 0030  
+   end_of_initialization 0023            _interrupiones 00D6      __end_of_ADC_convert 021A  
+              _PORTAbits 0005           ?_interrupiones 0070      start_initialization 0011  
            _down_nibbles 0078              _ADC_convert 0214               init_fetch0 01E7  
             __pdataBANK0 0020              __pbssCOMMON 0076                ___latbits 0002  
           __pcstackBANK0 0030        __size_of_conf_ADC 0026        __size_of_conf_osc 0057  

@@ -2837,6 +2837,11 @@ void display(uint8_t dato);
 void nibbles (uint8_t dato);
 # 10 "Lab01.c" 2
 
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
+# 11 "Lab01.c" 2
+
+
+
 
 
 
@@ -2859,14 +2864,13 @@ void nibbles (uint8_t dato);
 
 
 
-
 uint8_t tabla [16] ={0X3F, 0X06, 0X5B, 0X4F, 0X66, 0X6D, 0X7D, 0X07, 0X7F, 0X67,
                       0X77, 0X7C, 0X39, 0X5E, 0X79, 0X71};
 
 uint8_t flags;
 uint8_t down_nibbles;
 uint8_t upper_nibbles;
-uint8_t ADC_valor;
+uint8_t ADC;
 
 void setup (void);
 
@@ -2880,11 +2884,11 @@ void __attribute__((picinterrupt(("")))) interrupiones(void){
     }
 
     if (RBIF == 1){
-        if(PORTBbits.RB0 == 1){
-            PORTD ++;
+        if(RB0 == 1){
+            PORTD++;
         }
-        if(PORTBbits.RB1 == 1){
-            PORTD --;
+        if(RB1 == 1){
+            PORTD--;
         }
     INTCONbits.RBIF = 0;
     }
@@ -2892,21 +2896,21 @@ void __attribute__((picinterrupt(("")))) interrupiones(void){
     if (T0IF == 1){
 
         PORTAbits.RA1 = 0;
-        PORTBbits.RB2 = 0;
+        PORTAbits.RA2 = 0;
 
         INTCONbits.T0IF = 0;
         TMR0 = 255;
 
         if (flags == 1) {
-           PORTBbits.RB2 = 0;
-           PORTBbits.RB3 = 1;
+           PORTAbits.RA1 = 0;
+           PORTAbits.RA2 = 1;
            display(down_nibbles);
            flags = 0;
         }
 
         else {
-           PORTBbits.RB3 = 0;
-           PORTBbits.RB2 = 1;
+           PORTAbits.RA2 = 0;
+           PORTAbits.RA1 = 1;
            display(upper_nibbles);
            flags = 1;
         }
@@ -2924,17 +2928,15 @@ void main(void){
             ADCON0bits.GO = 1;
         }
 
-        nibbles(ADC_valor);
+        nibbles(ADC);
 
-        if (ADC_valor > PORTD) {
-            PORTCbits.RC0 = 1;
+        if (ADC > PORTD) {
+            PORTAbits.RA3 = 1;
         }
 
         else {
-            PORTCbits.RC0 = 0;
+            PORTAbits.RA3 = 0;
         }
-
-
     }
     return;
 }
@@ -2944,7 +2946,7 @@ void setup (void){
     ANSEL = 0b00000001;
     ANSELH = 0;
 
-    TRISA = 0b00000011;
+    TRISA = 0b00000001;
     TRISB = 0b00000011;
     TRISC = 0b00000000;
     TRISD = 0b00000000;
@@ -2983,6 +2985,7 @@ void setup (void){
     _delay((unsigned long)((200)*(800000/4000000.0)));
     ADCON0bits.ADON = 1;
     _delay((unsigned long)((200)*(800000/4000000.0)));
+
 
 
     flags = 0b00000000;

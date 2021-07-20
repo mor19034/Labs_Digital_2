@@ -2838,7 +2838,7 @@ void nibbles (uint8_t dato);
 
 
 
-uint8_t ADC_valor;
+uint8_t ADC;
 uint8_t upper_nibbles;
 uint8_t down_nibbles;
 
@@ -2934,7 +2934,7 @@ void display(uint8_t dato){
 }
 
 void ADC_convert(uint8_t dato){
-    ADC_valor = dato;
+    ADC = dato;
 }
 
 void nibbles (uint8_t dato){

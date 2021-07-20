@@ -8,6 +8,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "configuraciones_pic.h"
+#include <stdint.h>
+#include <xc.h>// </editor-fold>
+
 // PIC16F887 Configuration Bit Settings
 
 // 'C' source line config statements
@@ -28,7 +31,6 @@
 #pragma config BOR4V = BOR40V   // Brown-out Reset Selection bit (Brown-out Reset set to 4.0V)
 #pragma config WRT = OFF        // Flash Program Memory Self Write Enable bits (Write protection off)
 
-#include <xc.h>// </editor-fold>
 #define _XTAL_FREQ 800000
 //------------------------------tabla-------------------------------------------
 uint8_t tabla [16] ={0X3F, 0X06, 0X5B, 0X4F, 0X66, 0X6D, 0X7D, 0X07, 0X7F, 0X67,
@@ -37,7 +39,7 @@ uint8_t tabla [16] ={0X3F, 0X06, 0X5B, 0X4F, 0X66, 0X6D, 0X7D, 0X07, 0X7F, 0X67,
 uint8_t flags;
 uint8_t down_nibbles;
 uint8_t upper_nibbles;
-uint8_t ADC_valor;
+uint8_t ADC;
 //------------------------------prototipos--------------------------------------
 void setup (void);
 //------------------------------interrupciones----------------------------------
@@ -51,11 +53,11 @@ void __interrupt() interrupiones(void){
     }
 //-------------------------------PORTB
     if (RBIF == 1){
-        if(PORTBbits.RB0 == 1){
-            PORTD ++;
+        if(RB0 == 1){
+            PORTD++;
         }
-        if(PORTBbits.RB1 == 1){
-            PORTD --;
+        if(RB1 == 1){
+            PORTD--;
         }
     INTCONbits.RBIF = 0; 
     }
@@ -63,21 +65,21 @@ void __interrupt() interrupiones(void){
     if (T0IF == 1){
  
         PORTAbits.RA1 = 0;
-        PORTBbits.RB2 = 0;          //se limpian los puertos a utilizar
+        PORTAbits.RA2 = 0;          //se limpian los puertos a utilizar
         
         INTCONbits.T0IF  = 0;       //Reinicio del timer 0
         TMR0 = 255;  
         
         if (flags == 1) {           //Por medio de banderas verificamos que 
-           PORTBbits.RB2 = 0;       //display es el que toca encender
-           PORTBbits.RB3 = 1;       //al terminar el if cambiamos de bandera
+           PORTAbits.RA1 = 0;       //display es el que toca encender
+           PORTAbits.RA2 = 1;       //al terminar el if cambiamos de bandera
            display(down_nibbles);
            flags = 0; 
         }
         
         else {
-           PORTBbits.RB3 = 0;
-           PORTBbits.RB2 = 1;
+           PORTAbits.RA2 = 0;
+           PORTAbits.RA1 = 1;
            display(upper_nibbles);
            flags = 1;  
         }          
@@ -87,25 +89,23 @@ void __interrupt() interrupiones(void){
 //----------------------------------loop princiapl------------------------------
 void main(void){
     setup();
-    ADCON0bits.GO   = 1; //se inicia la conversion del ADC
+    ADCON0bits.GO = 1; //se inicia la conversion del ADC
     
     while(1){
            if (ADCON0bits.GO == 0){        //Cuando termine la conversion 
-            __delay_us(200);            //Esperamos un tiempo para que la conversion
-            ADCON0bits.GO = 1;          //termine correctamente
-        }                               //Luego le volvemos a indicar que inicie la conversion
+            __delay_us(200);            //
+            ADCON0bits.GO = 1;         
+        }                               
         
-        nibbles(ADC_valor);
+        nibbles(ADC);
         
-        if (ADC_valor > PORTD) {
-            PORTCbits.RC0 = 1;
+        if (ADC > PORTD) {
+            PORTAbits.RA3 = 1;
         }
         
         else {
-            PORTCbits.RC0 = 0;
-        }
-        
-            
+            PORTAbits.RA3 = 0;
+        }        
     }
     return;
 }
@@ -115,7 +115,7 @@ void setup (void){
     ANSEL = 0b00000001;
     ANSELH = 0;
     
-    TRISA = 0b00000011;
+    TRISA = 0b00000001;
     TRISB = 0b00000011;
     TRISC = 0b00000000;
     TRISD = 0b00000000;
@@ -148,12 +148,13 @@ void setup (void){
     IOCBbits.IOCB1   = 1;
     
     //------configuracion ADC
-    ADCON1bits.ADFM = 0; //Leer bits más significativos; justificado izquierda
-    conf_ADC(2);         //tads de 4us, con Fosc/32
-    ADCON0bits.CHS = 0;  //canal 0
+    ADCON1bits.ADFM  = 0;    //Justificado a la izquierda
+    conf_ADC(2);
+    ADCON0bits.CHS   = 0;    //Chanel 0
     __delay_us(200);
-    ADCON0bits.ADON     = 1;    //Se enciendex   ADC
+    ADCON0bits.ADON  = 1;    //Encendemos el ADC
     __delay_us(200);
+    
     
     //Valor inicial del multiplexado
     flags = 0b00000000;       //Valor inicial de la bandera para multiplexeado
