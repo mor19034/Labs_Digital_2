@@ -38,11 +38,13 @@
 uint8_t canal_flag = 0;
 volatile uint8_t var_adc0 = 0;
 volatile uint8_t var_adc1 = 0;
+volatile uint8_t contador = 0;
 float cont_uart = 0;
 char string_uart[10];
 char valor_uart = 0;
 char adc0[10];
 char adc1[10];
+char cont[10];
 float conv0 = 0;
 float conv1 = 0;
 
@@ -65,6 +67,7 @@ void main(void){
         Lcd_Set_Cursor(1, 15); //nos desplazamos de nuevo
         Lcd_Write_String("S3:"); //y volvemos a escribir
         
+        PORTD = contador; //le damos al puerto D el valor de contador
         mensaje (); //se manda la info por UART
         
         if (PIR1bits.ADIF == 1) { //se revisa si hubo interrupcion del ADC
@@ -80,7 +83,7 @@ void main(void){
             PIR1bits.ADIF = 0;
         }
    
-    Lcd_Set_Cursor(2, 1);
+        Lcd_Set_Cursor(2, 1);
         Lcd_Write_String(adc0);
         Lcd_Set_Cursor(2, 5);
         Lcd_Write_String("V");
@@ -89,6 +92,9 @@ void main(void){
         Lcd_Write_String(adc1);
         Lcd_Set_Cursor(2, 11);
         Lcd_Write_String("V");
+        
+        Lcd_Set_Cursor(2,14);
+        Lcd_Write_String(cont);
     
      conv0 = 0;//se reinicia las cada ves que se inicia el proceso de enviar datos
      conv1 = 0;//tanto para la LCD como por UART.
@@ -99,6 +105,8 @@ void main(void){
         
         conv1 = (var_adc1 / (float) 255)*5; //misma logica que conv0
         ADC_convert(adc1, conv1, 2);
+        
+        ADC_convert(cont, contador, 2);
     }
         
     return;
@@ -109,10 +117,30 @@ void mensaje (void){
     printf("\r voltaje 1: \r");
     __delay_ms(300);
     printf(adc0);
+    
     __delay_ms(300);
     printf("\r voltaje 2: \r");
     __delay_ms(300);
     printf(adc1);
+    __delay_ms(300);
+      
+    __delay_ms(300);
+    printf("\r Contador: \r");
+    __delay_ms(300);
+    printf(cont);
+     __delay_ms(300);  
+     
+    if (RCREG == '+'){
+        contador++;
+        RCREG = 0;
+    }
+    else if (RCREG == '-'){
+       contador--;
+       RCREG = 0;
+    }
+    else {
+        NULL;
+    }
 } 
 void putch(char dato){ 
     while(TXIF == 0);
@@ -121,19 +149,18 @@ void putch(char dato){
 }
 //----------------------------------Configuraciones-----------------------------
 void setup (void){
-    ANSEL = 0x00;
+    ANSEL = 0x03;
     ANSELH = 0;
     
     TRISA = 0x03;
     TRISB = 0x00;
-    TRISC = 0x00;
     TRISD = 0x00;
     TRISE = 0x00;
     
     PORTA = 0x00;
     PORTB = 0x00;
-    PORTC = 0x00;
     PORTD = 0x00;
+    PORTE = 0x00;
     //------reloj oscilador
     conf_osc(7);
     
