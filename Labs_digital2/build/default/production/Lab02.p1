@@ -41,15 +41,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "20 ./configuraciones_pic.h
 [; ;./configuraciones_pic.h: 20: void ADC_convert(char *data,float a, int place);
 [v _ADC_convert `(v ~T0 @X0 0 ef3`*uc`f`i ]
-"108 Lab02.c
-[; ;Lab02.c: 108: 
-[v ___delay_ `(i ~T0 @X0 0 e? ]
-"195 C:\Program Files\Microchip\xc8\v2.31\pic\include\c90\stdio.h
-[v _printf `(i ~T0 @X0 0 ev`*Cuc ]
 [v F1437 `(v ~T0 @X0 1 tf1`ul ]
 "92 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\pic.h
 [v __delay `JF1437 ~T0 @X0 0 e ]
 [p i __delay ]
+"195 C:\Program Files\Microchip\xc8\v2.31\pic\include\c90\stdio.h
+[v _printf `(i ~T0 @X0 0 ev`*Cuc ]
 "4544 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
 [; ;C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h: 4544: extern volatile __bit TXIF __attribute__((address(0x64)));
 [v _TXIF `Vb ~T0 @X0 0 e@100 ]
@@ -565,7 +562,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;Lab02.c: 72: void mensaje (void){
 [e = _var_adc0 _ADRESH ]
 "73
-[; ;Lab02.c: 73:     __delay_(300);
+[; ;Lab02.c: 73:     _delay((unsigned long)((300)*(800000/4000.0)));
 [e ( _Select_ch (1 -> -> 0 `i `uc ]
 "74
 [; ;Lab02.c: 74:     printf("\r voltaje 1: \r");
@@ -659,7 +656,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "108
 [; ;Lab02.c: 108: 
-[e ( ___delay_ -> 300 `i ]
+[e ( __delay (1 -> * -> -> 300 `i `d / -> -> 800000 `l `d .4000.0 `ul ]
 "109
 [; ;Lab02.c: 109: 
 [e ( _printf :s 6C ]

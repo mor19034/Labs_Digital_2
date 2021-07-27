@@ -105,7 +105,7 @@ void main(void){
 }
 //*******************************funciones**************************************
 void mensaje (void){
-    __delay_(300);
+    __delay_ms(300);
     printf("\r voltaje 1: \r");
     __delay_ms(300);
     printf(adc0);

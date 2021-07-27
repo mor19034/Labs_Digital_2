@@ -2948,7 +2948,7 @@ void main(void){
 }
 
 void mensaje (void){
-    __delay_(300);
+    _delay((unsigned long)((300)*(800000/4000.0)));
     printf("\r voltaje 1: \r");
     _delay((unsigned long)((300)*(800000/4000.0)));
     printf(adc0);
