@@ -1,0 +1,527 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F887 ]
+[d frameptr 0 ]
+"112 C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Slave_micros2.X\Lab03_slave.c
+[e E1486 . `uc
+SPI_MASTER_OSC_DIV4 32
+SPI_MASTER_OSC_DIV16 33
+SPI_MASTER_OSC_DIV64 34
+SPI_MASTER_TMR2 35
+SPI_SLAVE_SS_EN 36
+SPI_SLAVE_SS_DIS 37
+]
+[e E1494 . `uc
+SPI_DATA_SAMPLE_MIDDLE 0
+SPI_DATA_SAMPLE_END 128
+]
+[e E1498 . `uc
+SPI_CLOCK_IDLE_HIGH 16
+SPI_CLOCK_IDLE_LOW 0
+]
+[e E1502 . `uc
+SPI_IDLE_2_ACTIVE 0
+SPI_ACTIVE_2_IDLE 64
+]
+"14 C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Slave_micros2.X\SPI_slave.c
+[e E1445 . `uc
+SPI_MASTER_OSC_DIV4 32
+SPI_MASTER_OSC_DIV16 33
+SPI_MASTER_OSC_DIV64 34
+SPI_MASTER_TMR2 35
+SPI_SLAVE_SS_EN 36
+SPI_SLAVE_SS_DIS 37
+]
+[e E1453 . `uc
+SPI_DATA_SAMPLE_MIDDLE 0
+SPI_DATA_SAMPLE_END 128
+]
+[e E1457 . `uc
+SPI_CLOCK_IDLE_HIGH 16
+SPI_CLOCK_IDLE_LOW 0
+]
+[e E1461 . `uc
+SPI_IDLE_2_ACTIVE 0
+SPI_ACTIVE_2_IDLE 64
+]
+"16 C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Slave_micros2.X\ADC.c
+[v _conf_ADC conf_ADC `(v  1 e 1 0 ]
+"66
+[v _ADC_convert ADC_convert `(v  1 e 1 0 ]
+"127
+[v _canal_ADC canal_ADC `(v  1 e 1 0 ]
+"175
+[v _Select_ch Select_ch `(v  1 e 1 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"4 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\flge.c
+[v ___flge __flge `(b  1 e 0 0 ]
+"43 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\fltol.c
+[v ___fltol __fltol `(l  1 e 4 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"242
+[v ___flsub __flsub `(d  1 e 4 0 ]
+"8 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+"8 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+"15 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+"4 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\xxtofl.c
+[v ___xxtofl __xxtofl `(d  1 e 4 0 ]
+"6 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"45 C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Slave_micros2.X\Lab03_slave.c
+[v _isr isr `II(v  1 e 1 0 ]
+"64
+[v _main main `(v  1 e 1 0 ]
+"103
+[v _setup setup `(v  1 e 1 0 ]
+"14 C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Slave_micros2.X\SPI_slave.c
+[v _spiInit spiInit `(v  1 e 1 0 ]
+"31
+[v _spiReceiveWait spiReceiveWait `(v  1 s 1 spiReceiveWait ]
+"36
+[v _spiWrite spiWrite `(v  1 e 1 0 ]
+"49
+[v _spiRead spiRead `(uc  1 e 1 0 ]
+"166 C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\pic\include\proc\pic16f887.h
+[v _PORTA PORTA `VEuc  1 e 1 @5 ]
+[s S156 . 1 `uc 1 RBIF 1 0 :1:0 
+`uc 1 INTF 1 0 :1:1 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 RBIE 1 0 :1:3 
+`uc 1 INTE 1 0 :1:4 
+`uc 1 T0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+"482
+[s S165 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 TMR0IE 1 0 :1:5 
+]
+[u S170 . 1 `S156 1 . 1 0 `S165 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES170  1 e 1 @11 ]
+[s S32 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSPIF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+]
+"553
+[u S40 . 1 `S32 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES40  1 e 1 @12 ]
+"843
+[v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
+"850
+[v _SSPCON SSPCON `VEuc  1 e 1 @20 ]
+"1238
+[v _ADRESH ADRESH `VEuc  1 e 1 @30 ]
+[s S261 . 1 `uc 1 ADON 1 0 :1:0 
+`uc 1 GO_nDONE 1 0 :1:1 
+`uc 1 CHS 1 0 :4:2 
+`uc 1 ADCS 1 0 :2:6 
+]
+"1276
+[s S266 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO 1 0 :1:1 
+`uc 1 CHS0 1 0 :1:2 
+`uc 1 CHS1 1 0 :1:3 
+`uc 1 CHS2 1 0 :1:4 
+`uc 1 CHS3 1 0 :1:5 
+`uc 1 ADCS0 1 0 :1:6 
+`uc 1 ADCS1 1 0 :1:7 
+]
+[s S275 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 nDONE 1 0 :1:1 
+]
+[s S278 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_DONE 1 0 :1:1 
+]
+[u S281 . 1 `S261 1 . 1 0 `S266 1 . 1 0 `S275 1 . 1 0 `S278 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES281  1 e 1 @31 ]
+"1416
+[v _TRISA TRISA `VEuc  1 e 1 @133 ]
+[s S77 . 1 `uc 1 TRISA0 1 0 :1:0 
+`uc 1 TRISA1 1 0 :1:1 
+`uc 1 TRISA2 1 0 :1:2 
+`uc 1 TRISA3 1 0 :1:3 
+`uc 1 TRISA4 1 0 :1:4 
+`uc 1 TRISA5 1 0 :1:5 
+`uc 1 TRISA6 1 0 :1:6 
+`uc 1 TRISA7 1 0 :1:7 
+]
+"1433
+[u S86 . 1 `S77 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES86  1 e 1 @133 ]
+[s S188 . 1 `uc 1 TMR1IE 1 0 :1:0 
+`uc 1 TMR2IE 1 0 :1:1 
+`uc 1 CCP1IE 1 0 :1:2 
+`uc 1 SSPIE 1 0 :1:3 
+`uc 1 TXIE 1 0 :1:4 
+`uc 1 RCIE 1 0 :1:5 
+`uc 1 ADIE 1 0 :1:6 
+]
+"1718
+[u S196 . 1 `S188 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES196  1 e 1 @140 ]
+[s S122 . 1 `uc 1 SCS 1 0 :1:0 
+`uc 1 LTS 1 0 :1:1 
+`uc 1 HTS 1 0 :1:2 
+`uc 1 OSTS 1 0 :1:3 
+`uc 1 IRCF 1 0 :3:4 
+]
+"1882
+[s S128 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 IRCF0 1 0 :1:4 
+`uc 1 IRCF1 1 0 :1:5 
+`uc 1 IRCF2 1 0 :1:6 
+]
+[u S133 . 1 `S122 1 . 1 0 `S128 1 . 1 0 ]
+[v _OSCCONbits OSCCONbits `VES133  1 e 1 @143 ]
+"2177
+[v _SSPSTAT SSPSTAT `VEuc  1 e 1 @148 ]
+[s S458 . 1 `uc 1 BF 1 0 :1:0 
+`uc 1 UA 1 0 :1:1 
+`uc 1 R_nW 1 0 :1:2 
+`uc 1 S 1 0 :1:3 
+`uc 1 P 1 0 :1:4 
+`uc 1 D_nA 1 0 :1:5 
+`uc 1 CKE 1 0 :1:6 
+`uc 1 SMP 1 0 :1:7 
+]
+"2231
+[s S467 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 D 1 0 :1:5 
+]
+[s S472 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 I2C_READ 1 0 :1:2 
+`uc 1 I2C_START 1 0 :1:3 
+`uc 1 I2C_STOP 1 0 :1:4 
+`uc 1 I2C_DATA 1 0 :1:5 
+]
+[s S478 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nW 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 nA 1 0 :1:5 
+]
+[s S483 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nWRITE 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 nADDRESS 1 0 :1:5 
+]
+[s S488 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R_W 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 D_A 1 0 :1:5 
+]
+[s S493 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 READ_WRITE 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 DATA_ADDRESS 1 0 :1:5 
+]
+[u S498 . 1 `S458 1 . 1 0 `S467 1 . 1 0 `S472 1 . 1 0 `S478 1 . 1 0 `S483 1 . 1 0 `S488 1 . 1 0 `S493 1 . 1 0 ]
+[v _SSPSTATbits SSPSTATbits `VES498  1 e 1 @148 ]
+[s S307 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 VCFG0 1 0 :1:4 
+`uc 1 VCFG1 1 0 :1:5 
+`uc 1 . 1 0 :1:6 
+`uc 1 ADFM 1 0 :1:7 
+]
+"2991
+[u S313 . 1 `S307 1 . 1 0 ]
+[v _ADCON1bits ADCON1bits `VES313  1 e 1 @159 ]
+"3387
+[v _ANSEL ANSEL `VEuc  1 e 1 @392 ]
+[s S344 . 1 `uc 1 ANS0 1 0 :1:0 
+`uc 1 ANS1 1 0 :1:1 
+`uc 1 ANS2 1 0 :1:2 
+`uc 1 ANS3 1 0 :1:3 
+`uc 1 ANS4 1 0 :1:4 
+`uc 1 ANS5 1 0 :1:5 
+`uc 1 ANS6 1 0 :1:6 
+`uc 1 ANS7 1 0 :1:7 
+]
+"3404
+[u S353 . 1 `S344 1 . 1 0 ]
+[v _ANSELbits ANSELbits `VES353  1 e 1 @392 ]
+"3449
+[v _ANSELH ANSELH `VEuc  1 e 1 @393 ]
+[s S365 . 1 `uc 1 ANS8 1 0 :1:0 
+`uc 1 ANS9 1 0 :1:1 
+`uc 1 ANS10 1 0 :1:2 
+`uc 1 ANS11 1 0 :1:3 
+`uc 1 ANS12 1 0 :1:4 
+`uc 1 ANS13 1 0 :1:5 
+]
+"3464
+[u S372 . 1 `S365 1 . 1 0 ]
+[v _ANSELHbits ANSELHbits `VES372  1 e 1 @393 ]
+"4277
+[v _SSPIF SSPIF `VEb  1 e 0 @99 ]
+"4457
+[v _TRISC3 TRISC3 `VEb  1 e 0 @1083 ]
+"4463
+[v _TRISC5 TRISC5 `VEb  1 e 0 @1085 ]
+"33 C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Slave_micros2.X\Lab03_slave.c
+[v _canal_flag canal_flag `uc  1 e 1 0 ]
+"34
+[v _var_adc0 var_adc0 `VEuc  1 e 1 0 ]
+"35
+[v _var_adc1 var_adc1 `VEuc  1 e 1 0 ]
+"36
+[v _adc0 adc0 `[10]uc  1 e 10 0 ]
+"37
+[v _adc1 adc1 `[10]uc  1 e 10 0 ]
+"38
+[v _conv0 conv0 `f  1 e 4 0 ]
+"39
+[v _conv1 conv1 `f  1 e 4 0 ]
+"64
+[v _main main `(v  1 e 1 0 ]
+{
+"99
+} 0
+"103
+[v _setup setup `(v  1 e 1 0 ]
+{
+"127
+} 0
+"14 C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Slave_micros2.X\SPI_slave.c
+[v _spiInit spiInit `(v  1 e 1 0 ]
+{
+[v spiInit@sType sType `E1445  1 a 1 wreg ]
+[v spiInit@sType sType `E1445  1 a 1 wreg ]
+[v spiInit@sDataSample sDataSample `E1453  1 p 1 0 ]
+[v spiInit@sClockIdle sClockIdle `E1457  1 p 1 1 ]
+[v spiInit@sTransmitEdge sTransmitEdge `E1461  1 p 1 2 ]
+"16
+[v spiInit@sType sType `E1445  1 a 1 3 ]
+"29
+} 0
+"16 C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Slave_micros2.X\ADC.c
+[v _conf_ADC conf_ADC `(v  1 e 1 0 ]
+{
+[v conf_ADC@adcFrec adcFrec `uc  1 a 1 wreg ]
+[v conf_ADC@adcFrec adcFrec `uc  1 a 1 wreg ]
+[v conf_ADC@isr isr `uc  1 p 1 0 ]
+[v conf_ADC@Vref Vref `uc  1 p 1 1 ]
+[v conf_ADC@justRL justRL `uc  1 p 1 2 ]
+[v conf_ADC@adcFrec adcFrec `uc  1 a 1 5 ]
+"61
+} 0
+"127
+[v _canal_ADC canal_ADC `(v  1 e 1 0 ]
+{
+[v canal_ADC@channel channel `uc  1 a 1 wreg ]
+[v canal_ADC@channel channel `uc  1 a 1 wreg ]
+[v canal_ADC@channel channel `uc  1 a 1 2 ]
+"172
+} 0
+"175
+[v _Select_ch Select_ch `(v  1 e 1 0 ]
+{
+[v Select_ch@channel channel `uc  1 a 1 wreg ]
+[v Select_ch@channel channel `uc  1 a 1 wreg ]
+[v Select_ch@channel channel `uc  1 a 1 2 ]
+"229
+} 0
+"66
+[v _ADC_convert ADC_convert `(v  1 e 1 0 ]
+{
+[v ADC_convert@data data `*.4uc  1 a 1 wreg ]
+"69
+[v ADC_convert@x x `f  1 a 4 18 ]
+"71
+[v ADC_convert@mu mu `i  1 a 2 26 ]
+"70
+[v ADC_convert@digits digits `i  1 a 2 24 ]
+"71
+[v ADC_convert@i i `i  1 a 2 22 ]
+"72
+[v ADC_convert@j j `i  1 a 2 15 ]
+"68
+[v ADC_convert@temp temp `i  1 a 2 13 ]
+"66
+[v ADC_convert@data data `*.4uc  1 a 1 wreg ]
+[v ADC_convert@a a `f  1 p 4 70 ]
+[v ADC_convert@place place `i  1 p 2 74 ]
+"68
+[v ADC_convert@data data `*.4uc  1 a 1 17 ]
+"122
+} 0
+"10 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\xxtofl.c
+[v ___xxtofl __xxtofl `(d  1 e 4 0 ]
+{
+[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
+"13
+[v ___xxtofl@arg arg `ul  1 a 4 27 ]
+"12
+[v ___xxtofl@exp exp `uc  1 a 1 26 ]
+"10
+[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
+[v ___xxtofl@val val `l  1 p 4 17 ]
+"15
+[v ___xxtofl@sign sign `uc  1 a 1 25 ]
+"44
+} 0
+"15 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+{
+"17
+[v ___wmul@product product `ui  1 a 2 15 ]
+"15
+[v ___wmul@multiplier multiplier `ui  1 p 2 11 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 13 ]
+"53
+} 0
+"43 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\fltol.c
+[v ___fltol __fltol `(l  1 e 4 0 ]
+{
+"45
+[v ___fltol@exp1 exp1 `uc  1 a 1 10 ]
+[v ___fltol@sign1 sign1 `uc  1 a 1 9 ]
+"43
+[v ___fltol@f1 f1 `d  1 p 4 0 ]
+"70
+} 0
+"242 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\sprcadd.c
+[v ___flsub __flsub `(d  1 e 4 0 ]
+{
+[v ___flsub@a a `d  1 p 4 31 ]
+[v ___flsub@b b `d  1 p 4 35 ]
+"250
+} 0
+"10
+[v ___fladd __fladd `(d  1 e 4 0 ]
+{
+"17
+[v ___fladd@grs grs `uc  1 a 1 19 ]
+"15
+[v ___fladd@bexp bexp `uc  1 a 1 18 ]
+"16
+[v ___fladd@aexp aexp `uc  1 a 1 17 ]
+"13
+[v ___fladd@signs signs `uc  1 a 1 16 ]
+"10
+[v ___fladd@b b `d  1 p 4 0 ]
+[v ___fladd@a a `d  1 p 4 4 ]
+"237
+} 0
+"8 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+{
+[s S839 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+"13
+[s S844 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S847 . 4 `l 1 i 4 0 `d 1 f 4 0 `S839 1 fAsBytes 4 0 `S844 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S847  1 a 4 7 ]
+"12
+[v ___flmul@grs grs `ul  1 a 4 1 ]
+[s S916 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+"14
+[u S919 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S916 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S919  1 a 2 11 ]
+"10
+[v ___flmul@bexp bexp `uc  1 a 1 6 ]
+"11
+[v ___flmul@aexp aexp `uc  1 a 1 5 ]
+"9
+[v ___flmul@sign sign `uc  1 a 1 0 ]
+"8
+[v ___flmul@b b `d  1 p 4 57 ]
+[v ___flmul@a a `d  1 p 4 61 ]
+"205
+} 0
+"4 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+{
+[v __Umul8_16@multiplier multiplier `uc  1 a 1 wreg ]
+"6
+[v __Umul8_16@word_mpld word_mpld `ui  1 a 2 6 ]
+"5
+[v __Umul8_16@product product `ui  1 a 2 4 ]
+"4
+[v __Umul8_16@multiplier multiplier `uc  1 a 1 wreg ]
+[v __Umul8_16@multiplicand multiplicand `uc  1 p 1 0 ]
+[v __Umul8_16@multiplier multiplier `uc  1 a 1 8 ]
+"60
+} 0
+"4 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\flge.c
+[v ___flge __flge `(b  1 e 0 0 ]
+{
+[v ___flge@ff1 ff1 `d  1 p 4 0 ]
+[v ___flge@ff2 ff2 `d  1 p 4 4 ]
+"19
+} 0
+"8 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+{
+"21
+[v ___fldiv@grs grs `ul  1 a 4 51 ]
+"22
+[v ___fldiv@rem rem `ul  1 a 4 44 ]
+"20
+[v ___fldiv@new_exp new_exp `i  1 a 2 49 ]
+"19
+[v ___fldiv@aexp aexp `uc  1 a 1 56 ]
+"18
+[v ___fldiv@bexp bexp `uc  1 a 1 55 ]
+"16
+[v ___fldiv@sign sign `uc  1 a 1 48 ]
+"8
+[v ___fldiv@a a `d  1 p 4 31 ]
+[v ___fldiv@b b `d  1 p 4 35 ]
+"185
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"10
+[v ___awdiv@quotient quotient `i  1 a 2 7 ]
+"11
+[v ___awdiv@sign sign `uc  1 a 1 6 ]
+[v ___awdiv@counter counter `uc  1 a 1 5 ]
+"5
+[v ___awdiv@divisor divisor `i  1 p 2 0 ]
+[v ___awdiv@dividend dividend `i  1 p 2 2 ]
+"41
+} 0
+"45 C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Slave_micros2.X\Lab03_slave.c
+[v _isr isr `II(v  1 e 1 0 ]
+{
+"47
+[v isr@comando comando `uc  1 a 1 6 ]
+"62
+} 0
+"36 C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Slave_micros2.X\SPI_slave.c
+[v _spiWrite spiWrite `(v  1 e 1 0 ]
+{
+[v spiWrite@dat dat `uc  1 a 1 wreg ]
+[v spiWrite@dat dat `uc  1 a 1 wreg ]
+"38
+[v spiWrite@dat dat `uc  1 a 1 0 ]
+"39
+} 0
+"49
+[v _spiRead spiRead `(uc  1 e 1 0 ]
+{
+"53
+} 0
+"31
+[v _spiReceiveWait spiReceiveWait `(v  1 s 1 spiReceiveWait ]
+{
+"34
+} 0
