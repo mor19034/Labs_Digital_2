@@ -1,4 +1,4 @@
-# 1 "Lab02.c"
+# 1 "Lab03_master.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "Lab02.c" 2
+# 1 "Lab03_master.c" 2
 
 
 
@@ -111,7 +111,7 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 #pragma printf_check(sprintf) const
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
-# 8 "Lab02.c" 2
+# 8 "Lab03_master.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdlib.h" 1 3
 
@@ -209,11 +209,7 @@ extern char * ltoa(char * buf, long val, int base);
 extern char * ultoa(char * buf, unsigned long val, int base);
 
 extern char * ftoa(float f, int * status);
-# 9 "Lab02.c" 2
-
-# 1 "./configuraciones_pic.h" 1
-# 13 "./configuraciones_pic.h"
-#pragma config FOSC = INTRC_NOCLKOUT
+# 9 "Lab03_master.c" 2
 
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 3
@@ -2691,7 +2687,12 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 14 "./configuraciones_pic.h" 2
+# 10 "Lab03_master.c" 2
+
+# 1 "./configuraciones_pic.h" 1
+# 13 "./configuraciones_pic.h"
+#pragma config FOSC = INTRC_NOCLKOUT
+
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
 # 13 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
@@ -2831,28 +2832,69 @@ typedef uint16_t uintptr_t;
 
 void conf_osc(uint8_t frec);
 void conf_tmr0(uint8_t prescaler);
+# 11 "Lab03_master.c" 2
+
+# 1 "./SPI.h" 1
+
+
+
+#pragma config FOSC = INTRC_NOCLKOUT
+
+
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
+# 6 "./SPI.h" 2
+
+
+
+
+void config_osc(uint8_t frec);
+typedef enum
+{
+    SPI_MASTER_OSC_DIV4 = 0b00100000,
+    SPI_MASTER_OSC_DIV16 = 0b00100001,
+    SPI_MASTER_OSC_DIV64 = 0b00100010,
+    SPI_MASTER_TMR2 = 0b00100011,
+    SPI_SLAVE_SS_EN = 0b00100100,
+    SPI_SLAVE_SS_DIS = 0b00100101
+}Spi_Type;
+
+typedef enum
+{
+    SPI_DATA_SAMPLE_MIDDLE = 0b00000000,
+    SPI_DATA_SAMPLE_END = 0b10000000
+}Spi_Data_Sample;
+
+typedef enum
+{
+    SPI_CLOCK_IDLE_HIGH = 0b00010000,
+    SPI_CLOCK_IDLE_LOW = 0b00000000
+}Spi_Clock_Idle;
+
+typedef enum
+{
+    SPI_IDLE_2_ACTIVE = 0b00000000,
+    SPI_ACTIVE_2_IDLE = 0b01000000
+}Spi_Transmit_Edge;
+
+
+void spiInit(Spi_Type, Spi_Data_Sample, Spi_Clock_Idle, Spi_Transmit_Edge);
+void spiWrite(char);
+unsigned spiDataReady();
+char spiRead();
+# 12 "Lab03_master.c" 2
+
+# 1 "./ADC.h" 1
+# 13 "./ADC.h"
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
+# 13 "./ADC.h" 2
+
+#pragma config FOSC = INTRC_NOCLKOUT
+
 void conf_ADC(uint8_t adcFrec, uint8_t isr, uint8_t Vref, uint8_t justRL);
 void ADC_convert(char *data,float a, int place);
 void canal_ADC(uint8_t channel);
 void Select_ch(uint8_t channel);
-# 10 "Lab02.c" 2
-
-# 1 "./LCD.h" 1
-# 30 "./LCD.h"
-void Lcd_Port(char a);
-void Lcd_Cmd(char a);
-void Lcd_Clear(void);
-void Lcd_Set_Cursor(char a, char b);
-void Lcd_Init(void);
-void Lcd_Write_Char(char a);
-void Lcd_Write_String(char *a);
-void Lcd_Shift_Right(void);
-void Lcd_Shift_Left(void);
-# 11 "Lab02.c" 2
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
-# 12 "Lab02.c" 2
-
+# 13 "Lab03_master.c" 2
 
 
 
@@ -2862,7 +2904,7 @@ void Lcd_Shift_Left(void);
 
 #pragma config FOSC = INTRC_NOCLKOUT
 #pragma config WDTE = OFF
-#pragma config PWRTE = ON
+#pragma config PWRTE = OFF
 #pragma config MCLRE = OFF
 #pragma config CP = OFF
 #pragma config CPD = OFF
@@ -2878,112 +2920,65 @@ void Lcd_Shift_Left(void);
 
 
 
-uint8_t canal_flag = 0;
-volatile uint8_t var_adc0 = 0;
-volatile uint8_t var_adc1 = 0;
-volatile uint8_t contador = 0;
-float cont_uart = 0;
-char string_uart[10];
-char valor_uart = 0;
+
+volatile uint8_t pot1;
+volatile uint8_t pot2;
 char adc0[10];
 char adc1[10];
-char cont[10];
 float conv0 = 0;
 float conv1 = 0;
 
-
 void setup (void);
 void mensaje (void);
+void putch(char data);
 
 void main(void){
     setup();
-    Lcd_Init();
-    canal_ADC(0);
-    canal_ADC(1);
-    Select_ch(0);
-    Lcd_Clear();
+
     while(1){
-        Lcd_Set_Cursor(1, 1);
-        Lcd_Write_String("S1:");
-        Lcd_Set_Cursor(1, 8);
-        Lcd_Write_String("S2:");
-        Lcd_Set_Cursor(1, 15);
-        Lcd_Write_String("S3:");
+        mensaje();
+        PORTCbits.RC2 = 0;
+        _delay((unsigned long)((1)*(8000000/4000.0)));
 
-        PORTD = contador;
-        mensaje ();
+        spiWrite(1);
+        pot1 = spiRead();
+        _delay((unsigned long)((1)*(8000000/4000.0)));
+        PORTCbits.RC2 = 1;
 
-        if (PIR1bits.ADIF == 1) {
-            if (canal_flag == 0) {
-                var_adc0 = ADRESH;
-                Select_ch(0);
-                canal_flag++;
-            } else {
-                var_adc1 = ADRESH;
-                Select_ch(1);
-                canal_flag--;
-            }
-            PIR1bits.ADIF = 0;
-        }
+        PORTCbits.RC2 = 0;
+        _delay((unsigned long)((1)*(8000000/4000.0)));
 
-        Lcd_Set_Cursor(2, 1);
-        Lcd_Write_String(adc0);
-        Lcd_Set_Cursor(2, 5);
-        Lcd_Write_String("V");
+        spiWrite(2);
+        pot2 = spiRead();
 
-        Lcd_Set_Cursor(2, 7);
-        Lcd_Write_String(adc1);
-        Lcd_Set_Cursor(2, 11);
-        Lcd_Write_String("V");
+        _delay((unsigned long)((1)*(8000000/4000.0)));
+        PORTCbits.RC2 = 1;
 
-        Lcd_Set_Cursor(2,14);
-        Lcd_Write_String(cont);
+        conv0 = 0;
+        conv1 = 0;
 
-     conv0 = 0;
-     conv1 = 0;
-
-        conv0 = (var_adc0 / (float) 255)*5;
+        conv0 = (pot1 / (float) 255)*5;
+        conv1 = (pot2 / (float) 255)*5;
 
         ADC_convert(adc0, conv0, 2);
-
-        conv1 = (var_adc1 / (float) 255)*5;
         ADC_convert(adc1, conv1, 2);
 
-        ADC_convert(cont, contador, 2);
     }
-
     return;
 }
 
 void mensaje (void){
-    _delay((unsigned long)((300)*(800000/4000.0)));
+    _delay((unsigned long)((300)*(8000000/4000.0)));
     printf("\r voltaje 1: \r");
-    _delay((unsigned long)((300)*(800000/4000.0)));
+    _delay((unsigned long)((300)*(8000000/4000.0)));
     printf(adc0);
 
-    _delay((unsigned long)((300)*(800000/4000.0)));
+    _delay((unsigned long)((300)*(8000000/4000.0)));
     printf("\r voltaje 2: \r");
-    _delay((unsigned long)((300)*(800000/4000.0)));
+    _delay((unsigned long)((300)*(8000000/4000.0)));
     printf(adc1);
-    _delay((unsigned long)((300)*(800000/4000.0)));
-
-    _delay((unsigned long)((300)*(800000/4000.0)));
-    printf("\r Contador: \r");
-    _delay((unsigned long)((300)*(800000/4000.0)));
-    printf(cont);
-     _delay((unsigned long)((300)*(800000/4000.0)));
-
-    if (RCREG == '+'){
-        contador++;
-        RCREG = 0;
-    }
-    else if (RCREG == '-'){
-       contador--;
-       RCREG = 0;
-    }
-    else {
-        (0);
-    }
+    _delay((unsigned long)((300)*(8000000/4000.0)));
+# 114 "Lab03_master.c"
 }
 void putch(char dato){
     while(TXIF == 0);
@@ -2992,24 +2987,22 @@ void putch(char dato){
 }
 
 void setup (void){
-    ANSEL = 0x03;
+    ANSEL = 0x00;
     ANSELH = 0;
 
-    TRISA = 0x03;
     TRISB = 0x00;
     TRISD = 0x00;
-    TRISE = 0x00;
 
-    PORTA = 0x00;
+
     PORTB = 0x00;
     PORTD = 0x00;
-    PORTE = 0x00;
+
+    PORTCbits.RC2 = 1;
+    spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
+
+
 
     conf_osc(7);
-
-
-    conf_ADC(2, 0, 3, 0);
-
 
 
 

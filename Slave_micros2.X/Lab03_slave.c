@@ -28,25 +28,20 @@
 #pragma config WRT = OFF        // Flash Program Memory Self Write Enable bits (Write protection off)
 
 //-----------------------------valores definidos--------------------------------
-#define _XTAL_FREQ 800000
+#define _XTAL_FREQ 8000000
 //---------------------------------Variables------------------------------------
 uint8_t canal_flag = 0;
-volatile uint8_t var_adc0 = 0;
-volatile uint8_t var_adc1 = 0;
-char adc0[10];
-char adc1[10];
-float conv0 = 0;
-float conv1 = 0;
+uint8_t var_adc0 = 0;
+uint8_t var_adc1 = 0;
 
 //------------------------------prototipos--------------------------------------
 void setup (void);
-void mensaje (void);
 //--------------------------------interrupciones--------------------------------
 void __interrupt() isr(void){
    if(SSPIF == 1){
        uint8_t write;
        write = spiRead();
-       
+       PORTB++;
        switch(write) {
            case 1:
                spiWrite(var_adc0);
@@ -73,42 +68,32 @@ void main(void){
                 var_adc0 = ADRESH; //se guarda el valor convertido en la variable
                 Select_ch(0);
                 canal_flag++;
-            } else {
+            }
+            else {
                 var_adc1 = ADRESH; //se guarda el valor convertido en la variable
                 Select_ch(3);
                 canal_flag--;
             }
+            __delay_us(200);
             PIR1bits.ADIF = 0;
-        }
-   
-    
-//     conv0 = 0;//se reinicia cada vez que se inicia el proceso de enviar datos
-//     conv1 = 0;
-//        
-//        conv0 = (var_adc0 / (float) 255)*5; //Se consigue el porcentaje con 
-//        //respecto al valor maximo que un puerto puede tener, despues se 
-//        //multiplica por 5 para conocer el voltaje actual del puerto                                          
-//        ADC_convert(adc0, conv0, 2);//se convierte el valor actual a un valor ASCII.
-//        
-//        conv1 = (var_adc1 / (float) 255)*5; //misma logica que conv0
-//        ADC_convert(adc1, conv1, 2);
-        
-    }
-        
+        } 
     return;
+    }
 }
 //*******************************funciones**************************************
 
 //----------------------------------Configuraciones-----------------------------
 void setup (void){
-    ANSEL = 0x09;
+    ANSEL = 0b00001001;
     ANSELH = 0;
     
-    TRISA = 0x09;
+    TRISAbits.TRISA5 = 1; //slave selected
+    TRISA = 0b00001001;
+    TRISB = 0x00;
     
     PORTA = 0x00;
-    
-    TRISAbits.TRISA5 = 1; //slave selected
+    PORTB = 0x00;
+ 
     spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
     
     //------reloj oscilador

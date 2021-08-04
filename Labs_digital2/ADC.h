@@ -9,7 +9,8 @@
 // more than once.  
 #ifndef ADC_H
 #define	ADC_H
-#include <xc.h> // include processor files - each processor file is guarded. 
+#include <xc.h> // include processor files - each processor file is guarded.
+#include <stdint.h>
 #pragma config FOSC = INTRC_NOCLKOUT
 
 void conf_ADC(uint8_t adcFrec, uint8_t isr, uint8_t Vref, uint8_t justRL);

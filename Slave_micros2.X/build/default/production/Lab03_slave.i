@@ -2836,7 +2836,17 @@ void Select_ch(uint8_t channel);
 # 12 "Lab03_slave.c" 2
 
 # 1 "./SPI_slave.h" 1
-# 16 "./SPI_slave.h"
+# 12 "./SPI_slave.h"
+#pragma config FOSC = INTRC_NOCLKOUT
+
+
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
+# 14 "./SPI_slave.h" 2
+
+
+
+
+void config_osc(uint8_t frec);
 typedef enum
 {
     SPI_MASTER_OSC_DIV4 = 0b00100000,
@@ -2892,29 +2902,24 @@ char spiRead();
 
 
 uint8_t canal_flag = 0;
-volatile uint8_t var_adc0 = 0;
-volatile uint8_t var_adc1 = 0;
-char adc0[10];
-char adc1[10];
-float conv0 = 0;
-float conv1 = 0;
+uint8_t var_adc0 = 0;
+uint8_t var_adc1 = 0;
 
 
 void setup (void);
-void mensaje (void);
 
 void __attribute__((picinterrupt(("")))) isr(void){
    if(SSPIF == 1){
-       uint8_t comando;
-       comando = spiRead();
-
-       switch(comando) {
+       uint8_t write;
+       write = spiRead();
+       PORTB++;
+       switch(write) {
            case 1:
-               spiWrite(adc0);
+               spiWrite(var_adc0);
                break;
 
            case 2:
-               spiWrite(adc1);
+               spiWrite(var_adc1);
                break;
        }
 
@@ -2934,42 +2939,32 @@ void main(void){
                 var_adc0 = ADRESH;
                 Select_ch(0);
                 canal_flag++;
-            } else {
+            }
+            else {
                 var_adc1 = ADRESH;
                 Select_ch(3);
                 canal_flag--;
             }
+            _delay((unsigned long)((200)*(8000000/4000000.0)));
             PIR1bits.ADIF = 0;
         }
-
-
-     conv0 = 0;
-     conv1 = 0;
-
-        conv0 = (var_adc0 / (float) 255)*5;
-
-
-        ADC_convert(adc0, conv0, 2);
-
-        conv1 = (var_adc1 / (float) 255)*5;
-        ADC_convert(adc1, conv1, 2);
-
-    }
-
     return;
+    }
 }
 
 
 
 void setup (void){
-    ANSEL = 0x09;
+    ANSEL = 0b00001001;
     ANSELH = 0;
 
-    TRISA = 0x09;
+    TRISAbits.TRISA5 = 1;
+    TRISA = 0b00001001;
+    TRISB = 0x00;
 
     PORTA = 0x00;
+    PORTB = 0x00;
 
-    TRISAbits.TRISA5 = 1;
     spiInit(SPI_SLAVE_SS_EN, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
 
 

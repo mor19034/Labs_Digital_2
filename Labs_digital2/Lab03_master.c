@@ -10,6 +10,7 @@
 #include <xc.h>
 #include "configuraciones_pic.h"
 #include "SPI.h"
+#include "ADC.h"
 
 // PIC16F887 Configuration Bit Settings
 
@@ -32,53 +33,73 @@
 #pragma config WRT = OFF        // Flash Program Memory Self Write Enable bits (Write protection off)
 
 //-----------------------------valores definidos--------------------------------
-#define _XTAL_FREQ 800000
+#define _XTAL_FREQ 8000000
 
 //------------------------------variables---------------------------------------
-uint8_t pot1;
-uint8_t pot2;
-uint8_t varSC;
+volatile uint8_t pot1;
+volatile uint8_t pot2;
+char adc0[10];
+char adc1[10];
+float conv0 = 0;
+float conv1 = 0;
 //------------------------------prototipos--------------------------------------
 void setup (void);
-//void mensaje (void);
+void mensaje (void);
+void putch(char data);
 //----------------------------------loop princiapl------------------------------
 void main(void){
     setup();
-    
+ 
     while(1){
+        mensaje();
         PORTCbits.RC2 = 0;  //seleccion del esclavo
-        __delay_ms(5);
+        __delay_ms(1);
         
         spiWrite(1); //le digo al asclavo que quiero valot de pot1
-        pot1 == spiRead();
-        
+        pot1 = spiRead();
         __delay_ms(1);
         PORTCbits.RC2 = 1; //se deja de usar slave1
         
         PORTCbits.RC2 = 0; //se selecciona el slave 1 de nuevo
+        __delay_ms(1);
+        
+        spiWrite(2); //se avisa al esclavo que quiero el valor de pot2
+        pot2 = spiRead(); //guardo el valor 
+        
+        __delay_ms(1);
+        PORTCbits.RC2 = 1; //desleccionar esclavo 1    }
+    
+        conv0 = 0;
+        conv1 = 0;
+        
+        conv0 = (pot1 / (float) 255)*5;  
+        conv1 = (pot2 / (float) 255)*5; 
+        
+        ADC_convert(adc0, conv0, 2);//se convierte el valor actual a un valor ASCII.
+        ADC_convert(adc1, conv1, 2);
         
     }
     return;
 }
 //*******************************funciones**************************************
-//void mensaje (void){
-//    __delay_ms(300);
-//    printf("\r voltaje 1: \r");
-//    __delay_ms(300);
-//    printf(adc0);
-//    
-//    __delay_ms(300);
-//    printf("\r voltaje 2: \r");
-//    __delay_ms(300);
-//    printf(adc1);
-//    __delay_ms(300);
-//      
+void mensaje (void){
+    __delay_ms(300);
+    printf("\r voltaje 1: \r");
+    __delay_ms(300);
+    printf(adc0);
+    
+    __delay_ms(300);
+    printf("\r voltaje 2: \r");
+    __delay_ms(300);
+    printf(adc1);
+    __delay_ms(300);
+      
 //    __delay_ms(300);
 //    printf("\r Contador: \r");
 //    __delay_ms(300);
-//    printf(cont);
+//    printf(pot1);
 //     __delay_ms(300);  
-//     
+     
 //    if (RCREG == '+'){
 //        contador++;
 //        RCREG = 0;
@@ -90,22 +111,25 @@ void main(void){
 //    else {
 //        NULL;
 //    }
-//} 
-//void putch(char dato){ 
-//    while(TXIF == 0);
-//    TXREG = dato; //lo que se escribe se manda al pic para que lo procese 
-//    return; 
-//}
+} 
+void putch(char dato){ 
+    while(TXIF == 0);
+    TXREG = dato; //lo que se escribe se manda al pic para que lo procese 
+    return; 
+}
 //----------------------------------Configuraciones-----------------------------
 void setup (void){
     ANSEL = 0x00;
     ANSELH = 0;
-
-    TRISB = 0x00;
-    TRISC = 0b00101000;
     
-    PORTA = 0x00;
+    TRISB = 0x00;
+    TRISD = 0x00;
+    
+    //------conf SPI
     PORTB = 0x00;
+    PORTD = 0x00;
+    
+    PORTCbits.RC2 = 1;
     spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
     
     

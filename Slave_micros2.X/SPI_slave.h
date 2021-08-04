@@ -9,10 +9,13 @@
 // more than once.  
 #ifndef SPI_H
 #define	SPI_H
-
+#pragma config FOSC = INTRC_NOCLKOUT
 #include <xc.h> // include processor files - each processor file is guarded.  
+#include <stdint.h>
+//#include <pic16f887.h>
 
-#include <pic16f887.h>
+
+void config_osc(uint8_t frec);
 typedef enum 
 {
     SPI_MASTER_OSC_DIV4  = 0b00100000,
@@ -46,6 +49,7 @@ void spiInit(Spi_Type, Spi_Data_Sample, Spi_Clock_Idle, Spi_Transmit_Edge);
 void spiWrite(char);
 unsigned spiDataReady();
 char spiRead();
+
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 

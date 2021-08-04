@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ADC.h"
-#define _XTAL_FREQ 800000
+#define _XTAL_FREQ 8000000
 
 /*******************************************************************************
  * Funciones para configurar ADC 
@@ -30,16 +30,11 @@ void conf_ADC(uint8_t adcFrec, uint8_t isr, uint8_t Vref, uint8_t justRL){
             ADCON0bits.ADCS = 11; //FR
             break;
     }
-    if (justRL == 0){
-        ADCON1bits.ADFM = 0; //justificado a la izquierda
-    }
-    else{
-        ADCON1bits.ADFM = 1; //justificado a la derecha
-    }
     if (isr == 1) {
         PIE1bits.ADIE = 1; //Se habilita la interrupcion del ADC
         PIR1bits.ADIF = 0; //Se limpia la bandera del ADC
     }
+
     switch (Vref){
         case 0: //Vref+ pn y VSS
             ADCON1bits.VCFG0 = 1; 
@@ -57,6 +52,12 @@ void conf_ADC(uint8_t adcFrec, uint8_t isr, uint8_t Vref, uint8_t justRL){
             ADCON1bits.VCFG0 = 0; 
             ADCON1bits.VCFG1 = 0; 
             break;    
+    }
+    if (justRL == 0){
+        ADCON1bits.ADFM = 0; //justificado a la izquierda
+    }
+    else{
+        ADCON1bits.ADFM = 1; //justificado a la derecha
     }
 }
 
