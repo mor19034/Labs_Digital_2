@@ -5,66 +5,14 @@
  * Created on 1 de agosto de 2021, 23:18
  */
 
+#include <xc.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#define _XTAL_FREQ 8000000 
 #include "ADC.h"
-#define _XTAL_FREQ 8000000
-
-/*******************************************************************************
- * Funciones para configurar ADC 
- ******************************************************************************/
-void conf_ADC(uint8_t adcFrec, uint8_t isr, uint8_t Vref, uint8_t justRL){
-    ADCON0bits.ADON = 1;
-    
-    switch(adcFrec){              
-        case 0: 
-            ADCON0bits.ADCS = 00;     //Fosc/2
-            break;   
-        case 1:                       //Fosc/8
-            ADCON0bits.ADCS = 01;     
-            break;
-        case 2:                      //Fosc/32
-            ADCON0bits.ADCS = 10;     
-            break;
-        case 3: 
-            ADCON0bits.ADCS = 11; //FR
-            break;
-    }
-    if (isr == 1) {
-        PIE1bits.ADIE = 1; //Se habilita la interrupcion del ADC
-        PIR1bits.ADIF = 0; //Se limpia la bandera del ADC
-    }
-
-    switch (Vref){
-        case 0: //Vref+ pn y VSS
-            ADCON1bits.VCFG0 = 1; 
-            ADCON1bits.VCFG1 = 0; 
-            break;
-        case 1: //VDD y Vref - pin
-            ADCON1bits.VCFG0 = 0; 
-            ADCON1bits.VCFG1 = 1; 
-            break;
-        case 2: //Vref+ pin y Vref-pin
-            ADCON1bits.VCFG0 = 1; 
-            ADCON1bits.VCFG1 = 1;
-            break;
-        default: //Voltajes de referencia VSS y VDD
-            ADCON1bits.VCFG0 = 0; 
-            ADCON1bits.VCFG1 = 0; 
-            break;    
-    }
-    if (justRL == 0){
-        ADCON1bits.ADFM = 0; //justificado a la izquierda
-    }
-    else{
-        ADCON1bits.ADFM = 1; //justificado a la derecha
-    }
-}
-
-/*******************************************************************************
- * Funciones para conversión del ADC a ASCII
- ******************************************************************************/
-void ADC_convert(char *data,float a, int place) 
+// Conversion de ADC 
+void convert(char *data,float a, int place) //definition
 {
      int temp=a;
      float x=0.0;
@@ -121,11 +69,59 @@ void ADC_convert(char *data,float a, int place)
      
     data[i]='\n';
 }
+    // Alistar configuracion de ADC
+void start_adc(uint8_t frec, uint8_t isr, uint8_t Vref, uint8_t justRL) {
+    ADCON0bits.ADON = 1;
+    __delay_us(200);
+    switch (frec) {
+        case 1: // Fosc/2
+            ADCON0bits.ADCS0 = 0;
+            ADCON0bits.ADCS1 = 0;
+            break;
+        case 2: // Fosc/8
+            ADCON0bits.ADCS0 = 1;
+            ADCON0bits.ADCS1 = 0;
+            break;
+        case 3: // Fosc/32
+            ADCON0bits.ADCS0 = 0;
+            ADCON0bits.ADCS1 = 1;
+            break;
+        case 4: // FRC 
+            ADCON0bits.ADCS0 = 1;
+            ADCON0bits.ADCS1 = 1;
+            break;
+    }
+    if (isr == 1) {
+        PIE1bits.ADIE = 1; //Se habilita la interrupcion del ADC
+        PIR1bits.ADIF = 0; //Se limpia la bandera del ADC
+    }
+    if (justRL == 0) {
+        ADCON1bits.ADFM = 0; //se justifica a la izquierda
+    } else {
+        ADCON1bits.ADFM = 1; //se justifica a la derecha 
+    }
+    switch (Vref) {
+        case 0: //Referencia en VDD y VSS
+            ADCON1bits.VCFG0 = 0;
+            ADCON1bits.VCFG1 = 0;
+            break;
+        case 1: //Referencia en Vref+ pin y VSS
+            ADCON1bits.VCFG0 = 1;
+            ADCON1bits.VCFG1 = 0;
+            break;
+        case 2: //Referencia en VDD y Vref- pin
+            ADCON1bits.VCFG0 = 0;
+            ADCON1bits.VCFG1 = 1;
+            break;
+        case 3: //Referencia en Vref+ pin y Vref- pin 
+            ADCON1bits.VCFG0 = 1;
+            ADCON1bits.VCFG1 = 1;
+            break;
+    }
+}
 
-/*******************************************************************************
- Habilitar canales de conversión ADC
- ******************************************************************************/
-void canal_ADC(uint8_t channel) { //Habilita los canales del ADC 
+// Empezar a colocar el valor del canal
+void start_ch(uint8_t channel) { //Habilita los canales del ADC 
     switch (channel) {
         case 0: //Analogico en pin RA0
             ANSELbits.ANS0 = 1;
@@ -172,61 +168,107 @@ void canal_ADC(uint8_t channel) { //Habilita los canales del ADC
     }
 }
 
+
 // Seleccionar Canal de Conversion
 void Select_ch(uint8_t channel) {// se selecciona el canal analogico y se inicia la conversion
     switch (channel) {
         case 0: // AN0
-            ADCON0bits.CHS = 0000;
+            ADCON0bits.CHS0 = 0;
+            ADCON0bits.CHS1 = 0;
+            ADCON0bits.CHS2 = 0;
+            ADCON0bits.CHS3 = 0;
             break;
         case 1: // AN1
-            ADCON0bits.CHS = 0001;
+            ADCON0bits.CHS0 = 1;
+            ADCON0bits.CHS1 = 0;
+            ADCON0bits.CHS2 = 0;
+            ADCON0bits.CHS3 = 0;
             break;
         case 2: // AN2
-            ADCON0bits.CHS = 0010;
+            ADCON0bits.CHS0 = 0;
+            ADCON0bits.CHS1 = 1;
+            ADCON0bits.CHS2 = 0;
+            ADCON0bits.CHS3 = 0;
             break;
         case 3: // AN3
-            ADCON0bits.CHS = 0011;
+            ADCON0bits.CHS0 = 1;
+            ADCON0bits.CHS1 = 1;
+            ADCON0bits.CHS2 = 0;
+            ADCON0bits.CHS3 = 0;
             break;
         case 4: // AN4
-            ADCON0bits.CHS = 0100;
+            ADCON0bits.CHS0 = 0;
+            ADCON0bits.CHS1 = 0;
+            ADCON0bits.CHS2 = 1;
+            ADCON0bits.CHS3 = 0;
             break;
         case 5: // AN5
-            ADCON0bits.CHS = 0101;
+            ADCON0bits.CHS0 = 1;
+            ADCON0bits.CHS1 = 0;
+            ADCON0bits.CHS2 = 1;
+            ADCON0bits.CHS3 = 0;
             break;
         case 6: // AN6
-            ADCON0bits.CHS = 0110;
+            ADCON0bits.CHS0 = 0;
+            ADCON0bits.CHS1 = 1;
+            ADCON0bits.CHS2 = 1;
+            ADCON0bits.CHS3 = 0;
             break;
         case 7: // AN7
-            ADCON0bits.CHS = 0111;
+            ADCON0bits.CHS0 = 1;
+            ADCON0bits.CHS1 = 1;
+            ADCON0bits.CHS2 = 1;
+            ADCON0bits.CHS3 = 0;
             break;
         case 8: // AN8
-            ADCON0bits.CHS = 1000;
+            ADCON0bits.CHS0 = 0;
+            ADCON0bits.CHS1 = 0;
+            ADCON0bits.CHS2 = 0;
+            ADCON0bits.CHS3 = 1;
             break;
         case 9: // AN9
-            ADCON0bits.CHS = 1001;
+            ADCON0bits.CHS0 = 1;
+            ADCON0bits.CHS1 = 0;
+            ADCON0bits.CHS2 = 0;
+            ADCON0bits.CHS3 = 1;
             break;
         case 10: // AN10
-            ADCON0bits.CHS = 1010;
+            ADCON0bits.CHS0 = 0;
+            ADCON0bits.CHS1 = 1;
+            ADCON0bits.CHS2 = 0;
+            ADCON0bits.CHS3 = 1;
             break;
         case 11: // AN11
-            ADCON0bits.CHS = 1011;
+            ADCON0bits.CHS0 = 1;
+            ADCON0bits.CHS1 = 1;
+            ADCON0bits.CHS2 = 0;
+            ADCON0bits.CHS3 = 1;
             break;
         case 12: // AN12
-            ADCON0bits.CHS = 1100;
+            ADCON0bits.CHS0 = 0;
+            ADCON0bits.CHS1 = 0;
+            ADCON0bits.CHS2 = 1;
+            ADCON0bits.CHS3 = 1;
             break;
         case 13: // AN13
-            ADCON0bits.CHS = 1101;
+            ADCON0bits.CHS0 = 1;
+            ADCON0bits.CHS1 = 0;
+            ADCON0bits.CHS2 = 1;
+            ADCON0bits.CHS3 = 1;
             break;
         case 14: // CVref
-            ADCON0bits.CHS = 1110;
+            ADCON0bits.CHS0 = 0;
+            ADCON0bits.CHS1 = 1;
+            ADCON0bits.CHS2 = 1;
+            ADCON0bits.CHS3 = 1;
             break;
         case 15: // Fixed ref
-            ADCON0bits.CHS = 1111;
+            ADCON0bits.CHS0 = 1;
+            ADCON0bits.CHS1 = 1;
+            ADCON0bits.CHS2 = 1;
+            ADCON0bits.CHS3 = 1;
             break;
     }
     __delay_us(200); //es el tiempo recomendado de espera por cada cambio de canal
     ADCON0bits.GO = 1;
-    
 }
-
-

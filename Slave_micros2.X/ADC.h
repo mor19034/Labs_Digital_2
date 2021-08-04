@@ -9,15 +9,15 @@
 // more than once.  
 #ifndef ADC_H
 #define	ADC_H
-
-#include <xc.h> // include processor files - each processor file is guarded.
-#include <stdint.h>
 #pragma config FOSC = INTRC_NOCLKOUT
+#include <xc.h> // include processor files - each processor file is guarded.  
+#include <stdint.h>
 
-void conf_ADC(uint8_t adcFrec, uint8_t isr, uint8_t Vref, uint8_t justRL);
-void ADC_convert(char *data,float a, int place);
-void canal_ADC(uint8_t channel);
+//COnversion ADC 
+void convert(char *data,float a, int place);
+void start_adc(uint8_t frec, uint8_t isr, uint8_t Vref, uint8_t justRL);
 void Select_ch(uint8_t channel);
+void start_ch(uint8_t channel);
 
-#endif	/* ADC_H */
 
+#endif	/* XC_HEADER_TEMPLATE_H */

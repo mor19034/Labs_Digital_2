@@ -7,7 +7,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <xc.h>
+#include <string.h> // Concatenar
 #include "configuraciones_pic.h"
 #include "SPI.h"
 #include "ADC.h"
@@ -19,7 +21,7 @@
 
 #pragma config FOSC = INTRC_NOCLKOUT// Oscillator Selection bits (RC oscillator: CLKOUT function on RA6/OSC2/CLKOUT pin, RC on RA7/OSC1/CLKIN)
 #pragma config WDTE = OFF        // Watchdog Timer Enable bit (WDT enabled)
-#pragma config PWRTE = OFF      // Power-up Timer Enable bit (PWRT disabled)
+#pragma config PWRTE = ON      // Power-up Timer Enable bit (PWRT disabled)
 #pragma config MCLRE = OFF       // RE3/MCLR pin function select bit (RE3/MCLR pin function is MCLR)
 #pragma config CP = OFF         // Code Protection bit (Program memory code protection is disabled)
 #pragma config CPD = OFF        // Data Code Protection bit (Data memory code protection is disabled)
@@ -42,6 +44,10 @@ char adc0[10];
 char adc1[10];
 float conv0 = 0;
 float conv1 = 0;
+char unidad, decena, centena;
+char concatenado;
+int full;
+
 //------------------------------prototipos--------------------------------------
 void setup (void);
 void mensaje (void);
@@ -77,7 +83,7 @@ void main(void){
         
         ADC_convert(adc0, conv0, 2);//se convierte el valor actual a un valor ASCII.
         ADC_convert(adc1, conv1, 2);
-        
+        PORTB = full;
     }
     return;
 }
@@ -86,36 +92,77 @@ void mensaje (void){
     __delay_ms(300);
     printf("\r voltaje 1: \r");
     __delay_ms(300);
-    printf(adc0);
+    printf(adc0);       //se manda el valor de la conversión de ADC canal 0
+    printf("\r---------------\r");
     
     __delay_ms(300);
     printf("\r voltaje 2: \r");
     __delay_ms(300);
-    printf(adc1);
+    printf(adc1);       //se manda el valor de la conversión de ADC canal 1
     __delay_ms(300);
-      
-//    __delay_ms(300);
-//    printf("\r Contador: \r");
-//    __delay_ms(300);
-//    printf(pot1);
-//     __delay_ms(300);  
-     
-//    if (RCREG == '+'){
-//        contador++;
-//        RCREG = 0;
-//    }
-//    else if (RCREG == '-'){
-//       contador--;
-//       RCREG = 0;
-//    }
-//    else {
-//        NULL;
-//    }
-} 
+    printf("\r---------------\r");
+    
+    printf("Ingresar Centena: Rango(0-2)\r"); //le pide al usuario ingresar algo
+      chistosito1:  
+       while(RCIF == 0);
+        centena = RCREG -48;  
+
+       while(RCREG > '2'){  //este es una defensa por si alguien se pasa de 
+                            //chistoso y mete un dato que no es
+           goto chistosito1;
+       }
+    
+    printf("Ingresar Decenas: \r");
+      chistosito2:
+        while(RCIF == 0); 
+         decena = RCREG -48; 
+
+        if(centena == 2){
+           while(RCREG > '5'){
+               goto chistosito2;    //misma funcion que chistosito 1
+           }
+       }
+
+    printf("Ingresar Unidades: \r");
+      chistosito3:
+       while(RCIF == 0); 
+        unidad = RCREG - 48;
+
+       if(centena == 2 && decena == 5){
+           while(RCREG > '5'){
+               goto chistosito3;    //misma función que chistosito 1
+           }
+       }
+      concatenado = concatenar(centena, decena); //se concatenan primeros datos
+      full = concatenar(concatenado, unidad); //se termina de concatenar 
+      __delay_ms(250);
+    printf("El numero elegido es: %d", full); //se manda valor de concatenado final
+
+   return;
+}
+ 
 void putch(char dato){ 
     while(TXIF == 0);
     TXREG = dato; //lo que se escribe se manda al pic para que lo procese 
     return; 
+}
+
+int concatenar(int a, int b){
+    char s1[20];    //variables para cadena de caracteres
+    char s2[20];
+    
+    //Aquí se convierten los integers a strings
+    sprintf(s1, "%d", a);
+    sprintf(s2, "%d", b);
+    
+    //concatenar los strings
+    strcat(s1, s2);
+    
+    //convertir los strings concatenados a integers
+    int c = atoi(s1);
+    
+    //regresa el valor numerico formado
+    return c;
 }
 //----------------------------------Configuraciones-----------------------------
 void setup (void){
@@ -160,5 +207,3 @@ void setup (void){
     PIR1bits.TXIF = 0; 
     PIR1bits.RCIF = 0; 
 }
-
-
