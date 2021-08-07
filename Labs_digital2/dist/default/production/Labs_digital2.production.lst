@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.31 build 20201012212115 
-                                                                                               Wed Aug 04 11:41:51 2021
+                                                                                               Wed Aug 04 12:28:37 2021
 
 Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1 
      1                           	processor	16F887
@@ -9158,7 +9158,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
   9115                           ;	Watchdog Timer Enable bit
   9116                           ;	WDTE = OFF, WDT disabled and can be enabled by SWDTEN bit of the WDTCON register
   9117                           ;	Power-up Timer Enable bit
-  9118                           ;	PWRTE = ON, PWRT enabled
+  9118                           ;	PWRTE = OFF, PWRT disabled
   9119                           ;	RE3/MCLR pin function select bit
   9120                           ;	MCLRE = OFF, RE3/MCLR pin function is digital input, MCLR internally tied to VDD
   9121                           ;	Code Protection bit
@@ -9176,7 +9176,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
   9133                           ;	In-Circuit Debugger Mode bit
   9134                           ;	DEBUG = 0x1, unprogrammed default
   9135  2007                     	org	8199
-  9136  2007  30C4               	dw	12484
+  9136  2007  30D4               	dw	12500
   9137                           
   9138                           ;Config register CONFIG2 @ 0x2008
   9139                           ;	Brown-out Reset Selection bit
@@ -9590,7 +9590,7 @@ EEDATA             100      0       0       0        0.0%
 
 
 Microchip Technology PIC Macro Assembler V2.31 build 20201012212115 
-Symbol Table                                                                                   Wed Aug 04 11:41:51 2021
+Symbol Table                                                                                   Wed Aug 04 12:28:37 2021
 
            ___fldiv@aexp 004B             ___fldiv@bexp 004A                        pc 0002  
            ___fldiv@sign 0043              _SSPSTATbits 0094                       l11 14D8  

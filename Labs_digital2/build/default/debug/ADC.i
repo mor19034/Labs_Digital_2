@@ -1,4 +1,4 @@
-# 1 "Lab03_master.c"
+# 1 "ADC.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,7 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "Lab03_master.c" 2
+# 1 "ADC.c" 2
 
 
 
@@ -111,7 +111,7 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 #pragma printf_check(sprintf) const
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
-# 8 "Lab03_master.c" 2
+# 8 "ADC.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdlib.h" 1 3
 
@@ -209,143 +209,10 @@ extern char * ltoa(char * buf, long val, int base);
 extern char * ultoa(char * buf, unsigned long val, int base);
 
 extern char * ftoa(float f, int * status);
-# 9 "Lab03_master.c" 2
+# 9 "ADC.c" 2
 
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
-# 13 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int8_t;
-
-
-
-
-
-
-typedef signed int int16_t;
-
-
-
-
-
-
-
-typedef __int24 int24_t;
-
-
-
-
-
-
-
-typedef signed long int int32_t;
-# 52 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint8_t;
-
-
-
-
-
-typedef unsigned int uint16_t;
-
-
-
-
-
-
-typedef __uint24 uint24_t;
-
-
-
-
-
-
-typedef unsigned long int uint32_t;
-# 88 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int_least8_t;
-
-
-
-
-
-
-
-typedef signed int int_least16_t;
-# 109 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef __int24 int_least24_t;
-# 118 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef signed long int int_least32_t;
-# 136 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint_least8_t;
-
-
-
-
-
-
-typedef unsigned int uint_least16_t;
-# 154 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef __uint24 uint_least24_t;
-
-
-
-
-
-
-
-typedef unsigned long int uint_least32_t;
-# 181 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef signed char int_fast8_t;
-
-
-
-
-
-
-typedef signed int int_fast16_t;
-# 200 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef __int24 int_fast24_t;
-
-
-
-
-
-
-
-typedef signed long int int_fast32_t;
-# 224 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef unsigned char uint_fast8_t;
-
-
-
-
-
-typedef unsigned int uint_fast16_t;
-# 240 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef __uint24 uint_fast24_t;
-
-
-
-
-
-
-typedef unsigned long int uint_fast32_t;
-# 268 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef int32_t intmax_t;
-# 282 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
-typedef uint32_t uintmax_t;
-
-
-
-
-
-
-typedef int16_t intptr_t;
-
-
-
-
-typedef uint16_t uintptr_t;
-# 10 "Lab03_master.c" 2
-
+# 1 "./ADC.h" 1
+# 12 "./ADC.h"
 # 1 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -2822,106 +2689,141 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 28 "C:/Program Files/Microchip/MPLABX/v5.45/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
-# 11 "Lab03_master.c" 2
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\string.h" 1 3
-# 14 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\string.h" 3
-extern void * memcpy(void *, const void *, size_t);
-extern void * memmove(void *, const void *, size_t);
-extern void * memset(void *, int, size_t);
-# 36 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\string.h" 3
-extern char * strcat(char *, const char *);
-extern char * strcpy(char *, const char *);
-extern char * strncat(char *, const char *, size_t);
-extern char * strncpy(char *, const char *, size_t);
-extern char * strdup(const char *);
-extern char * strtok(char *, const char *);
-
-
-extern int memcmp(const void *, const void *, size_t);
-extern int strcmp(const char *, const char *);
-extern int stricmp(const char *, const char *);
-extern int strncmp(const char *, const char *, size_t);
-extern int strnicmp(const char *, const char *, size_t);
-extern void * memchr(const void *, int, size_t);
-extern size_t strcspn(const char *, const char *);
-extern char * strpbrk(const char *, const char *);
-extern size_t strspn(const char *, const char *);
-extern char * strstr(const char *, const char *);
-extern char * stristr(const char *, const char *);
-extern char * strerror(int);
-extern size_t strlen(const char *);
-extern char * strchr(const char *, int);
-extern char * strichr(const char *, int);
-extern char * strrchr(const char *, int);
-extern char * strrichr(const char *, int);
-# 12 "Lab03_master.c" 2
-
-# 1 "./configuraciones_pic.h" 1
-# 13 "./configuraciones_pic.h"
-#pragma config FOSC = INTRC_NOCLKOUT
-
+# 12 "./ADC.h" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
-# 15 "./configuraciones_pic.h" 2
-
-
-void conf_osc(uint8_t frec);
-void conf_tmr0(uint8_t prescaler);
-# 13 "Lab03_master.c" 2
-
-# 1 "./SPI.h" 1
-
-
-
-#pragma config FOSC = INTRC_NOCLKOUT
-
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
-# 6 "./SPI.h" 2
+# 13 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef signed char int8_t;
 
 
 
 
-void config_osc(uint8_t frec);
-typedef enum
-{
-    SPI_MASTER_OSC_DIV4 = 0b00100000,
-    SPI_MASTER_OSC_DIV16 = 0b00100001,
-    SPI_MASTER_OSC_DIV64 = 0b00100010,
-    SPI_MASTER_TMR2 = 0b00100011,
-    SPI_SLAVE_SS_EN = 0b00100100,
-    SPI_SLAVE_SS_DIS = 0b00100101
-}Spi_Type;
-
-typedef enum
-{
-    SPI_DATA_SAMPLE_MIDDLE = 0b00000000,
-    SPI_DATA_SAMPLE_END = 0b10000000
-}Spi_Data_Sample;
-
-typedef enum
-{
-    SPI_CLOCK_IDLE_HIGH = 0b00010000,
-    SPI_CLOCK_IDLE_LOW = 0b00000000
-}Spi_Clock_Idle;
-
-typedef enum
-{
-    SPI_IDLE_2_ACTIVE = 0b00000000,
-    SPI_ACTIVE_2_IDLE = 0b01000000
-}Spi_Transmit_Edge;
 
 
-void spiInit(Spi_Type, Spi_Data_Sample, Spi_Clock_Idle, Spi_Transmit_Edge);
-void spiWrite(char);
-unsigned spiDataReady();
-char spiRead();
-# 14 "Lab03_master.c" 2
+typedef signed int int16_t;
 
-# 1 "./ADC.h" 1
-# 13 "./ADC.h"
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 1 3
+
+
+
+
+
+
+typedef __int24 int24_t;
+
+
+
+
+
+
+
+typedef signed long int int32_t;
+# 52 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef unsigned char uint8_t;
+
+
+
+
+
+typedef unsigned int uint16_t;
+
+
+
+
+
+
+typedef __uint24 uint24_t;
+
+
+
+
+
+
+typedef unsigned long int uint32_t;
+# 88 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef signed char int_least8_t;
+
+
+
+
+
+
+
+typedef signed int int_least16_t;
+# 109 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef __int24 int_least24_t;
+# 118 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef signed long int int_least32_t;
+# 136 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef unsigned char uint_least8_t;
+
+
+
+
+
+
+typedef unsigned int uint_least16_t;
+# 154 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef __uint24 uint_least24_t;
+
+
+
+
+
+
+
+typedef unsigned long int uint_least32_t;
+# 181 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef signed char int_fast8_t;
+
+
+
+
+
+
+typedef signed int int_fast16_t;
+# 200 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef __int24 int_fast24_t;
+
+
+
+
+
+
+
+typedef signed long int int_fast32_t;
+# 224 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef unsigned char uint_fast8_t;
+
+
+
+
+
+typedef unsigned int uint_fast16_t;
+# 240 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef __uint24 uint_fast24_t;
+
+
+
+
+
+
+typedef unsigned long int uint_fast32_t;
+# 268 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef int32_t intmax_t;
+# 282 "C:\\Program Files\\Microchip\\xc8\\v2.31\\pic\\include\\c90\\stdint.h" 3
+typedef uint32_t uintmax_t;
+
+
+
+
+
+
+typedef int16_t intptr_t;
+
+
+
+
+typedef uint16_t uintptr_t;
 # 13 "./ADC.h" 2
 
 #pragma config FOSC = INTRC_NOCLKOUT
@@ -2930,199 +2832,224 @@ void conf_ADC(uint8_t adcFrec, uint8_t isr, uint8_t Vref, uint8_t justRL);
 void ADC_convert(char *data,float a, int place);
 void canal_ADC(uint8_t channel);
 void Select_ch(uint8_t channel);
-# 15 "Lab03_master.c" 2
+# 10 "ADC.c" 2
 
 
 
 
 
 
+void conf_ADC(uint8_t adcFrec, uint8_t isr, uint8_t Vref, uint8_t justRL){
+    ADCON0bits.ADON = 1;
 
-#pragma config FOSC = INTRC_NOCLKOUT
-#pragma config WDTE = OFF
-#pragma config PWRTE = OFF
-#pragma config MCLRE = OFF
-#pragma config CP = OFF
-#pragma config CPD = OFF
-#pragma config BOREN = OFF
-#pragma config IESO = OFF
-#pragma config FCMEN = OFF
-#pragma config LVP = ON
-
-
-#pragma config BOR4V = BOR40V
-#pragma config WRT = OFF
-
-
-
-
-
-volatile uint8_t pot1;
-volatile uint8_t pot2;
-char adc0[10];
-char adc1[10];
-float conv0 = 0;
-float conv1 = 0;
-char unidad, decena, centena;
-char concatenado;
-int full;
-
-
-void setup (void);
-void mensaje (void);
-void putch(char data);
-
-void main(void){
-    setup();
-
-    while(1){
-        mensaje();
-        PORTCbits.RC2 = 0;
-        _delay((unsigned long)((1)*(8000000/4000.0)));
-
-        spiWrite(1);
-        pot1 = spiRead();
-        _delay((unsigned long)((1)*(8000000/4000.0)));
-        PORTCbits.RC2 = 1;
-
-        PORTCbits.RC2 = 0;
-        _delay((unsigned long)((1)*(8000000/4000.0)));
-
-        spiWrite(2);
-        pot2 = spiRead();
-
-        _delay((unsigned long)((1)*(8000000/4000.0)));
-        PORTCbits.RC2 = 1;
-
-        conv0 = 0;
-        conv1 = 0;
-
-        conv0 = (pot1 / (float) 255)*5;
-        conv1 = (pot2 / (float) 255)*5;
-
-        ADC_convert(adc0, conv0, 2);
-        ADC_convert(adc1, conv1, 2);
-        PORTB = full;
+    switch(adcFrec){
+        case 0:
+            ADCON0bits.ADCS = 00;
+            break;
+        case 1:
+            ADCON0bits.ADCS = 01;
+            break;
+        case 2:
+            ADCON0bits.ADCS = 10;
+            break;
+        case 3:
+            ADCON0bits.ADCS = 11;
+            break;
     }
-    return;
+    if (isr == 1) {
+        PIE1bits.ADIE = 1;
+        PIR1bits.ADIF = 0;
+    }
+    switch (Vref){
+        case 0:
+            ADCON1bits.VCFG0 = 1;
+            ADCON1bits.VCFG1 = 0;
+            break;
+        case 1:
+            ADCON1bits.VCFG0 = 0;
+            ADCON1bits.VCFG1 = 1;
+            break;
+        case 2:
+            ADCON1bits.VCFG0 = 1;
+            ADCON1bits.VCFG1 = 1;
+            break;
+        default:
+            ADCON1bits.VCFG0 = 0;
+            ADCON1bits.VCFG1 = 0;
+            break;
+    }
+    if (justRL == 0){
+        ADCON1bits.ADFM = 0;
+    }
+    else{
+        ADCON1bits.ADFM = 1;
+    }
 }
 
-void mensaje (void){
-    _delay((unsigned long)((300)*(8000000/4000.0)));
-    printf("\r voltaje 1: \r");
-    _delay((unsigned long)((300)*(8000000/4000.0)));
-    printf(adc0);
-    printf("\r---------------\r");
 
-    _delay((unsigned long)((300)*(8000000/4000.0)));
-    printf("\r voltaje 2: \r");
-    _delay((unsigned long)((300)*(8000000/4000.0)));
-    printf(adc1);
-    _delay((unsigned long)((300)*(8000000/4000.0)));
-    printf("\r---------------\r");
 
-    printf("Ingresar Centena: Rango(0-2)\r");
-      chistosito1:
-       while(RCIF == 0);
-        centena = RCREG -48;
 
-       while(RCREG > '2'){
+void ADC_convert(char *data,float a, int place)
+{
+     int temp=a;
+     float x=0.0;
+     int digits=0;
+     int i=0,mu=1;
+     int j=0;
+     if(a<0)
+     {
+            a=a*-1;
+            data[i]='-';
+            i++;
+      }
 
-           goto chistosito1;
-       }
+     while(temp!=0)
+     {
+         temp=temp/10;
+         digits++;
+     }
+     while(digits!=0)
+     {
+         if(digits==1)mu=1;
+         else for(j=2;j<=digits;j++)mu=mu*10;
 
-    printf("Ingresar Decenas: \r");
-      chistosito2:
-        while(RCIF == 0);
-         decena = RCREG -48;
+         x=a/mu;
+         a=a-((int)x*mu);
+         data[i]=0x30+((int)x);
+         i++;
+         digits--;
+         mu=1;
+     }
 
-        if(centena == 2){
-           while(RCREG > '5'){
-               goto chistosito2;
-           }
-       }
+     data[i]='.';
+     i++;
+     digits=0;
+     for(j=1;j<=place;j++)mu=mu*10;
+     x=(a-(int)a)*mu;
+     a=x;
+     temp=a;
+     x=0.0;
+     mu=1;
+     digits=place;
+     while(digits!=0)
+     {
+         if(digits==1)mu=1;
+         else for(j=2;j<=digits;j++)mu=mu*10;
 
-    printf("Ingresar Unidades: \r");
-      chistosito3:
-       while(RCIF == 0);
-        unidad = RCREG - 48;
+         x=a/mu;
+         a=a-((int)x*mu);
+         data[i]=0x30+((int)x);
+         i++;
+         digits--;
+         mu=1;
+     }
 
-       if(centena == 2 && decena == 5){
-           while(RCREG > '5'){
-               goto chistosito3;
-           }
-       }
-      concatenado = concatenar(centena, decena);
-      full = concatenar(concatenado, unidad);
-      _delay((unsigned long)((250)*(8000000/4000.0)));
-    printf("El numero elegido es: %d", full);
-
-   return;
+    data[i]='\n';
 }
 
-void putch(char dato){
-    while(TXIF == 0);
-    TXREG = dato;
-    return;
+
+
+
+void canal_ADC(uint8_t channel) {
+    switch (channel) {
+        case 0:
+            ANSELbits.ANS0 = 1;
+            break;
+        case 1:
+            ANSELbits.ANS1 = 1;
+            break;
+        case 2:
+            ANSELbits.ANS2 = 1;
+            break;
+        case 3:
+            ANSELbits.ANS3 = 1;
+            break;
+        case 4:
+            ANSELbits.ANS4 = 1;
+            break;
+        case 5:
+            ANSELbits.ANS5 = 1;
+            break;
+        case 6:
+            ANSELbits.ANS6 = 1;
+            break;
+        case 7:
+            ANSELbits.ANS7 = 1;
+            break;
+        case 8:
+            ANSELHbits.ANS8 = 1;
+            break;
+        case 9:
+            ANSELHbits.ANS9 = 1;
+            break;
+        case 10:
+            ANSELHbits.ANS10 = 1;
+            break;
+        case 11:
+            ANSELHbits.ANS11 = 1;
+            break;
+        case 12:
+            ANSELHbits.ANS12 = 1;
+            break;
+        case 13:
+            ANSELHbits.ANS13 = 1;
+            break;
+    }
 }
 
-int concatenar(int a, int b){
-    char s1[20];
-    char s2[20];
 
+void Select_ch(uint8_t channel) {
+    switch (channel) {
+        case 0:
+            ADCON0bits.CHS = 0000;
+            break;
+        case 1:
+            ADCON0bits.CHS = 0001;
+            break;
+        case 2:
+            ADCON0bits.CHS = 0010;
+            break;
+        case 3:
+            ADCON0bits.CHS = 0011;
+            break;
+        case 4:
+            ADCON0bits.CHS = 0100;
+            break;
+        case 5:
+            ADCON0bits.CHS = 0101;
+            break;
+        case 6:
+            ADCON0bits.CHS = 0110;
+            break;
+        case 7:
+            ADCON0bits.CHS = 0111;
+            break;
+        case 8:
+            ADCON0bits.CHS = 1000;
+            break;
+        case 9:
+            ADCON0bits.CHS = 1001;
+            break;
+        case 10:
+            ADCON0bits.CHS = 1010;
+            break;
+        case 11:
+            ADCON0bits.CHS = 1011;
+            break;
+        case 12:
+            ADCON0bits.CHS = 1100;
+            break;
+        case 13:
+            ADCON0bits.CHS = 1101;
+            break;
+        case 14:
+            ADCON0bits.CHS = 1110;
+            break;
+        case 15:
+            ADCON0bits.CHS = 1111;
+            break;
+    }
+    _delay((unsigned long)((200)*(8000000/4000000.0)));
+    ADCON0bits.GO = 1;
 
-    sprintf(s1, "%d", a);
-    sprintf(s2, "%d", b);
-
-
-    strcat(s1, s2);
-
-
-    int c = atoi(s1);
-
-
-    return c;
-}
-
-void setup (void){
-    ANSEL = 0x00;
-    ANSELH = 0;
-
-    TRISB = 0x00;
-    TRISD = 0x00;
-
-
-    PORTB = 0x00;
-    PORTD = 0x00;
-
-    PORTCbits.RC2 = 1;
-    spiInit(SPI_MASTER_OSC_DIV4, SPI_DATA_SAMPLE_MIDDLE, SPI_CLOCK_IDLE_LOW, SPI_IDLE_2_ACTIVE);
-
-
-
-    conf_osc(7);
-
-
-
-    TXSTAbits.SYNC = 0;
-    TXSTAbits.BRGH = 1;
-    BAUDCTLbits.BRG16 = 1;
-
-    SPBRG = 207;
-    SPBRGH = 0;
-
-    RCSTAbits.SPEN = 1;
-    RCSTAbits.RX9 = 0;
-    RCSTAbits.CREN = 1;
-    TXSTAbits.TXEN = 1;
-
-
-    INTCONbits.GIE = 1;
-    INTCONbits.PEIE = 1;
-
-    PIE1bits.RCIE = 1;
-    PIE1bits.TXIE = 1;
-
-    PIR1bits.TXIF = 0;
-    PIR1bits.RCIF = 0;
 }

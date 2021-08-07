@@ -11,7 +11,7 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\pablo\AppData\Local\Temp\sd1c.o
+$C:\Users\pablo\AppData\Local\Temp\sgjs.o
 reset_vec CODE 0 0 0 3 2
 end_init CODE 0 E E 3 2
 config CONFIG 4 2007 2007 2 2
@@ -80,16 +80,16 @@ STRING 2E9-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\Slave_micros2.X.production.o
-11 cinit CODE >796:C:\Users\pablo\AppData\Local\Temp\sd1c.s
-11 cinit CODE >799:C:\Users\pablo\AppData\Local\Temp\sd1c.s
-11 cinit CODE >819:C:\Users\pablo\AppData\Local\Temp\sd1c.s
-12 cinit CODE >820:C:\Users\pablo\AppData\Local\Temp\sd1c.s
-13 cinit CODE >823:C:\Users\pablo\AppData\Local\Temp\sd1c.s
-14 cinit CODE >824:C:\Users\pablo\AppData\Local\Temp\sd1c.s
-15 cinit CODE >825:C:\Users\pablo\AppData\Local\Temp\sd1c.s
-16 cinit CODE >831:C:\Users\pablo\AppData\Local\Temp\sd1c.s
-16 cinit CODE >833:C:\Users\pablo\AppData\Local\Temp\sd1c.s
-17 cinit CODE >834:C:\Users\pablo\AppData\Local\Temp\sd1c.s
+11 cinit CODE >796:C:\Users\pablo\AppData\Local\Temp\sgjs.s
+11 cinit CODE >799:C:\Users\pablo\AppData\Local\Temp\sgjs.s
+11 cinit CODE >819:C:\Users\pablo\AppData\Local\Temp\sgjs.s
+12 cinit CODE >820:C:\Users\pablo\AppData\Local\Temp\sgjs.s
+13 cinit CODE >823:C:\Users\pablo\AppData\Local\Temp\sgjs.s
+14 cinit CODE >824:C:\Users\pablo\AppData\Local\Temp\sgjs.s
+15 cinit CODE >825:C:\Users\pablo\AppData\Local\Temp\sgjs.s
+16 cinit CODE >831:C:\Users\pablo\AppData\Local\Temp\sgjs.s
+16 cinit CODE >833:C:\Users\pablo\AppData\Local\Temp\sgjs.s
+17 cinit CODE >834:C:\Users\pablo\AppData\Local\Temp\sgjs.s
 4 intentry CODE >44:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Slave_micros2.X\Lab03_slave.c
 2DC text10 CODE >70:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Slave_micros2.X\SPI_slave.c
 2DC text10 CODE >72:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Slave_micros2.X\SPI_slave.c
@@ -394,11 +394,11 @@ spiInit@sTransmitEdge 22 0 BANK0 1 cstackBANK0 dist/default/production\Slave_mic
 __Heeprom_data 0 0 EEDATA 3 eeprom_data -
 __Hstrings 0 0 ABS 0 strings -
 __end_of_Select_ch 166 0 CODE 0 text6 dist/default/production\Slave_micros2.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\pablo\AppData\Local\Temp\sd1c.o
+___sp 0 0 STACK 2 stack C:\Users\pablo\AppData\Local\Temp\sgjs.o
 _main 332 0 CODE 0 maintext dist/default/production\Slave_micros2.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production\Slave_micros2.X.production.o
 __size_of_Select_ch 0 0 ABS 0 - dist/default/production\Slave_micros2.X.production.o
-start 1C 0 CODE 0 init C:\Users\pablo\AppData\Local\Temp\sd1c.o
+start 1C 0 CODE 0 init C:\Users\pablo\AppData\Local\Temp\sgjs.o
 __size_of_main 0 0 ABS 0 - dist/default/production\Slave_micros2.X.production.o
 __HbssCOMMON 0 0 ABS 0 bssCOMMON -
 __size_of_config_osc 0 0 ABS 0 - dist/default/production\Slave_micros2.X.production.o
@@ -408,12 +408,12 @@ _Select_ch 34 0 CODE 0 text6 dist/default/production\Slave_micros2.X.production.
 __end_of_start_ch 332 0 CODE 0 text1 dist/default/production\Slave_micros2.X.production.o
 start_adc@Vref 21 0 BANK0 1 cstackBANK0 dist/default/production\Slave_micros2.X.production.o
 start_adc@frec 25 0 BANK0 1 cstackBANK0 dist/default/production\Slave_micros2.X.production.o
-intlevel0 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\sd1c.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\sd1c.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\sd1c.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\sd1c.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\sd1c.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\sd1c.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\sgjs.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\sgjs.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\sgjs.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\sgjs.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\sgjs.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\sgjs.o
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
 _OSCCONbits 8F 0 ABS 0 - dist/default/production\Slave_micros2.X.production.o
 wtemp0 7E 0 ABS 0 - dist/default/production\Slave_micros2.X.production.o
@@ -428,8 +428,8 @@ __size_of_spiInit 0 0 ABS 0 - dist/default/production\Slave_micros2.X.production
 __size_of_spiRead 0 0 ABS 0 - dist/default/production\Slave_micros2.X.production.o
 __Lmaintext 0 0 ABS 0 maintext -
 __end_of_start_adc 250 0 CODE 0 text2 dist/default/production\Slave_micros2.X.production.o
-___stackhi 0 0 ABS 0 - C:\Users\pablo\AppData\Local\Temp\sd1c.o
-___stacklo 0 0 ABS 0 - C:\Users\pablo\AppData\Local\Temp\sd1c.o
+___stackhi 0 0 ABS 0 - C:\Users\pablo\AppData\Local\Temp\sgjs.o
+___stacklo 0 0 ABS 0 - C:\Users\pablo\AppData\Local\Temp\sgjs.o
 __size_of_start_adc 0 0 ABS 0 - dist/default/production\Slave_micros2.X.production.o
 __size_of_setup 0 0 ABS 0 - dist/default/production\Slave_micros2.X.production.o
 _var_adc0 78 0 COMMON 1 bssCOMMON dist/default/production\Slave_micros2.X.production.o
@@ -445,7 +445,7 @@ _SSPCON 14 0 ABS 0 - dist/default/production\Slave_micros2.X.production.o
 _TRISC3 43B 0 ABS 0 - dist/default/production\Slave_micros2.X.production.o
 _TRISC5 43D 0 ABS 0 - dist/default/production\Slave_micros2.X.production.o
 start_ch@channel 22 0 BANK0 1 cstackBANK0 dist/default/production\Slave_micros2.X.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\pablo\AppData\Local\Temp\sd1c.o
+___int_sp 0 0 STACK 2 stack C:\Users\pablo\AppData\Local\Temp\sgjs.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -492,7 +492,7 @@ saved_w 7E 0 ABS 0 - dist/default/production\Slave_micros2.X.production.o
 config_osc@frec 22 0 BANK0 1 cstackBANK0 dist/default/production\Slave_micros2.X.production.o
 __end_of_isr 51C 0 CODE 0 text7 dist/default/production\Slave_micros2.X.production.o
 __Lintentry 8 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\pablo\AppData\Local\Temp\sd1c.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\pablo\AppData\Local\Temp\sgjs.o
 __LbssBANK0 0 0 ABS 0 bssBANK0 -
 _PIE1bits 8C 0 ABS 0 - dist/default/production\Slave_micros2.X.production.o
 __ptext10 5B8 0 CODE 0 text10 dist/default/production\Slave_micros2.X.production.o

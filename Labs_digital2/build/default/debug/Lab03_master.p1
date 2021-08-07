@@ -870,8 +870,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "209
 [e :UE 176 ]
 }
-[p f _printf 9437824 ]
 [p f _sprintf 8388736 ]
+[p f _printf 9437824 ]
 [a 8C 69 108 32 110 117 109 101 114 111 32 101 108 101 103 105 100 111 32 101 115 58 32 37 100 0 ]
 [a 9C 37 100 0 ]
 [a 10C 37 100 0 ]
