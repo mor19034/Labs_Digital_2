@@ -43,7 +43,7 @@ uint8_t lectura;
  void __interrupt() isr(void){
  //--------------------------------interrupion I2C------------------------------    
    if(PIR1bits.SSPIF == 1){ 
-
+        
         SSPCONbits.CKP = 0;
        
         if ((SSPCONbits.SSPOV) || (SSPCONbits.WCOL)){
@@ -51,6 +51,7 @@ uint8_t lectura;
             SSPCONbits.SSPOV = 0;       // Clear the overflow flag
             SSPCONbits.WCOL = 0;        // Clear the collision bit
             SSPCONbits.CKP = 1;         // Enables SCL (Clock)
+            
         }
 //----------------------------hacer al esclavo leer-----------------------------
         if(!SSPSTATbits.D_nA && !SSPSTATbits.R_nW) {
@@ -74,16 +75,20 @@ uint8_t lectura;
        
         PIR1bits.SSPIF = 0;    
     }
+
 //---------------------------------interrupcion ADC-----------------------------
    if (PIR1bits.ADIF == 1){
        var_adc = ADRESH; 
-       PORTB = var_adc;
        PIR1bits.ADIF = 0;
    }
 }
 //*********************************loop principal*******************************
  void main (void){
-     setup();   
+     setup();  
+     //--------------------------configuracion de I2C--------------------------------
+     I2C_Slave_Init(0X50); //inicializar comunicación I2C del esclavo y se le da
+     //dirección al esclavo, en este caso 0x10
+     
      start_adc(3, 1, 0, 0); //fosc/32, interrupciones habilitadas, VDD y VSS
                             //justificado a la izquierda
      start_ch(0);
@@ -103,16 +108,16 @@ uint8_t lectura;
      ANSEL = 0X01;
      ANSELH = 0X00;
  //-----------------------------SELECCIONAR INPUTS Y OUTPUTS--------------------    
-     TRISA =  0X01;
+     TRISA = 0X01;
      TRISB = 0;
  //------------------------------LIMPIAR PUERTOS--------------------------------    
      PORTA = 0X00;
      PORTB = 0;
 //------------------------------configuracion del oscilador---------------------
-     conf_osc(7); 
-//--------------------------configuracion de I2C--------------------------------
-     I2C_Slave_Init(0x10); //inicializar comunicación I2C del esclavo y se le da
-     //dirección al esclavo, en este caso 0x10
+     //conf_osc(7); 
+    //Configuracion del Oscilador
+    OSCCONbits.IRCF2 = 1;       //Reloj interno de 8MHz
+    OSCCONbits.IRCF1 = 1;
+    OSCCONbits.IRCF0 = 1;
+    OSCCONbits.SCS   = 1;
  }
- //********************************Funciones************************************
-

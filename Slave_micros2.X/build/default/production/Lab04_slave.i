@@ -2917,6 +2917,7 @@ uint8_t lectura;
             SSPCONbits.SSPOV = 0;
             SSPCONbits.WCOL = 0;
             SSPCONbits.CKP = 1;
+
         }
 
         if(!SSPSTATbits.D_nA && !SSPSTATbits.R_nW) {
@@ -2941,15 +2942,19 @@ uint8_t lectura;
         PIR1bits.SSPIF = 0;
     }
 
+
    if (PIR1bits.ADIF == 1){
        var_adc = ADRESH;
-       PORTB = var_adc;
        PIR1bits.ADIF = 0;
    }
 }
 
  void main (void){
      setup();
+
+     I2C_Slave_Init(0X50);
+
+
      start_adc(3, 1, 0, 0);
 
      start_ch(0);
@@ -2975,8 +2980,10 @@ uint8_t lectura;
      PORTA = 0X00;
      PORTB = 0;
 
-     conf_osc(7);
 
-     I2C_Slave_Init(0x10);
 
+    OSCCONbits.IRCF2 = 1;
+    OSCCONbits.IRCF1 = 1;
+    OSCCONbits.IRCF0 = 1;
+    OSCCONbits.SCS = 1;
  }

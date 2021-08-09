@@ -2914,13 +2914,12 @@ void conf_tmr0(uint8_t prescaler);
 
 
 
-
 void main(void) {
     setup();
 
      while (1) {
          I2C_Master_Start();
-         I2C_Master_Write(0x11);
+         I2C_Master_Write(0x51);
 
          PORTB = I2C_Master_Read(0);
          I2C_Master_Stop();

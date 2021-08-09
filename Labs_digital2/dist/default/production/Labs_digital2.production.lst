@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.31 build 20201012212115 
-                                                                                               Sun Aug 08 20:52:44 2021
+                                                                                               Sun Aug 08 23:23:32 2021
 
 Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1 
      1                           	processor	16F887
@@ -672,7 +672,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    658 ;;
    659 ;; *************** function _main *****************
    660 ;; Defined at:
-   661 ;;		line 45 in file "Lab04_master.c"
+   661 ;;		line 44 in file "Lab04_master.c"
    662 ;; Parameters:    Size  Location     Type
    663 ;;		None
    664 ;; Auto vars:     Size  Location     Type
@@ -711,23 +711,23 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    697                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+pclath+cstack]
    698                           
    699                           
-   700                           ;Lab04_master.c: 46:     setup();
+   700                           ;Lab04_master.c: 45:     setup();
    701  06CC  120A  118A  267E  120A  118A  	fcall	_setup
    702  06D1                     l1232:
    703                           
-   704                           ;Lab04_master.c: 49:          I2C_Master_Start();
+   704                           ;Lab04_master.c: 48:          I2C_Master_Start();
    705  06D1  120A  118A  2632  120A  118A  	fcall	_I2C_Master_Start
    706  06D6                     l1234:
    707                           
-   708                           ;Lab04_master.c: 50:          I2C_Master_Write(0x11);
-   709  06D6  3011               	movlw	17
+   708                           ;Lab04_master.c: 49:          I2C_Master_Write(0x51);
+   709  06D6  3051               	movlw	81
    710  06D7  00F0               	movwf	I2C_Master_Write@d
    711  06D8  3000               	movlw	0
    712  06D9  00F1               	movwf	I2C_Master_Write@d+1
    713  06DA  120A  118A  2644  120A  118A  	fcall	_I2C_Master_Write
    714  06DF                     l1236:
    715                           
-   716                           ;Lab04_master.c: 52:          PORTB = I2C_Master_Read(0);
+   716                           ;Lab04_master.c: 51:          PORTB = I2C_Master_Read(0);
    717  06DF  3000               	movlw	0
    718  06E0  00F0               	movwf	I2C_Master_Read@a
    719  06E1  00F1               	movwf	I2C_Master_Read@a+1
@@ -738,11 +738,11 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    724  06EA  0086               	movwf	6	;volatile
    725  06EB                     l1238:
    726                           
-   727                           ;Lab04_master.c: 53:          I2C_Master_Stop();
+   727                           ;Lab04_master.c: 52:          I2C_Master_Stop();
    728  06EB  120A  118A  263B  120A  118A  	fcall	_I2C_Master_Stop
    729  06F0                     l1240:
    730                           
-   731                           ;Lab04_master.c: 54:          _delay((unsigned long)((200)*(8000000/4000000.0)));
+   731                           ;Lab04_master.c: 53:          _delay((unsigned long)((200)*(8000000/4000000.0)));
    732  06F0  3084               	movlw	132
    733  06F1  1283               	bcf	3,5	;RP0=0, select bank0
    734  06F2  1303               	bcf	3,6	;RP1=0, select bank0
@@ -759,7 +759,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    745  067E                     __ptext1:	
    746 ;; *************** function _setup *****************
    747 ;; Defined at:
-   748 ;;		line 58 in file "Lab04_master.c"
+   748 ;;		line 57 in file "Lab04_master.c"
    749 ;; Parameters:    Size  Location     Type
    750 ;;		None
    751 ;; Auto vars:     Size  Location     Type
@@ -796,32 +796,32 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    782                           ; Regs used in _setup: [wreg-fsr0h+status,2+status,0+pclath+cstack]
    783                           
    784                           
-   785                           ;Lab04_master.c: 59:     ANSEL = 0x00;
+   785                           ;Lab04_master.c: 58:     ANSEL = 0x00;
    786  067E  1683               	bsf	3,5	;RP0=1, select bank3
    787  067F  1703               	bsf	3,6	;RP1=1, select bank3
    788  0680  0188               	clrf	8	;volatile
    789                           
-   790                           ;Lab04_master.c: 60:     ANSELH = 0x00;
+   790                           ;Lab04_master.c: 59:     ANSELH = 0x00;
    791  0681  0189               	clrf	9	;volatile
    792                           
-   793                           ;Lab04_master.c: 62:     TRISA = 0x00;
+   793                           ;Lab04_master.c: 61:     TRISA = 0x00;
    794  0682  1683               	bsf	3,5	;RP0=1, select bank1
    795  0683  1303               	bcf	3,6	;RP1=0, select bank1
    796  0684  0185               	clrf	5	;volatile
    797                           
-   798                           ;Lab04_master.c: 63:     TRISB = 0x00;
+   798                           ;Lab04_master.c: 62:     TRISB = 0x00;
    799  0685  0186               	clrf	6	;volatile
    800                           
-   801                           ;Lab04_master.c: 65:     PORTA = 0X00;
+   801                           ;Lab04_master.c: 64:     PORTA = 0X00;
    802  0686  1283               	bcf	3,5	;RP0=0, select bank0
    803  0687  1303               	bcf	3,6	;RP1=0, select bank0
    804  0688  0185               	clrf	5	;volatile
    805                           
-   806                           ;Lab04_master.c: 66:     PORTB = 0x00;
+   806                           ;Lab04_master.c: 65:     PORTB = 0x00;
    807  0689  0186               	clrf	6	;volatile
    808  068A                     l1226:
    809                           
-   810                           ;Lab04_master.c: 68:     I2C_Master_Init(100000);
+   810                           ;Lab04_master.c: 67:     I2C_Master_Init(100000);
    811  068A  3000               	movlw	0
    812  068B  00B3               	movwf	I2C_Master_Init@c+3
    813  068C  3001               	movlw	1
@@ -833,7 +833,7 @@ Microchip MPLAB XC8 C Compiler v2.31 (Free license) build 20201012212115 Og1
    819  0692  120A  118A  26FB  120A  118A  	fcall	_I2C_Master_Init
    820  0697                     l1228:
    821                           
-   822                           ;Lab04_master.c: 71:     conf_osc(7);
+   822                           ;Lab04_master.c: 70:     conf_osc(7);
    823  0697  3007               	movlw	7
    824  0698  120A  118A  2733  120A  118A  	fcall	_conf_osc
    825  069D                     l224:
@@ -1820,7 +1820,7 @@ EEDATA             100      0       0       0        0.0%
 
 
 Microchip Technology PIC Macro Assembler V2.31 build 20201012212115 
-Symbol Table                                                                                   Sun Aug 08 20:52:44 2021
+Symbol Table                                                                                   Sun Aug 08 23:23:32 2021
 
                         pc 0002                         l11 0786                         l19 0787  
                        u90 0654                         u91 0653                         fsr 0004  

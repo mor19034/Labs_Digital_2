@@ -11,7 +11,7 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\pablo\AppData\Local\Temp\s844.o
+$C:\Users\pablo\AppData\Local\Temp\shnk.o
 end_init CODE 0 0 0 3 2
 config CONFIG 4 2007 2007 2 2
 $dist/default/production\Labs_digital2.production.o
@@ -77,21 +77,21 @@ STRING 800-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\Labs_digital2.production.o
-7EE cinit CODE >980:C:\Users\pablo\AppData\Local\Temp\s844.s
-7EE cinit CODE >983:C:\Users\pablo\AppData\Local\Temp\s844.s
-7EE cinit CODE >1024:C:\Users\pablo\AppData\Local\Temp\s844.s
-7EF cinit CODE >1025:C:\Users\pablo\AppData\Local\Temp\s844.s
-7F0 cinit CODE >1026:C:\Users\pablo\AppData\Local\Temp\s844.s
-7F1 cinit CODE >1027:C:\Users\pablo\AppData\Local\Temp\s844.s
-7F2 cinit CODE >1028:C:\Users\pablo\AppData\Local\Temp\s844.s
-7F3 cinit CODE >1029:C:\Users\pablo\AppData\Local\Temp\s844.s
-7F4 cinit CODE >1030:C:\Users\pablo\AppData\Local\Temp\s844.s
-7F5 cinit CODE >1031:C:\Users\pablo\AppData\Local\Temp\s844.s
-7F6 cinit CODE >1032:C:\Users\pablo\AppData\Local\Temp\s844.s
-7F7 cinit CODE >1033:C:\Users\pablo\AppData\Local\Temp\s844.s
-7FC cinit CODE >1039:C:\Users\pablo\AppData\Local\Temp\s844.s
-7FC cinit CODE >1041:C:\Users\pablo\AppData\Local\Temp\s844.s
-7FD cinit CODE >1042:C:\Users\pablo\AppData\Local\Temp\s844.s
+7EE cinit CODE >980:C:\Users\pablo\AppData\Local\Temp\shnk.s
+7EE cinit CODE >983:C:\Users\pablo\AppData\Local\Temp\shnk.s
+7EE cinit CODE >1024:C:\Users\pablo\AppData\Local\Temp\shnk.s
+7EF cinit CODE >1025:C:\Users\pablo\AppData\Local\Temp\shnk.s
+7F0 cinit CODE >1026:C:\Users\pablo\AppData\Local\Temp\shnk.s
+7F1 cinit CODE >1027:C:\Users\pablo\AppData\Local\Temp\shnk.s
+7F2 cinit CODE >1028:C:\Users\pablo\AppData\Local\Temp\shnk.s
+7F3 cinit CODE >1029:C:\Users\pablo\AppData\Local\Temp\shnk.s
+7F4 cinit CODE >1030:C:\Users\pablo\AppData\Local\Temp\shnk.s
+7F5 cinit CODE >1031:C:\Users\pablo\AppData\Local\Temp\shnk.s
+7F6 cinit CODE >1032:C:\Users\pablo\AppData\Local\Temp\shnk.s
+7F7 cinit CODE >1033:C:\Users\pablo\AppData\Local\Temp\shnk.s
+7FC cinit CODE >1039:C:\Users\pablo\AppData\Local\Temp\shnk.s
+7FC cinit CODE >1041:C:\Users\pablo\AppData\Local\Temp\shnk.s
+7FD cinit CODE >1042:C:\Users\pablo\AppData\Local\Temp\shnk.s
 64E text9 CODE >32:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\I2C.c
 64E text9 CODE >34:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\I2C.c
 65A text9 CODE >35:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\I2C.c
@@ -166,40 +166,40 @@ $dist/default/production\Labs_digital2.production.o
 767 text2 CODE >49:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\configuraciones_pic.c
 786 text2 CODE >50:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\configuraciones_pic.c
 787 text2 CODE >51:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\configuraciones_pic.c
+67E text1 CODE >57:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
 67E text1 CODE >58:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
-67E text1 CODE >59:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
-681 text1 CODE >60:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
-682 text1 CODE >62:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
-685 text1 CODE >63:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
-686 text1 CODE >65:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
-689 text1 CODE >66:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
-68A text1 CODE >68:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
-697 text1 CODE >71:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
-69D text1 CODE >72:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
+681 text1 CODE >59:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
+682 text1 CODE >61:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
+685 text1 CODE >62:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
+686 text1 CODE >64:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
+689 text1 CODE >65:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
+68A text1 CODE >67:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
+697 text1 CODE >70:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
+69D text1 CODE >71:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
+6CC maintext CODE >44:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
 6CC maintext CODE >45:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
-6CC maintext CODE >46:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
-6D1 maintext CODE >49:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
-6D6 maintext CODE >50:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
-6DF maintext CODE >52:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
-6EB maintext CODE >53:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
-6F0 maintext CODE >54:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
-66B inittext CODE >998:C:\Users\pablo\AppData\Local\Temp\s844.s
-66B inittext CODE >999:C:\Users\pablo\AppData\Local\Temp\s844.s
-66C inittext CODE >1000:C:\Users\pablo\AppData\Local\Temp\s844.s
-66D inittext CODE >1001:C:\Users\pablo\AppData\Local\Temp\s844.s
-66E inittext CODE >1002:C:\Users\pablo\AppData\Local\Temp\s844.s
-66F inittext CODE >1009:C:\Users\pablo\AppData\Local\Temp\s844.s
-66F inittext CODE >1010:C:\Users\pablo\AppData\Local\Temp\s844.s
-674 inittext CODE >1011:C:\Users\pablo\AppData\Local\Temp\s844.s
-675 inittext CODE >1012:C:\Users\pablo\AppData\Local\Temp\s844.s
-676 inittext CODE >1013:C:\Users\pablo\AppData\Local\Temp\s844.s
-677 inittext CODE >1014:C:\Users\pablo\AppData\Local\Temp\s844.s
-678 inittext CODE >1015:C:\Users\pablo\AppData\Local\Temp\s844.s
-679 inittext CODE >1016:C:\Users\pablo\AppData\Local\Temp\s844.s
-67A inittext CODE >1017:C:\Users\pablo\AppData\Local\Temp\s844.s
-67B inittext CODE >1018:C:\Users\pablo\AppData\Local\Temp\s844.s
-67C inittext CODE >1019:C:\Users\pablo\AppData\Local\Temp\s844.s
-67D inittext CODE >1020:C:\Users\pablo\AppData\Local\Temp\s844.s
+6D1 maintext CODE >48:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
+6D6 maintext CODE >49:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
+6DF maintext CODE >51:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
+6EB maintext CODE >52:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
+6F0 maintext CODE >53:C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
+66B inittext CODE >998:C:\Users\pablo\AppData\Local\Temp\shnk.s
+66B inittext CODE >999:C:\Users\pablo\AppData\Local\Temp\shnk.s
+66C inittext CODE >1000:C:\Users\pablo\AppData\Local\Temp\shnk.s
+66D inittext CODE >1001:C:\Users\pablo\AppData\Local\Temp\shnk.s
+66E inittext CODE >1002:C:\Users\pablo\AppData\Local\Temp\shnk.s
+66F inittext CODE >1009:C:\Users\pablo\AppData\Local\Temp\shnk.s
+66F inittext CODE >1010:C:\Users\pablo\AppData\Local\Temp\shnk.s
+674 inittext CODE >1011:C:\Users\pablo\AppData\Local\Temp\shnk.s
+675 inittext CODE >1012:C:\Users\pablo\AppData\Local\Temp\shnk.s
+676 inittext CODE >1013:C:\Users\pablo\AppData\Local\Temp\shnk.s
+677 inittext CODE >1014:C:\Users\pablo\AppData\Local\Temp\shnk.s
+678 inittext CODE >1015:C:\Users\pablo\AppData\Local\Temp\shnk.s
+679 inittext CODE >1016:C:\Users\pablo\AppData\Local\Temp\shnk.s
+67A inittext CODE >1017:C:\Users\pablo\AppData\Local\Temp\shnk.s
+67B inittext CODE >1018:C:\Users\pablo\AppData\Local\Temp\shnk.s
+67C inittext CODE >1019:C:\Users\pablo\AppData\Local\Temp\shnk.s
+67D inittext CODE >1020:C:\Users\pablo\AppData\Local\Temp\shnk.s
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -224,22 +224,22 @@ I2C_Master_Init@c 30 0 BANK0 1 cstackBANK0 dist/default/production\Labs_digital2
 __Heeprom_data 0 0 EEDATA 3 eeprom_data -
 __Hstrings 0 0 ABS 0 strings -
 _PEIE 5E 0 ABS 0 - dist/default/production\Labs_digital2.production.o
-___sp 0 0 STACK 2 stack C:\Users\pablo\AppData\Local\Temp\s844.o
+___sp 0 0 STACK 2 stack C:\Users\pablo\AppData\Local\Temp\shnk.o
 _main D98 0 CODE 0 maintext dist/default/production\Labs_digital2.production.o
 btemp 7E 0 ABS 0 - dist/default/production\Labs_digital2.production.o
-start 0 0 CODE 0 init C:\Users\pablo\AppData\Local\Temp\s844.o
+start 0 0 CODE 0 init C:\Users\pablo\AppData\Local\Temp\shnk.o
 __size_of_main 0 0 ABS 0 - dist/default/production\Labs_digital2.production.o
 __size_of___lldiv 0 0 ABS 0 - dist/default/production\Labs_digital2.production.o
 _OPTION_REGbits 81 0 ABS 0 - dist/default/production\Labs_digital2.production.o
 __LidataBANK0 0 0 ABS 0 idataBANK0 -
 __Hpowerup 0 0 CODE 0 powerup -
 I2C_Master_Read@a 70 0 COMMON 1 cstackCOMMON dist/default/production\Labs_digital2.production.o
-intlevel0 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\s844.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\s844.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\s844.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\s844.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\s844.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\s844.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\shnk.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\shnk.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\shnk.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\shnk.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\shnk.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\pablo\AppData\Local\Temp\shnk.o
 _OSCCONbits 8F 0 ABS 0 - dist/default/production\Labs_digital2.production.o
 wtemp0 7E 0 ABS 0 - dist/default/production\Labs_digital2.production.o
 __Hfunctab 0 0 ENTRY 0 functab -
@@ -248,8 +248,8 @@ __Hclrtext 0 0 ABS 0 clrtext -
 _ANSELH 189 0 ABS 0 - dist/default/production\Labs_digital2.production.o
 __Lmaintext 0 0 ABS 0 maintext -
 __end_of___lldiv FDC 0 CODE 0 text4 dist/default/production\Labs_digital2.production.o
-___stackhi 0 0 ABS 0 - C:\Users\pablo\AppData\Local\Temp\s844.o
-___stacklo 0 0 ABS 0 - C:\Users\pablo\AppData\Local\Temp\s844.o
+___stackhi 0 0 ABS 0 - C:\Users\pablo\AppData\Local\Temp\shnk.o
+___stacklo 0 0 ABS 0 - C:\Users\pablo\AppData\Local\Temp\shnk.o
 __size_of_setup 0 0 ABS 0 - dist/default/production\Labs_digital2.production.o
 ___lldiv@counter 7D 0 COMMON 1 cstackCOMMON dist/default/production\Labs_digital2.production.o
 start_initialization FDC 0 CODE 0 cinit dist/default/production\Labs_digital2.production.o
@@ -261,7 +261,7 @@ _SSPBUF 13 0 ABS 0 - dist/default/production\Labs_digital2.production.o
 _SSPCON 14 0 ABS 0 - dist/default/production\Labs_digital2.production.o
 _TRISC3 43B 0 ABS 0 - dist/default/production\Labs_digital2.production.o
 _TRISC4 43C 0 ABS 0 - dist/default/production\Labs_digital2.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\pablo\AppData\Local\Temp\s844.o
+___int_sp 0 0 STACK 2 stack C:\Users\pablo\AppData\Local\Temp\shnk.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -307,7 +307,7 @@ _I2C_Master_Start C64 0 CODE 0 text7 dist/default/production\Labs_digital2.produ
 _I2C_Master_Write C88 0 CODE 0 text5 dist/default/production\Labs_digital2.production.o
 __Lintentry 0 0 CODE 0 intentry -
 ___lldiv@divisor 70 0 COMMON 1 cstackCOMMON dist/default/production\Labs_digital2.production.o
-reset_vec 0 0 CODE 0 reset_vec C:\Users\pablo\AppData\Local\Temp\s844.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\pablo\AppData\Local\Temp\shnk.o
 __pdataBANK0 20 0 BANK0 1 dataBANK0 dist/default/production\Labs_digital2.production.o
 _PIE1bits 8C 0 ABS 0 - dist/default/production\Labs_digital2.production.o
 ___lldiv F10 0 CODE 0 text4 dist/default/production\Labs_digital2.production.o

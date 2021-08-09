@@ -65,5 +65,3 @@ void I2C_Slave_Init(uint8_t address);
 //*****************************************************************************
 void conf_osc(uint8_t frec);
 #endif	/* __I2C_H */
-
-

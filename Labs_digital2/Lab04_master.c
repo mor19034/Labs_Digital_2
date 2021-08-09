@@ -46,7 +46,7 @@ void main(void) {
                 
      while (1) {
          I2C_Master_Start();
-         I2C_Master_Write(0x11); //va a esclavo con direccion 0x10 y le dice que
+         I2C_Master_Write(0x51); //va a esclavo con direccion 0x10 y le dice que
                                  //va a leer
          PORTB = I2C_Master_Read(0);
          I2C_Master_Stop();
@@ -69,3 +69,4 @@ void setup(void){
     //Configuracion del Oscilador
     conf_osc(7); //8MHz
 }
+
