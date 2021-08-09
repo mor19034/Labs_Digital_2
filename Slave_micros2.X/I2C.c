@@ -15,11 +15,11 @@
 //*****************************************************************************
 void I2C_Master_Init(const unsigned long c)
 {
-    SSPCON = 0b00101000;
-    SSPCON2 = 0;
-    SSPADD = (_XTAL_FREQ/(4*c))-1;
+    SSPCON = 0b00101000; //I2C master mode y SDA y SCL como fuentes del puerto
+    SSPCON2 = 0;   //configuración default del pic
+    SSPADD = (_XTAL_FREQ/(4*c))-1;//baud rate/velocidad de transmisión de datos
     SSPSTAT = 0;
-    TRISCbits.TRISC3 = 1;
+    TRISCbits.TRISC3 = 1;   //se configuran SCL y SDA como inputs
     TRISCbits.TRISC4 = 1;
 }
 //*****************************************************************************
@@ -97,12 +97,39 @@ void I2C_Slave_Init(uint8_t address)
     SSPSTAT = 0x80;     // 0b10000000
     SSPCON2 = 0x01;     // 0b00000001
     TRISC3 = 1;
-    TRISC4 = 1;
+    TRISC4 = 1;     //revisar que esto funcione
     GIE = 1;
     PEIE = 1;
     SSPIF = 0;
     SSPIE = 1;
 }
 //*****************************************************************************
-
-
+void conf_osc(uint8_t frec){
+    switch(frec){                   //31kHz
+        case 0: 
+            OSCCONbits.IRCF = 000;     
+            break;   
+        case 1:                     //125kHz
+            OSCCONbits.IRCF = 001;     
+            break;
+        case 2:                     //250kHz
+            OSCCONbits.IRCF = 010;     
+            break;
+        case 3:                     //500kHz
+            OSCCONbits.IRCF = 011;     
+            break;
+        case 4:                     //1MHz
+            OSCCONbits.IRCF = 100;     
+            break;
+        case 5:                     //2MHz
+            OSCCONbits.IRCF = 101;     
+            break;
+        case 7:                     //8MHz
+            OSCCONbits.IRCF = 111;     
+            break;   
+        default:                     //4MHz
+            OSCCONbits.IRCF = 110;     
+            break;            
+    }
+    OSCCONbits.SCS = 1; //se utiliza el reloj interno del sistema
+}

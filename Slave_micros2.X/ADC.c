@@ -92,6 +92,8 @@ void start_adc(uint8_t frec, uint8_t isr, uint8_t Vref, uint8_t justRL) {
             break;
     }
     if (isr == 1) {
+        INTCONbits.GIE   = 1;       //Activamos la interupcion del ADC
+        INTCONbits.PEIE  = 1;
         PIE1bits.ADIE = 1; //Se habilita la interrupcion del ADC
         PIR1bits.ADIF = 0; //Se limpia la bandera del ADC
     }

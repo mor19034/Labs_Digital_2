@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "configuraciones_pic.h"
-#define _XTAL_FREQ 800000
+#define _XTAL_FREQ 8000000
 //-----------------------------variables----------------------------------------
 
 
