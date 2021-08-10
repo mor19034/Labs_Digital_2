@@ -45,9 +45,9 @@
 [v _I2C_Master_Write I2C_Master_Write `(v  1 e 1 0 ]
 "74
 [v _I2C_Master_Read I2C_Master_Read `(us  1 e 2 0 ]
-"52 C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
+"63 C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
 [v _main main `(v  1 e 1 0 ]
-"104
+"132
 [v _setup setup `(v  1 e 1 0 ]
 "13 C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\LCD.c
 [v _Lcd_Port Lcd_Port `(v  1 e 1 0 ]
@@ -237,25 +237,29 @@
 [v _TRISC3 TRISC3 `VEb  1 e 0 @1083 ]
 "4460
 [v _TRISC4 TRISC4 `VEb  1 e 0 @1084 ]
-"39 C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
+"47 C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\Lab04_master.c
 [v _var_adc0 var_adc0 `VEuc  1 e 1 0 ]
-"43
+"51
 [v _adc0 adc0 `[10]uc  1 e 10 0 ]
-"44
-[v _contador_lcd contador_lcd `[10]uc  1 e 10 0 ]
-"45
-[v _conv0 conv0 `f  1 e 4 0 ]
-"46
-[v _contador contador `uc  1 e 1 0 ]
 "52
+[v _contador_lcd contador_lcd `[10]uc  1 e 10 0 ]
+"53
+[v _sensor_lcd sensor_lcd `[10]uc  1 e 10 0 ]
+"54
+[v _conv0 conv0 `f  1 e 4 0 ]
+"55
+[v _contador contador `uc  1 e 1 0 ]
+"56
+[v _sensor sensor `c  1 e 1 0 ]
+"63
 [v _main main `(v  1 e 1 0 ]
 {
-"103
+"130
 } 0
-"104
+"132
 [v _setup setup `(v  1 e 1 0 ]
 {
-"120
+"148
 } 0
 "23 C:\Users\pablo\MPLABXProjects\Labs_Digital_2\Labs_digital2\configuraciones_pic.c
 [v _conf_osc conf_osc `(v  1 e 1 0 ]
@@ -374,13 +378,13 @@
 {
 [v ADC_convert@data data `*.4uc  1 a 1 wreg ]
 "69
-[v ADC_convert@x x `f  1 a 4 5 ]
+[v ADC_convert@x x `f  1 a 4 4 ]
 "71
 [v ADC_convert@mu mu `i  1 a 2 13 ]
 "70
 [v ADC_convert@digits digits `i  1 a 2 11 ]
 "71
-[v ADC_convert@i i `i  1 a 2 9 ]
+[v ADC_convert@i i `i  1 a 2 8 ]
 "72
 [v ADC_convert@j j `i  1 a 2 2 ]
 "68
@@ -390,7 +394,7 @@
 [v ADC_convert@a a `f  1 p 4 70 ]
 [v ADC_convert@place place `i  1 p 2 74 ]
 "68
-[v ADC_convert@data data `*.4uc  1 a 1 4 ]
+[v ADC_convert@data data `*.4uc  1 a 1 10 ]
 "122
 } 0
 "10 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\xxtofl.c
@@ -454,17 +458,17 @@
 "8 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S769 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+[s S771 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
 "13
-[s S774 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
-[u S777 . 4 `l 1 i 4 0 `d 1 f 4 0 `S769 1 fAsBytes 4 0 `S774 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S777  1 a 4 64 ]
+[s S776 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S779 . 4 `l 1 i 4 0 `d 1 f 4 0 `S771 1 fAsBytes 4 0 `S776 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S779  1 a 4 64 ]
 "12
 [v ___flmul@grs grs `ul  1 a 4 58 ]
-[s S846 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+[s S848 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
-[u S849 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S846 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S849  1 a 2 68 ]
+[u S851 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S848 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S851  1 a 2 68 ]
 "10
 [v ___flmul@bexp bexp `uc  1 a 1 63 ]
 "11

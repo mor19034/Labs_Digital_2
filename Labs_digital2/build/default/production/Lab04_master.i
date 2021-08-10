@@ -2916,28 +2916,28 @@ void Lcd_Write_String(char *a);
 void Lcd_Shift_Right(void);
 void Lcd_Shift_Left(void);
 # 34 "Lab04_master.c" 2
-
-
-
-
-
+# 47 "Lab04_master.c"
 volatile uint8_t var_adc0 = 0;
 float cont_uart = 0;
 char string_uart[10];
 char valor_uart = 0;
 char adc0[10];
 char contador_lcd[10];
+char sensor_lcd[10];
 float conv0 = 0;
 uint8_t contador;
+int8_t sensor;
 
  void setup(void);
-
+ void I2C_MPU_Init(void);
+ void I2C_Read_MPU(float* data_send);
 
 
 void main(void) {
     setup();
     Lcd_Init();
     Lcd_Clear();
+    void I2C_MPU_Init(void);
     while (1) {
 
         Lcd_Set_Cursor(1, 1);
@@ -2962,6 +2962,20 @@ void main(void) {
          _delay((unsigned long)((200)*(8000000/4000000.0)));
 
 
+        I2C_Master_Start();
+        I2C_Master_Write(0x9A);
+        I2C_Master_Write(0x00);
+        _delay((unsigned long)((100)*(8000000/4000.0)));
+        I2C_Master_Stop();
+        _delay((unsigned long)((200)*(8000000/4000.0)));
+
+        I2C_Master_Start();
+        _delay((unsigned long)((200)*(8000000/4000.0)));
+        I2C_Master_Write(0x9B);
+        sensor= I2C_Master_Read(0);
+        I2C_Master_Stop();
+        _delay((unsigned long)((200)*(8000000/4000.0)));
+
 
         Lcd_Set_Cursor(2, 1);
         Lcd_Write_String(adc0);
@@ -2973,8 +2987,8 @@ void main(void) {
         Lcd_Set_Cursor(2, 11);
         Lcd_Write_String("U");
 
-
-
+        Lcd_Set_Cursor(2,14);
+        Lcd_Write_String(sensor_lcd);
 
         conv0 = 0;
         conv0 = (var_adc0 / (float) 255)*5;
@@ -2983,9 +2997,11 @@ void main(void) {
         ADC_convert(adc0, conv0, 2);
 
         ADC_convert(contador_lcd, contador, 2);
+        ADC_convert(sensor_lcd, sensor, 2);
         }
     return;
 }
+
 void setup(void){
     ANSEL = 0x00;
     ANSELH = 0x00;

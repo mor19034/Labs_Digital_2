@@ -32,8 +32,16 @@
 #include "ADC.h"
 #include "configuraciones_pic.h"
 #include "LCD.h"
-
+//*******************************definiciones***********************************
 #define _XTAL_FREQ 8000000 
+#define Sample_Rate_Divider 0x19
+#define CONFIG_MPU6050 0x1A
+#define Gyro_CONFIG 0x1B
+#define Accel_CONFIG 0x1C
+#define Power_Managment_1 0x6B
+#define Accel_Xout_H 0x3B
+#define MPU_Write 0xD0
+#define MPU_Read 0xD1
 
 //**********Variables***********
 volatile uint8_t var_adc0 = 0;
@@ -42,17 +50,21 @@ char string_uart[10];
 char valor_uart = 0;
 char adc0[10];
 char contador_lcd[10];
+char sensor_lcd[10];
 float conv0 = 0;
 uint8_t contador;
+int8_t sensor;
  //**********Prototipos*********
  void setup(void);
-
+ void I2C_MPU_Init(void);
+ void I2C_Read_MPU(float* data_send);
  //**********Interrupcion********* 
 //********************************loop principl*********************************
 void main(void) {
     setup(); 
     Lcd_Init(); //se inisiliza la LCD  
     Lcd_Clear(); //se limpia la LCD
+    void I2C_MPU_Init(void);
     while (1) {
          
         Lcd_Set_Cursor(1, 1); //primeras cordenadas de la pantalla
@@ -76,7 +88,21 @@ void main(void) {
          I2C_Master_Stop();
          __delay_us(200);
 
-         
+        //I2C sensor 
+        I2C_Master_Start();
+        I2C_Master_Write(0x9A);
+        I2C_Master_Write(0x00);
+        __delay_ms(100);
+        I2C_Master_Stop();
+        __delay_ms(200);
+        
+        I2C_Master_Start();
+        __delay_ms(200);
+        I2C_Master_Write(0x9B);
+        sensor= I2C_Master_Read(0);
+        I2C_Master_Stop();
+        __delay_ms(200);
+        
         //*********************se escribe en la LCD*****************************
         Lcd_Set_Cursor(2, 1); //nos colocamos abajo de V1 
         Lcd_Write_String(adc0); //mandamos el valor de la conversion en voltaje
@@ -87,9 +113,9 @@ void main(void) {
         Lcd_Write_String(contador_lcd);
         Lcd_Set_Cursor(2, 11);
         Lcd_Write_String("U");
-//        
-//        Lcd_Set_Cursor(2,14);
-//        Lcd_Write_String(cont);
+        
+        Lcd_Set_Cursor(2,14);
+        Lcd_Write_String(sensor_lcd);
         
         conv0 = 0;//se reinicia las cada ves que se inicia el proceso de enviar datos
         conv0 = (var_adc0 / (float) 255)*5; //Se consigue el porcentaje con 
@@ -98,9 +124,11 @@ void main(void) {
         ADC_convert(adc0, conv0, 2);//se convierte el valor actual a un valor ASCII.
         
         ADC_convert(contador_lcd, contador, 2); 
+        ADC_convert(sensor_lcd, sensor, 2);
         }      
     return;
 }
+//********************************configuración*********************************
 void setup(void){
     ANSEL = 0x00;
     ANSELH = 0x00;
@@ -119,3 +147,64 @@ void setup(void){
     conf_osc(7); //8MHz
 }
 
+//*************************************funciones********************************
+//void I2C_MPU_Init(void) {
+//    //Config del modo de energia y reloj 
+//    I2C_Master_Start();
+//    I2C_Master_Write(MPU_Write); //Direccion de escritura 0xD0
+//    I2C_Master_Write(Power_Managment_1); //Es el para el registro con direccion 0x6B
+//    I2C_Master_Write(0x01); //PLL ref en el eje x
+//    I2C_Master_Stop();
+//    //Config de la frecuencia de los datos
+//    I2C_Master_Start();
+//    I2C_Master_Write(MPU_Write); //Direccion de escritura
+//    I2C_Master_Write(Sample_Rate_Divider); //Es el para el registro con direccion 0x19
+//    I2C_Master_Write(0x07); //Es el para que los datos tengan una frecuencia de 1KHz
+//    I2C_Master_Stop();
+//    //Config general 
+//    I2C_Master_Start();
+//    I2C_Master_Write(MPU_Write); //Direccion de escritura
+//    I2C_Master_Write(CONFIG_MPU6050); //Es el para el registro con direccion 0x1A
+//    I2C_Master_Write(0x00); //Input desactivada, maxima ancho de banda para el accel
+//    I2C_Master_Stop();
+//    //Config del giroscopio
+//    I2C_Master_Start();
+//    I2C_Master_Write(MPU_Write); //Direccion de escritura
+//    I2C_Master_Write(Gyro_CONFIG); //Es el para el registro con direccion 0x1B
+//    I2C_Master_Write(0x00); //Sin pruebas, +-250°/s  
+//    I2C_Master_Stop();
+//    //Config del acelerometro
+//    I2C_Master_Start();
+//    I2C_Master_Write(MPU_Write); //Direccion de escritura
+//    I2C_Master_Write(Accel_CONFIG); //Es el para el registro con direccion 0x1C
+//    I2C_Master_Write(0x00); //Sin pruebas y escala de +-2g
+//    I2C_Master_Stop();
+//    return;
+//}
+//
+//void I2C_Read_MPU(float* data_send) {
+//    //En esta funcion solo se recuperan 6 de los 14 registros que tiene el sensor
+//    
+//    char temp[6]; //valores temporales
+//    int valor_original[3]; // arreglo donde se van a guardar los datos 
+//    
+//    I2C_Start(MPU_Write);
+//    while (SSPCON2bits.ACKSTAT);
+//    I2C_Master_Write(Accel_Xout_H); //Registro donde se inicia la lectura de valores
+//    while (SSPCON2bits.ACKSTAT);
+//    I2C_Master_RepeatedStart();
+//    I2C_Master_Write(MPU_Read);
+//    for (int Addr = 0; Addr < 5; Addr++) temp[Addr] = I2C_Read(0);
+//    temp[5] = I2C_Read(1);
+//    I2C_Master_Stop();
+//    
+//    //Registros de la aceleracion 
+//    valor_original[0] = ((int) temp[0] << 8) | ((int) temp[1]); //en el eje x
+//    valor_original[1] = ((int) temp[2] << 8) | ((int) temp[3]); //en el eje y
+//    valor_original[2] = ((int) temp[4] << 8) | ((int) temp[5]); //en el eje z
+//    //El valor se arregla para que los valores esten en m/s^2
+//    data_send[0] = ((float) valor_original[0]) * 0.0005982; 
+//    data_send[1] = ((float) valor_original[1]) * 0.0005982; //aceleracion en m/s^2
+//    data_send[2] = ((float) valor_original[2]) * 0.0005982; //aceleracion en m/s^2
+//    return;
+//}

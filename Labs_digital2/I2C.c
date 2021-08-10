@@ -104,3 +104,53 @@ void I2C_Slave_Init(uint8_t address)
     SSPIE = 1;
 }
 //*****************************************************************************
+// Función de reinicio de la comunicación I2C PIC
+//*****************************************************************************
+//void I2C_Start(char add) {
+//    I2C_Master_Wait();
+//    SEN = 1;
+//    I2C_Master_Write(add);
+//}
+////*****************************************************************************
+////Función de recepción de datos enviados por el esclavo al maestro
+////esta función es para leer los datos que están en el esclavo
+////*****************************************************************************
+//unsigned char I2C_Read_Byte(void) {
+//    //---[ Receive & Return A Byte ]---
+//    I2C_Master_Wait();
+//    RCEN = 1; // Enable & Start Reception
+//    while (!SSPIF); // Wait Until Completion
+//    SSPIF = 0; // Clear The Interrupt Flag Bit
+//    I2C_Master_Wait();
+//    return SSPBUF; // Return The Received Byte
+//}
+//
+//unsigned char I2C_Read(unsigned char ACK_NACK) {
+//    I2C_Master_Wait();
+//    //---[ Receive & Return A Byte & Send ACK or NACK ]---
+//    unsigned char Data;
+//    RCEN = 1;
+//    while (!BF);
+//    Data = SSPBUF;
+//    if (ACK_NACK == 0)
+//        I2C_ACK();
+//    else
+//        I2C_NACK();
+//    while (!SSPIF);
+//    SSPIF = 0;
+//    return Data;
+//}
+////******************************************************************************
+////**********************************revisar ACK*********************************
+////******************************************************************************
+//void I2C_ACK(void) {
+//    ACKDT = 0; // 0 -> ACK
+//    ACKEN = 1; // Send ACK
+//    while (ACKEN);
+//}
+//
+//void I2C_NACK(void) {
+//    ACKDT = 1; // 1 -> NACK
+//    ACKEN = 1; // Send NACK
+//    while (ACKEN);
+//}
