@@ -86,8 +86,8 @@ uint8_t lectura;
  void main (void){
      setup();  
      //--------------------------configuracion de I2C--------------------------------
-     I2C_Slave_Init(0X50); //inicializar comunicación I2C del esclavo y se le da
-     //dirección al esclavo, en este caso 0x10
+     I2C_Slave_Init(0X10); //inicializar comunicación I2C del esclavo y se le da
+     //dirección al esclavo, en este caso 0x50
      
      start_adc(3, 1, 0, 0); //fosc/32, interrupciones habilitadas, VDD y VSS
                             //justificado a la izquierda

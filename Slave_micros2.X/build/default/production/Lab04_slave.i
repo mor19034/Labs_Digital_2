@@ -2952,7 +2952,7 @@ uint8_t lectura;
  void main (void){
      setup();
 
-     I2C_Slave_Init(0X50);
+     I2C_Slave_Init(0X10);
 
 
      start_adc(3, 1, 0, 0);

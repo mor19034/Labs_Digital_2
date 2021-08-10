@@ -199,7 +199,7 @@
         <property key="program-the-device-with-default-config-words" value="true"/>
         <property key="remove-unused-sections" value="true"/>
       </HI-TECH-LINK>
-      <item path="LCD.c" ex="true" overriding="false">
+      <item path="LCD.c" ex="false" overriding="false">
         <HI-TECH-COMP>
         </HI-TECH-COMP>
         <HI-TECH-LINK>
@@ -209,7 +209,7 @@
         <XC8-config-global>
         </XC8-config-global>
       </item>
-      <item path="LCD.h" ex="true" overriding="false">
+      <item path="LCD.h" ex="false" overriding="false">
         <HI-TECH-COMP>
         </HI-TECH-COMP>
         <HI-TECH-LINK>

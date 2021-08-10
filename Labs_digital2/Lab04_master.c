@@ -31,11 +31,19 @@
 #include "I2C.h"
 #include "ADC.h"
 #include "configuraciones_pic.h"
+#include "LCD.h"
 
 #define _XTAL_FREQ 8000000 
 
 //**********Variables***********
-
+volatile uint8_t var_adc0 = 0;
+float cont_uart = 0;
+char string_uart[10];
+char valor_uart = 0;
+char adc0[10];
+char contador_lcd[10];
+float conv0 = 0;
+uint8_t contador;
  //**********Prototipos*********
  void setup(void);
 
@@ -43,14 +51,53 @@
 //********************************loop principl*********************************
 void main(void) {
     setup(); 
-                
-     while (1) {
+    Lcd_Init(); //se inisiliza la LCD  
+    Lcd_Clear(); //se limpia la LCD
+    while (1) {
+         
+        Lcd_Set_Cursor(1, 1); //primeras cordenadas de la pantalla
+        Lcd_Write_String("S1:"); //se escribe en la pantalla
+        Lcd_Set_Cursor(1, 8); //nos despalazamos en la pantalla
+        Lcd_Write_String("S2:"); //se escribe de nuevo
+        Lcd_Set_Cursor(1, 15); //nos desplazamos de nuevo
+        Lcd_Write_String("S3:"); //y volvemos a escribir
+        //****************se hace la cmunicación I2C con esclavo 1************** 
          I2C_Master_Start();
-         I2C_Master_Write(0x51); //va a esclavo con direccion 0x10 y le dice que
+         I2C_Master_Write(0x11); //va a esclavo con direccion 0x50 y le dice que
                                  //va a leer
-         PORTB = I2C_Master_Read(0);
+         var_adc0 = I2C_Master_Read(0);
          I2C_Master_Stop();
          __delay_us(200);
+         
+         I2C_Master_Start();
+         I2C_Master_Write(0x21); //va a esclavo con direccion 0x50 y le dice que
+                                 //va a leer
+         contador = I2C_Master_Read(0);
+         I2C_Master_Stop();
+         __delay_us(200);
+
+         
+        //*********************se escribe en la LCD*****************************
+        Lcd_Set_Cursor(2, 1); //nos colocamos abajo de V1 
+        Lcd_Write_String(adc0); //mandamos el valor de la conversion en voltaje
+        Lcd_Set_Cursor(2, 5);
+        Lcd_Write_String("V");
+
+        Lcd_Set_Cursor(2, 7);
+        Lcd_Write_String(contador_lcd);
+        Lcd_Set_Cursor(2, 11);
+        Lcd_Write_String("U");
+//        
+//        Lcd_Set_Cursor(2,14);
+//        Lcd_Write_String(cont);
+        
+        conv0 = 0;//se reinicia las cada ves que se inicia el proceso de enviar datos
+        conv0 = (var_adc0 / (float) 255)*5; //Se consigue el porcentaje con 
+        //respecto al valor maximo que un puerto puede tener, despues se 
+        //multiplica por 5 para conocer el voltaje actual del puerto                                          
+        ADC_convert(adc0, conv0, 2);//se convierte el valor actual a un valor ASCII.
+        
+        ADC_convert(contador_lcd, contador, 2); 
         }      
     return;
 }
@@ -60,9 +107,11 @@ void setup(void){
     
     TRISA = 0x00;
     TRISB = 0x00;
+    TRISE = 0x00;
     
     PORTA = 0X00;
     PORTB = 0x00;
+    PORTE = 0x00;
     
     I2C_Master_Init(100000);        // Inicializar Comuncación I2C
     

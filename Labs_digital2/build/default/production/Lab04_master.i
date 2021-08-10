@@ -2904,11 +2904,31 @@ void conf_osc(uint8_t frec);
 void conf_tmr0(uint8_t prescaler);
 # 33 "Lab04_master.c" 2
 
+# 1 "./LCD.h" 1
+# 30 "./LCD.h"
+void Lcd_Port(char a);
+void Lcd_Cmd(char a);
+void Lcd_Clear(void);
+void Lcd_Set_Cursor(char a, char b);
+void Lcd_Init(void);
+void Lcd_Write_Char(char a);
+void Lcd_Write_String(char *a);
+void Lcd_Shift_Right(void);
+void Lcd_Shift_Left(void);
+# 34 "Lab04_master.c" 2
 
 
 
 
 
+volatile uint8_t var_adc0 = 0;
+float cont_uart = 0;
+char string_uart[10];
+char valor_uart = 0;
+char adc0[10];
+char contador_lcd[10];
+float conv0 = 0;
+uint8_t contador;
 
  void setup(void);
 
@@ -2916,14 +2936,53 @@ void conf_tmr0(uint8_t prescaler);
 
 void main(void) {
     setup();
+    Lcd_Init();
+    Lcd_Clear();
+    while (1) {
 
-     while (1) {
+        Lcd_Set_Cursor(1, 1);
+        Lcd_Write_String("S1:");
+        Lcd_Set_Cursor(1, 8);
+        Lcd_Write_String("S2:");
+        Lcd_Set_Cursor(1, 15);
+        Lcd_Write_String("S3:");
+
          I2C_Master_Start();
-         I2C_Master_Write(0x51);
+         I2C_Master_Write(0x11);
 
-         PORTB = I2C_Master_Read(0);
+         var_adc0 = I2C_Master_Read(0);
          I2C_Master_Stop();
          _delay((unsigned long)((200)*(8000000/4000000.0)));
+
+         I2C_Master_Start();
+         I2C_Master_Write(0x21);
+
+         contador = I2C_Master_Read(0);
+         I2C_Master_Stop();
+         _delay((unsigned long)((200)*(8000000/4000000.0)));
+
+
+
+        Lcd_Set_Cursor(2, 1);
+        Lcd_Write_String(adc0);
+        Lcd_Set_Cursor(2, 5);
+        Lcd_Write_String("V");
+
+        Lcd_Set_Cursor(2, 7);
+        Lcd_Write_String(contador_lcd);
+        Lcd_Set_Cursor(2, 11);
+        Lcd_Write_String("U");
+
+
+
+
+        conv0 = 0;
+        conv0 = (var_adc0 / (float) 255)*5;
+
+
+        ADC_convert(adc0, conv0, 2);
+
+        ADC_convert(contador_lcd, contador, 2);
         }
     return;
 }
@@ -2933,9 +2992,11 @@ void setup(void){
 
     TRISA = 0x00;
     TRISB = 0x00;
+    TRISE = 0x00;
 
     PORTA = 0X00;
     PORTB = 0x00;
+    PORTE = 0x00;
 
     I2C_Master_Init(100000);
 
