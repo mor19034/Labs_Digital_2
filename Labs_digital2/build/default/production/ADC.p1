@@ -484,14 +484,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 143 ]
 }
 "66
-[; ;ADC.c: 66: void ADC_convert(char *data,float a, int place)
-[v _ADC_convert `(v ~T0 @X0 1 ef3`*uc`f`i ]
+[; ;ADC.c: 66: void convert(char *data,float a, int place)
+[v _convert `(v ~T0 @X0 1 ef3`*uc`f`i ]
 "67
 [; ;ADC.c: 67: {
 {
-[e :U _ADC_convert ]
+[e :U _convert ]
 "66
-[; ;ADC.c: 66: void ADC_convert(char *data,float a, int place)
+[; ;ADC.c: 66: void convert(char *data,float a, int place)
 [v _data `*uc ~T0 @X0 1 r1 ]
 [v _a `f ~T0 @X0 1 r2 ]
 [v _place `i ~T0 @X0 1 r3 ]

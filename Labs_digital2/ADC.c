@@ -63,7 +63,7 @@ void conf_ADC(uint8_t adcFrec, uint8_t isr, uint8_t Vref, uint8_t justRL){
 /*******************************************************************************
  * Funciones para conversión del ADC 
  ******************************************************************************/
-void ADC_convert(char *data,float a, int place) 
+void convert(char *data,float a, int place) 
 {
      int temp=a;
      float x=0.0;

@@ -2829,7 +2829,7 @@ typedef uint16_t uintptr_t;
 #pragma config FOSC = INTRC_NOCLKOUT
 
 void conf_ADC(uint8_t adcFrec, uint8_t isr, uint8_t Vref, uint8_t justRL);
-void ADC_convert(char *data,float a, int place);
+void convert(char *data,float a, int place);
 void canal_ADC(uint8_t channel);
 void Select_ch(uint8_t channel);
 # 10 "ADC.c" 2
@@ -2889,7 +2889,7 @@ void conf_ADC(uint8_t adcFrec, uint8_t isr, uint8_t Vref, uint8_t justRL){
 
 
 
-void ADC_convert(char *data,float a, int place)
+void convert(char *data,float a, int place)
 {
      int temp=a;
      float x=0.0;
