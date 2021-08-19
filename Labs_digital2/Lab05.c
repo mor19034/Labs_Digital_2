@@ -4,10 +4,6 @@
  *
  * Created on 15 de agosto de 2021, 21:16
  */
-
-#include <stdio.h>
-#include <stdlib.h>
-
 #pragma config FOSC = INTRC_NOCLKOUT// Oscillator Selection bits (INTOSCIO oscillator: I/O function on RA6/OSC2/CLKOUT pin, I/O function on RA7/OSC1/CLKIN)
 #pragma config WDTE = OFF       // Watchdog Timer Enable bit (WDT disabled and can be enabled by SWDTEN bit of the WDTCON register)
 #pragma config PWRTE = ON       // Power-up Timer Enable bit (PWRT enabled)
@@ -32,22 +28,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h> // Concatenar
+#include "EUSART.h"
+#include "configuraciones_pic.h"
 #include "ADC.h"
-//#include "EUSART.h"
-//#include "configuraciones_pic.h"
 //*******************************definiciones***********************************
 #define _XTAL_FREQ 8000000 
 
 //*********************************Variables************************************
 uint8_t contador;
 char contador_string[10];
-char unidad, decena, centena;
-char concatenado;
-int full;
+char ingreso, pos, total;
+char centena, decena, unidad;
+char entrante [2];
  //********************************Prototipos***********************************
 void setup (void);
-void mensaje (void);
-void putch(char data);
+char centenas (int dato);
+char decenas (int dato);
+char unidades (int dato);
  //********************************Interrupciones*******************************
  void __interrupt() isr(void){  
 //--------------------------------interrupcion PORTB----------------------------
@@ -55,11 +52,10 @@ void putch(char data);
        
        if(PORTBbits.RB0 == 1){ //se incrementa variable si se toca botón 1
            contador++;
-           contador = contador & 0x0f; //solo deja pasar de 0 a 255
    }
        if(PORTBbits.RB1 == 1){ //se decrementa variable si se toca botón 2
            contador--;
-           contador = contador & 0x0f; //solo deja pasar de 0 a 255
+ 
        }
        INTCONbits.RBIF = 0; //limpiar bandera para reiniciar interrupción
    }
@@ -67,83 +63,77 @@ void putch(char data);
 
 //*********************************loop principal*******************************
  void main (void){
-     setup();  
-     while (1){ 
-         mensaje();
-         PORTA = full;
-         convert (contador_string, contador, 2);
-     } 
-     return;
-}
+    setup();  
+    while (1){
+        centena = centenas(contador);
+        decena = decenas(contador);
+        unidad = unidades(contador);
+        centena += 48;
+        decena += 48;
+        unidad += 48;
+        if (PIR1bits.RCIF == 1){ //compruebo si se introdujo un dato
+            ingreso = USART_Recieve();
+            
+            if(ingreso == 's'){
+                USART_Transmit(centena);
+                USART_Transmit(decena);
+                USART_Transmit(unidad);
+            }
+            
+            if(ingreso > 47 && ingreso < 58){
+                entrante[pos] = ingreso;
+                pos++;
+                //PORTD++;
+                if (pos > 2){
+                    pos = 0;
+                    total = (entrante[0] - 48) * 100;
+                    total +=(entrante[1] - 48) *10;
+                    total +=(entrante[2] - 48);
+                    PORTA = total;
+                    //PORTD++;
+                }
+            }
+       }
+        ingreso = 0;
+    }
+    return;
+ }
  //*******************************funciones**************************************
-void mensaje (void){
-    __delay_ms(300);
-    printf("\r valor del contador: \r");
-    __delay_ms(300);
-    printf(contador_string);       //se manda el valor del contador
-    printf("\r---------------\r");
-    
-    printf("Ingresar Centena: Rango(0-2)\r"); //le pide al usuario ingresar algo
-      chistosito1:  
-       while(RCIF == 0);
-        centena = RCREG -48;  
+char centenas (int dato){
+    char out = dato / 100;
+    return out;
+}
 
-       while(RCREG > '2'){  //este es una defensa por si alguien se pasa de 
-                            //chistoso y mete un dato que no es
-           goto chistosito1;
-       }
-    
-    printf("Ingresar Decenas: \r");
-      chistosito2:
-        while(RCIF == 0); 
-         decena = RCREG -48; 
+char decenas (int dato){
+    char out;
+    out = (dato % 100) / 10;
+    return out;
+}
 
-        if(centena == 2){
-           while(RCREG > '5'){
-               goto chistosito2;    //misma funcion que chistosito 1
-           }
-       }
-
-    printf("Ingresar Unidades: \r");
-      chistosito3:
-       while(RCIF == 0); 
-        unidad = RCREG - 48;
-
-       if(centena == 2 && decena == 5){
-           while(RCREG > '5'){
-               goto chistosito3;    //misma función que chistosito 1
-           }
-       }
-      concatenado = concatenar(centena, decena); //se concatenan primeros datos
-      full = concatenar(concatenado, unidad); //se termina de concatenar 
-      __delay_ms(250);
-    printf("El numero elegido es: %d", full); //se manda valor de concatenado final
-
-   return;
+char unidades (int dato){
+    char out;
+    out = (dato % 100) % 10;
+    return out;
 }
  
-int concatenar(int a, int b){
-    char s1[20];    //variables para cadena de caracteres
-    char s2[20];
-    
-    //Aquí se convierten los integers a strings
-    sprintf(s1, "%d", a);
-    sprintf(s2, "%d", b);
-    
-    //concatenar los strings
-    strcat(s1, s2);
-    
-    //convertir los strings concatenados a integers
-    int c = atoi(s1);
-    
-    //regresa el valor numerico formado
-    return c;
-}
-void putch(char dato){ 
-    while(TXIF == 0);
-    TXREG = dato; //lo que se escribe se manda al pic para que lo procese 
-    return; 
-}
+//int concatenar(int a, int b){
+//    char s1[20];    //variables para cadena de caracteres
+//    char s2[20];
+//    
+//    //Aquí se convierten los integers a strings
+//    sprintf(s1, "%d", a);
+//    sprintf(s2, "%d", b);
+//    
+//    //concatenar los strings
+//    strcat(s1, s2);
+//    
+//    //convertir los strings concatenados a integers
+//    int c = atoi(s1);
+//    
+//    //regresa el valor numerico formado
+//    return c;
+//}
+
  //********************************configuraciones******************************
  void setup(void){
      ANSEL = 0X00;
@@ -155,27 +145,11 @@ void putch(char dato){
      PORTA = 0X00;
      PORTB = 0x00;
 //------------------------------configuracion del oscilador---------------------
-     //conf_osc(7); 
-    OSCCONbits.IRCF2 = 1;       //Reloj interno de 8MHz
-    OSCCONbits.IRCF1 = 1;
-    OSCCONbits.IRCF0 = 1;
-    OSCCONbits.SCS   = 1;
-     
-    //-----------------------------conf UART------------------------------------
-    //Configuración del RX y TX
-    TXSTAbits.SYNC = 0;     //modo sincrono desabilitado
-    TXSTAbits.BRGH = 1;     //Bound rate High
-    BAUDCTLbits.BRG16 = 1;  //16 bits para generar fire brake
-    
-    SPBRG = 207;    //SPBRG con 0.16% de error
-    SPBRGH = 0;
-    
-    RCSTAbits.SPEN = 1; //Puertos seriales 
-    RCSTAbits.RX9 = 0;  //No se van a recibir 9 bits
-    RCSTAbits.CREN = 1; //habilitar recepción
-    TXSTAbits.TXEN = 1; //habilitar transmisión
+      conf_osc(7); //Reloj interno de 8MHz
 
      
+    //-----------------------------conf UART------------------------------------
+    void init_USART (void);
  //-------------------------configuración de interrpciones----------------------
     INTCONbits.GIE = 1; 
     INTCONbits.PEIE = 1;
@@ -193,4 +167,3 @@ void putch(char dato){
 //    PIR1bits.TXIF = 0; 
 //    PIR1bits.RCIF = 0; 
  }
-

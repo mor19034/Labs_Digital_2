@@ -3,27 +3,63 @@
 # IE3027 - Electrónica Digital 2
 # Pablo Moreno
 
-# Adafruit IO
-# https://io.adafruit.com/
-
-# if Module not Found. Open Terminal/CMD and execute:
-# pip3 install Adafruit_IO
-
 from Adafruit_IO import Client, RequestError, Feed
+import serial
+import time
 
-ADAFRUIT_IO_KEY = "aio_YCmA99tGPD5IWk68fd0PvjbsJrtr"
-ADAFRUIT_IO_USERNAME = "mor19034"
+envio = 184     #dato que viene desde la pág
+nulo = 0        #valor nulo
+nulo = str(nulo)#char nulo
+temporal1 = 0
+temporal2 = 0
+
+#ubicación de mi plataforma
+ADAFRUIT_IO_KEY = "aio_VifF06V2bL60eCycFW47k9ElAwgp"  #contraseña
+ADAFRUIT_IO_USERNAME = "mor19034"                    #usuario
 aio = Client(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY)
 
-while True:
-    lab05_sensor1 = aio.feeds('sensor-1')
-    sensor_1 = int(input('Que valor queres para el sensor 1?: ')) #valor del sensor 1
-    aio.send_data(lab05_sensor1.key, sensor_1)
-    sensor1_data = aio.receive(lab05_sensor1.key)
-    print(f'Sensor_1 : {sensor1_data.value}')
+#Defino nombre de comunicación
+puerto = serial.Serial("COM8",9600) 
+puerto.timeout = 3 #tiempo de espera para recibir datos
+time.sleep(1) #para que establezca conexion
 
-    lab05_sensor2 = aio.feeds('sensor-2')
-    sensor_2 = int(input('Que valor queres para el sensor 2?: ')) #valor del sensor 1
-    aio.send_data(lab05_sensor2.key, sensor_2)
-    sensor2_data = aio.receive(lab05_sensor2.key)
-    print(f'Sensor_2 : {sensor2_data.value}')
+print('Puerto activado con exito \n')
+#----------------Temperatura y humedad valor---------------------------------
+
+while True:
+    with puerto:   #utilice el COM serial
+        #nombre_feed = cliente.feed('llave_de_mi_feed')
+        uart_feed = aio.feeds('contador-uart')
+        botones_feed = aio.feeds('contador-botones')
+
+        #variable = cliente.receive(mifeed_feed.key) ; Esto para leer valor
+        uart_data = aio.receive(uart_feed.key)
+        botones_data = aio.receive(botones_feed.key)
+        
+        valor = int(uart_data.value)
+        puerto.write(b's') #mando codigo de caracter
+        val = puerto.readline(3).decode('ascii') #recibo 2 bytes
+        val = int(val)  
+
+        if(valor != temporal1 or val1 != temporal2):
+            print(f'valor que se le envia al pic: {uart_data.value}')
+            print(f'valor de contador de botones: {botones_data.value} \n')
+
+            if (valor < 10 and valor > -1):
+                puerto.write(nulo.encode('ascii')) #envio un cero
+                puerto.write(nulo.encode('ascii'))
+                
+            elif (valor <100 and valor > 9):
+                puerto.write(nulo.encode('ascii')) #envio un cero
+            
+            envio = str(int(uart_data.value))
+            puerto.write(envio.encode('ascii'))
+            print("Escrito en pic: {} \n".format(envio))
+            print("Escrito en AdaFruit: ")
+            print(val)
+            
+            #cliente.send_data(mifeed.feed.key, valor a enviar) ; Esto para mandar dato y leer
+            aio.send_data(botones_feed.key, val)
+            print('----------------------------------------------------')
+            temporal1 = int(uart_data.value)
+            temporal2 = int(botones_data.value)

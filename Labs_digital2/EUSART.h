@@ -11,18 +11,15 @@
 #define	EUSART_H
 
 //************************************librerias*********************************
-#include <stdio.h>
-#include <stdlib.h>
 #include <xc.h> // include processor files - each processor file is guarded.  
 #include <pic16f887.h>
 #include <stdint.h>
-//**********************************definiciones********************************
-#ifndef _XTAL_FREQ
-#define _XTAL_FREQ 8000000
-#endif
 
 //**********************función de librería de EUSART***************************
-void putch(uint8_t dato);
+void init_USART (void);
+char USART_Recieve(void);
+void USART_Cadena(char *str);
+void USART_Transmit(char dato);
 
 #endif	/* EUSART_H */
 

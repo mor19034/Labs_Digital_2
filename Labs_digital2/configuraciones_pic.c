@@ -7,9 +7,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "configuraciones_pic.h"
-#define _XTAL_FREQ 8000000
-//-----------------------------variables----------------------------------------
-
 
 //-----------------------------tabla de datos hezadecimales---------------------
 uint8_t tabla [16] ={0X3F, 0X06, 0X5B, 0X4F, 0X66, 0X6D, 0X7D, 0X07, 0X7F, 0X67,
